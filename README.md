@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Law Pro Digital — website
 
-## Getting Started
-
-First, run the development server:
+Marketing site for Law Pro Digital, a digital marketing agency for law firms. It's built with
+Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS 4.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deployment to cPanel is covered in **[DEPLOYMENT.md](DEPLOYMENT.md)**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Path | What it is |
+| --- | --- |
+| `src/content/` | **All site copy and data**: brand and contact details (`site.ts`), services (`services.ts`), case studies (`case-studies.ts`), homepage content (`home.ts`). Edit text here, not in components. Copy follows [`COPY_RULES.md`](src/content/COPY_RULES.md). |
+| `src/app/` | Routes. `[slug]/` serves the service pages and case studies, which live at the site root to keep the original URLs. |
+| `src/components/` | `layout/` (header, mobile nav, footer), `sections/` (page sections), `service/` and `case-study/` (page templates), `ui/` (buttons, headings, icons), `motion/` (scroll reveal, count-up, process timeline), `three/` (hero 3D scene and its SVG fallback). |
+| `src/app/globals.css` | Design tokens (colors, fonts, easing) and global styles. |
+| `src/lib/` | SEO helpers (metadata, JSON-LD) and the case-study image lookup. |
+| `public/brand/` | Logo and social-share image. |
+| `public/images/case-studies/` | Case-study screenshots (see below). |
 
-## Learn More
+## Common edits
 
-To learn more about Next.js, take a look at the following resources:
+- **Contact details and social links:** fill in `contact` and `socials` in `src/content/site.ts`.
+  Empty values are hidden everywhere, so no placeholder text ever ships.
+- **Case-study screenshots:** the original WordPress screenshots couldn't be recovered. Copy them
+  into `public/images/case-studies/` using the file names referenced in
+  `src/content/case-studies.ts` (for example `chambers-law-firm-HOmepage.jpg`), then rebuild.
+  Each image appears automatically once its file exists.
+- **Testimonials:** the only published testimonial is the Chambers Law Firm video. Add new ones
+  only when they come from real, consenting clients.
+- **New service or case study:** add an entry to `services.ts` or `case-studies.ts`. The page,
+  the sitemap entry, the navigation link and the structured data are all generated from it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Motion and 3D
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Scroll reveals use one `IntersectionObserver` plus CSS. Content is visible without
+  JavaScript, and a failsafe reveals everything if scripts fail to load.
+- The hero's 3D mark (React Three Fiber) loads only on desktop devices with WebGL and a fine
+  pointer, after the page is idle. It pauses when off-screen. Every other visitor sees a static
+  SVG version of the same composition.
+- `prefers-reduced-motion` turns off all animation and the 3D scene.
 
-## Deploy on Vercel
+## Quality checks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run typecheck
+npm run lint:copy   # banned-word check from COPY_RULES.md
+npm run build:standalone
+```
