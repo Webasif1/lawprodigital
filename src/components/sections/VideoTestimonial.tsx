@@ -32,7 +32,7 @@ export function VideoTestimonial({ youtubeId, title }: Props) {
           <span className="relative grid size-18 place-items-center rounded-full bg-gold text-ink transition-transform duration-(--dur-base) ease-out-expo group-hover:scale-105">
             <PlayIcon className="ml-1 size-8" />
           </span>
-          <span className="relative font-display text-3xl leading-tight">Play client video</span>
+          <span className="relative font-display text-2xl font-bold leading-tight">Play client video</span>
           <span className="relative text-sm text-mist">Loads from YouTube</span>
           <span className="sr-only">{title}</span>
         </button>

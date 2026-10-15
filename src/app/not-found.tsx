@@ -20,8 +20,8 @@ export default function NotFound() {
           <p className="mt-6 max-w-lg text-lg text-mist">The page you’re looking for doesn’t exist. Try one of these instead.</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <ButtonLink href="/">Back to home</ButtonLink>
-            <ButtonLink href="/contact-us/" variant="ghost-dark" arrow={false}>
-              Contact us
+            <ButtonLink href="/case-study/" variant="ghost-dark" arrow={false}>
+              Read the case studies
             </ButtonLink>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function NotFound() {
           <ul className="grid border-t border-white/15">
             {services.map((s) => (
               <li key={s.slug} className="border-b border-white/15">
-                <Link href={serviceHref(s.slug)} className="block py-4 font-display text-xl hover:text-gold">
+                <Link href={serviceHref(s.slug)} className="block py-4 font-display text-lg font-semibold hover:text-gold">
                   {s.navLabel}
                 </Link>
               </li>

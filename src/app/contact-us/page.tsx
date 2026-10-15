@@ -13,9 +13,9 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const nextSteps = [
-  "Tell us about your practice area, city and goals.",
-  "Our team reviews your enquiry.",
-  "We get back to you to arrange your free call.",
+  "Tell us about your firm: offices, case types and goals.",
+  "We review how you show up on Google, Maps and ChatGPT, and what happens when a prospect contacts you after hours.",
+  "You get a 5-minute video audit, then we walk you through it on a call.",
 ];
 
 export default function ContactPage() {
@@ -29,21 +29,21 @@ export default function ContactPage() {
         crumbs={[{ name: "Contact Us", path: "/contact-us/" }]}
         title={
           <>
-            Ready to grow your law firm? <em className="text-gold">Let’s talk.</em>
+            Get your free <em className="text-gold">AI lead audit.</em>
           </>
         }
-        intro="Have questions? Want to learn how our specialized digital marketing services can bring more clients through your door? Our team at Law Pro Digital is here to help."
+        intro="In 5 minutes of video, we’ll show you how your firm appears on Google, Maps and ChatGPT, and what happens when a prospect contacts you after hours."
       />
       <section aria-label="Contact form" className="bg-paper">
         <div className="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="text-lg leading-relaxed text-ink/80">
-              Whether you’re looking for more leads, better reviews, or a stronger online presence, we’re ready to build a strategy for your law firm.
+              Have questions? Want to learn how our services can bring more clients through your door? Whether you’re looking for more signed clients, better reviews or a stronger presence in AI search, our team is here to help.
             </p>
             <h2 className="eyebrow mt-12 text-brass">What happens next</h2>
             <ol className="mt-5 grid border-t border-line">
               {nextSteps.map((s, i) => (
-                <li key={s} className="flex gap-4 border-b border-line py-4 text-lg leading-snug">
+                <li key={s} className="flex gap-4 border-b border-line py-4 leading-snug">
                   <span className="figure w-7 shrink-0 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
                   <span>{s}</span>
                 </li>

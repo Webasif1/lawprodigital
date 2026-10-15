@@ -1,9 +1,14 @@
 import { cities } from "@/content/home";
 
-/** Options carried over from the original contact form, plus Law Firm SEO. */
+/** Options carried over from the original contact form, plus the services on the new homepage. */
 export const cityOptions: string[] = [...cities];
 
 export const serviceOptions: string[] = [
+  "Free AI lead audit",
+  "Meta Ads (Facebook & Instagram)",
+  "AI intake assistant",
+  "AI search (AEO/GEO)",
+  "Google Business Profile",
   "Law Firm SEO",
   "Bankruptcy lawyer SEO",
   "Immigration lawyer SEO",

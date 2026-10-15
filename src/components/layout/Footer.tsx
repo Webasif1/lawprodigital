@@ -1,29 +1,32 @@
-import Image from "next/image";
 import Link from "next/link";
 import { contact, quickLinks, site, socials } from "@/content/site";
 import { services, serviceHref } from "@/content/services";
 import { cities } from "@/content/home";
-import { ButtonLink } from "@/components/ui/Button";
+import { Logo } from "@/components/brand/Logo";
 
 export function Footer() {
-  const hasContact = Boolean(contact.email || contact.phone || contact.offices?.length);
   const year = new Date().getFullYear();
+  const linkClass = "text-white/75 transition-colors duration-(--dur-fast) hover:text-gold";
 
   return (
-    <footer className="on-dark bg-navy-deep text-paper">
+    <footer className="on-dark bg-navy-deep text-white">
       <div className="container-x pt-20 pb-10">
         <div className="grid gap-12 border-b border-white/10 pb-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            {/* The logo's navy wordmark needs a light surface, so it sits on a paper tile. */}
-            <Link href="/" className="inline-block rounded-field bg-paper px-5 py-4" aria-label={`${site.name} — home`}>
-              <Image src={site.logo.src} alt={site.logo.alt} width={site.logo.width} height={site.logo.height} sizes="240px" className="h-11 w-auto" />
+            <Link href="/" aria-label={`${site.name} — home`}>
+              <Logo tone="dark" tagline />
             </Link>
-            <p className="mt-8 max-w-sm font-display text-2xl leading-snug text-paper">
-              Digital marketing for law firms, and only law firms.
-            </p>
-            <ButtonLink href={site.primaryCta.href} className="mt-8">
-              {site.primaryCta.label}
-            </ButtonLink>
+            <p className="mt-8 max-w-md leading-relaxed text-mist">{site.description}</p>
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} className="mt-6 inline-block font-display text-xl font-bold tracking-tight text-white hover:text-gold">
+                {contact.email}
+              </a>
+            )}
+            {contact.phone && (
+              <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="mt-2 block text-white/80 hover:text-gold">
+                {contact.phone}
+              </a>
+            )}
           </div>
 
           <nav aria-label="Services" className="lg:col-span-3">
@@ -31,20 +34,25 @@ export function Footer() {
             <ul className="mt-5 grid gap-3">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={serviceHref(s.slug)} className="text-paper/80 transition-colors duration-(--dur-fast) hover:text-gold">
+                  <Link href={serviceHref(s.slug)} className={linkClass}>
                     {s.navLabel}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/ai-solutions/" className={linkClass}>
+                  AI Intake Assistant
+                </Link>
+              </li>
             </ul>
           </nav>
 
-          <nav aria-label="Quick links" className="lg:col-span-2">
-            <h2 className="eyebrow text-gold">Quick Links</h2>
+          <nav aria-label="Company" className="lg:col-span-2">
+            <h2 className="eyebrow text-gold">Company</h2>
             <ul className="mt-5 grid gap-3">
               {quickLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-paper/80 transition-colors duration-(--dur-fast) hover:text-gold">
+                  <Link href={l.href} className={linkClass}>
                     {l.label}
                   </Link>
                 </li>
@@ -53,41 +61,18 @@ export function Footer() {
           </nav>
 
           <div className="lg:col-span-2">
-            <h2 className="eyebrow text-gold">Contact</h2>
-            <ul className="mt-5 grid gap-3 text-paper/80">
-              {contact.phone && (
-                <li>
-                  <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="hover:text-gold">
-                    {contact.phone}
-                  </a>
-                </li>
-              )}
-              {contact.email && (
-                <li>
-                  <a href={`mailto:${contact.email}`} className="break-all hover:text-gold">
-                    {contact.email}
-                  </a>
-                </li>
-              )}
-              {contact.offices?.map((o) => (
-                <li key={o.label}>
-                  <span className="block text-sm font-semibold text-paper">{o.label}</span>
-                  <address className="not-italic">{o.lines.join(", ")}</address>
-                </li>
-              ))}
-              {!hasContact && (
-                <li>
-                  <Link href="/contact-us/" className="hover:text-gold">
-                    Send us a message
-                  </Link>
-                </li>
-              )}
-            </ul>
+            <h2 className="eyebrow text-gold">Start here</h2>
+            <p className="mt-5 text-sm leading-relaxed text-mist">
+              A 5-minute video audit of how your firm shows up on Google, Maps and ChatGPT.
+            </p>
+            <Link href={site.primaryCta.href} className="mt-4 inline-flex items-center gap-2 font-semibold text-gold hover:text-gold-soft">
+              {site.primaryCta.label} →
+            </Link>
             {socials.length > 0 && (
               <ul className="mt-6 flex flex-wrap gap-3">
                 {socials.map((s) => (
                   <li key={s.href}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-sm text-paper/80 underline-offset-4 hover:text-gold hover:underline">
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-sm text-white/75 underline-offset-4 hover:text-gold hover:underline">
                       {s.label}
                     </a>
                   </li>
@@ -100,7 +85,7 @@ export function Footer() {
         <div className="py-8">
           <h2 className="sr-only">Cities we serve</h2>
           <p className="text-sm leading-relaxed text-mist">
-            <span className="font-semibold text-paper">Serving law firms in </span>
+            <span className="font-semibold text-white">Serving law firms in </span>
             {cities.join(" · ")}
           </p>
         </div>
@@ -109,7 +94,7 @@ export function Footer() {
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
-          <p className="font-display text-base italic text-paper/70">{site.tagline}</p>
+          <p className="font-display font-semibold text-white/70">{site.tagline}</p>
         </div>
       </div>
     </footer>

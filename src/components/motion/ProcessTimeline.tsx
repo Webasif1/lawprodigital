@@ -38,7 +38,7 @@ export function ProcessTimeline({ steps, tone = "dark" }: Props) {
             {String(i + 1).padStart(2, "0")}
           </span>
           <p className={`eyebrow ${dark ? "text-mist" : "text-muted"}`}>Step {i + 1}</p>
-          <h3 className="mt-2 font-display text-h3">{step.title}</h3>
+          <h3 className="mt-2 font-display text-h3 font-bold">{step.title}</h3>
           <p className={`mt-3 max-w-xl leading-relaxed ${dark ? "text-mist" : "text-muted"}`}>{step.text}</p>
         </li>
       ))}

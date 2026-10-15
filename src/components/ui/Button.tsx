@@ -5,7 +5,7 @@ import { ArrowIcon } from "./icons";
 type Variant = "gold" | "ghost-dark" | "ghost-light" | "ink";
 
 const variants: Record<Variant, string> = {
-  gold: "bg-gold text-ink hover:bg-gold-soft",
+  gold: "bg-gold text-ink shadow-[0_8px_24px_-12px_rgba(214,173,59,0.8)] hover:bg-gold-soft",
   ink: "bg-navy text-paper hover:bg-navy-2",
   "ghost-dark": "text-paper ring-1 ring-inset ring-white/25 hover:ring-white/70 hover:bg-white/5",
   "ghost-light": "bg-surface text-ink ring-1 ring-inset ring-line hover:ring-ink/40",

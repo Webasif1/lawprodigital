@@ -9,6 +9,7 @@ import { useEffect } from "react";
  *
  * - `[data-timeline]` / `[data-step]`: the process rule fills and steps light up.
  * - `[data-media]`: case-study artwork opens from a slightly inset frame.
+ * - `[data-grow]`: chart columns / table bars grow in once when reached.
  * - `[data-parallax="-0.08"]`: a gentle vertical drift (factor × 400px over the viewport).
  *
  * GSAP is loaded only after the page is idle and only when the visitor allows
@@ -58,6 +59,27 @@ export function GsapScenes() {
                 scrollTrigger: { trigger: media, start: "top 95%", end: "top 50%", scrub: 0.5 },
               },
             );
+          }
+
+          // Story charts: columns and table bars grow in once, as the reader reaches them.
+          for (const chart of gsap.utils.toArray<HTMLElement>("[data-grow]")) {
+            const cols = chart.querySelectorAll("[data-grow-col]");
+            const bars = chart.querySelectorAll("[data-grow-bar]");
+            const trigger = { trigger: chart, start: "top 82%", once: true };
+            if (cols.length) gsap.from(cols, { scaleY: 0, duration: 1.1, ease: "expo.out", stagger: 0.06, scrollTrigger: trigger });
+            if (bars.length) gsap.from(bars, { scaleX: 0, duration: 1.1, ease: "expo.out", stagger: 0.05, scrollTrigger: trigger });
+          }
+
+          // Flow diagrams light up step by step.
+          for (const flow of gsap.utils.toArray<HTMLElement>("figure:has([data-flow-step])")) {
+            gsap.from(flow.querySelectorAll("[data-flow-step]"), {
+              opacity: 0.25,
+              y: 8,
+              duration: 0.6,
+              ease: "power2.out",
+              stagger: 0.18,
+              scrollTrigger: { trigger: flow, start: "top 80%", once: true },
+            });
           }
 
           for (const el of gsap.utils.toArray<HTMLElement>("[data-parallax]")) {

@@ -49,8 +49,8 @@ unstoppable"). None of the strong sites use them.
 - Bullet lists hold facts, not slogans.
 
 ### Buttons
-- Primary: say what happens. Use **Book a free strategy call**, not "Contact", "Get started" or "Learn more".
-- At most one secondary button per screen, and it has to cost less effort than the primary (e.g. **See the results**).
+- Primary: say what happens. Use **Get Your Free AI Lead Audit** (the offer from the October 2026 homepage brief), not "Contact", "Get started" or "Learn more".
+- At most one secondary button per screen, and it has to cost less effort than the primary (e.g. **Read the 9-month story**).
 - Use the same verb for the same action across the site.
 
 ### Proof

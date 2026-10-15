@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cities, process, specialties } from "@/content/home";
 import { site } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import Link from "next/link";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us — Digital Marketing Exclusively for Law Firms",
@@ -35,8 +36,8 @@ export default function AboutPage() {
             Your trusted digital marketing partner <em className="text-gold">dedicated to law firms</em>
           </>
         }
-        intro="At Law Pro Digital, we specialize exclusively in marketing for law firms."
-        actions={<ButtonLink href={site.primaryCta.href}>Contact us</ButtonLink>}
+        intro={site.description}
+        actions={<ButtonLink href={site.primaryCta.href}>{site.primaryCta.label}</ButtonLink>}
       />
 
       <section aria-labelledby="mission-heading" className="bg-paper">
@@ -51,6 +52,15 @@ export default function AboutPage() {
               Bankruptcy, Injury, Criminal, Sexual Harassment, and other practice areas.
             </p>
             <p data-reveal>
+              Our system was built and tested inside a multi-office US immigration firm: the ads, the content, the Google profiles and the monthly
+              reports, all measured against one number, signed retainers. In nine months that firm went from 79 to an average of 115 new clients a
+              month.{" "}
+              <Link href="/case-study/immigration-law-firm-client-growth/" className="font-semibold text-navy-2 underline decoration-gold decoration-2 underline-offset-4">
+                Read the story
+              </Link>
+              .
+            </p>
+            <p data-reveal>
               With Law Pro Digital, you get a dedicated growth partner, not only a marketing agency. We work closely with you every step of the way.
             </p>
           </div>
@@ -62,7 +72,7 @@ export default function AboutPage() {
           <SectionHeading eyebrow="Team" align="split" title={<span id="results-heading">Expert marketing that delivers real results for legal practices</span>} />
           <ul className="mt-14 grid border-t border-ink sm:grid-cols-2">
             {outcomes.map((o, i) => (
-              <li key={o} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-5 border-b border-line py-6 text-xl leading-snug sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
+              <li key={o} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-5 border-b border-line py-6 font-display text-xl leading-snug sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
                 <span aria-hidden className="figure w-7 shrink-0 pt-0.5 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
                 {o}
               </li>
@@ -78,7 +88,7 @@ export default function AboutPage() {
             <ul className="mt-10 grid border-t border-ink">
               {specialties.map((s) => (
                 <li key={s.title} data-reveal className="flex items-baseline justify-between gap-6 border-b border-line py-4">
-                  <span className="font-display text-2xl tracking-[-0.015em]">{s.title}</span>
+                  <span className="font-display text-xl font-bold">{s.title}</span>
                 </li>
               ))}
             </ul>

@@ -1,7 +1,7 @@
-import { caseStudies } from "@/content/case-studies";
 import { type Service, type ServiceSection, services, serviceHref } from "@/content/services";
 import { site } from "@/content/site";
-import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
+import { StoryCard } from "@/components/story/StoryCard";
+import { getStoryByNumber, type Story } from "@/lib/stories";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { FaqList } from "@/components/sections/FaqList";
 import { PageHero } from "@/components/sections/PageHero";
@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export function ServicePage({ service }: { service: Service }) {
   const path = serviceHref(service.slug);
-  const related = caseStudies.filter((c) => service.relatedCaseStudies.includes(c.slug));
+  const related = service.relatedStories.map(getStoryByNumber).filter((s): s is Story => Boolean(s));
   const faq = service.sections.find((s) => s.kind === "faq");
   const others = services.filter((s) => s.slug !== service.slug);
 
@@ -63,10 +63,10 @@ export function ServicePage({ service }: { service: Service }) {
       {related.length > 0 && (
         <section aria-labelledby="related-heading" className="border-t border-line bg-paper">
           <div className="container-x section-y">
-            <SectionHeading eyebrow="Proof" title={<span id="related-heading">Related case studies</span>} />
-            <div className="mt-16 grid gap-20">
-              {related.map((study, i) => (
-                <CaseStudyCard key={study.slug} study={study} index={i} />
+            <SectionHeading eyebrow="Proof" title={<span id="related-heading">Stories from a real immigration firm</span>} />
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {related.map((story) => (
+                <StoryCard key={story.slug} story={story} />
               ))}
             </div>
           </div>
@@ -114,12 +114,12 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
         <section aria-labelledby={headingId} className={bg}>
           <div className="container-x section-y">
             <SectionHeading align="split" eyebrow={section.eyebrow} title={<span id={headingId}>{section.heading}</span>} intro={section.intro} />
-            <ul className={`mt-16 grid border-t border-l border-line sm:grid-cols-2 ${section.items.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-2 xl:grid-cols-3"}`}>
+            <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {section.items.map((item, i) => (
-                <li key={item.title} data-reveal style={{ ["--reveal-i" as string]: i % 3 }} className="group flex flex-col gap-4 border-r border-b border-line p-7 transition-colors duration-(--dur-base) hover:bg-surface sm:p-8">
-                  <span className="figure text-lg tabular-nums text-muted transition-colors duration-(--dur-fast) group-hover:text-brass">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="font-display text-[1.6rem] leading-tight tracking-[-0.015em] transition-colors duration-(--dur-fast) group-hover:text-navy">{item.title}</h3>
-                  {item.text && <p className="leading-relaxed text-muted">{item.text}</p>}
+                <li key={item.title} data-reveal style={{ ["--reveal-i" as string]: i % 3 }} className="group flex flex-col gap-4 rounded-card bg-surface p-7 ring-1 ring-line transition-[background-color,color,translate] duration-(--dur-base) ease-out-expo hover:-translate-y-1 hover:bg-navy hover:text-white sm:p-8">
+                  <span className="figure grid size-10 place-items-center rounded-tag bg-paper text-sm tabular-nums text-brass transition-colors duration-(--dur-fast) group-hover:bg-gold group-hover:text-ink">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="font-display text-xl font-bold leading-snug tracking-tight">{item.title}</h3>
+                  {item.text && <p className="leading-relaxed text-muted transition-colors group-hover:text-mist">{item.text}</p>}
                 </li>
               ))}
             </ul>
@@ -137,7 +137,7 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
                   key={item}
                   data-reveal
                   style={{ ["--reveal-i" as string]: i % 4 }}
-                  className="rounded-tag bg-surface px-5 py-3 font-display text-xl tracking-[-0.01em] ring-1 ring-line sm:text-2xl"
+                  className="rounded-full bg-surface px-5 py-2.5 font-display text-lg font-semibold tracking-tight ring-1 ring-line"
                 >
                   {item}
                 </li>

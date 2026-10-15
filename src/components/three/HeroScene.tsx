@@ -18,8 +18,8 @@ import {
   Vector3,
 } from "three";
 
-const GOLD = "#f4b71a";
-const PAPER = "#fafaf8";
+const GOLD = "#d6ad3b";
+const PAPER = "#ffffff";
 const BARS = [
   { x: -1.05, h: 0.8 },
   { x: -0.4, h: 1.3 },

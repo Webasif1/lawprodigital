@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { contact, mainNav, site } from "@/content/site";
 import { services, serviceHref } from "@/content/services";
+import { Logo } from "@/components/brand/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 
 type Props = { open: boolean; onClose: () => void; pathname: string };
@@ -51,7 +52,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       aria-modal="true"
       aria-label="Site menu"
       inert={!open}
-      className={`on-dark fixed inset-0 z-60 flex flex-col overflow-y-auto bg-navy text-paper lg:hidden ${
+      className={`on-dark fixed inset-0 z-60 flex flex-col overflow-y-auto bg-navy-deep text-paper xl:hidden ${
         // Visibility flips instantly on open (so focus can move in) and only after the fade on close.
         open
           ? "visible opacity-100 [transition:opacity_.5s_var(--ease-out-expo)]"
@@ -59,7 +60,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       }`}
     >
       <div className="container-x flex h-(--header-h) shrink-0 items-center justify-between">
-        <span className="font-display text-2xl">{site.name}</span>
+        <Logo tone="dark" />
         <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-11 place-items-center rounded-tag ring-1 ring-white/25">
           <span aria-hidden className="relative block size-5">
             <span className="absolute left-0 top-1/2 h-0.5 w-5 rotate-45 rounded bg-paper" />
@@ -84,7 +85,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
             ))}
           </ul>
         </div>
-        <ul className="grid gap-1 border-t border-white/12 pt-6 font-display text-4xl">
+        <ul className="grid gap-1 border-t border-white/12 pt-6 font-display text-3xl font-bold tracking-tight">
           <li>
             <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={linkClass}>
               Home
@@ -92,7 +93,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
           </li>
           {mainNav.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} aria-current={pathname === item.href ? "page" : undefined} className={linkClass}>
+              <Link href={item.href} aria-current={pathname === item.href || (item.href === "/case-study/" && pathname.startsWith(item.href)) ? "page" : undefined} className={linkClass}>
                 {item.label}
               </Link>
             </li>

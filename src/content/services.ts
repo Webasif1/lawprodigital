@@ -29,7 +29,8 @@ export type Service = {
   summary: string;
   sections: ServiceSection[];
   closing?: { heading: string; text: string };
-  relatedCaseStudies: string[];
+  /** Story numbers from the case study library (src/content/source/case-studies.md). */
+  relatedStories: number[];
 };
 
 export const services: Service[] = [
@@ -87,7 +88,7 @@ export const services: Service[] = [
         closing: "Strategies are customized for your specialty and your local market.",
       },
     ],
-    relatedCaseStudies: ["bankruptcy-law-firm-99-percent-lead-conversion"],
+    relatedStories: [13, 12, 14],
   },
   {
     slug: "immigration-lawyer-seo",
@@ -135,11 +136,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    relatedCaseStudies: [
-      "us-immigration-leads-dubai-meta-ads-case-study",
-      "e2-visa-lead-generation-for-us-immigration-lawyers-dubai",
-      "google-call-ads-leads-immigration-lawyers-los-angeles",
-    ],
+    relatedStories: [12, 14, 6],
   },
   {
     slug: "law-firm-ppc-agency",
@@ -226,11 +223,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    relatedCaseStudies: [
-      "google-call-ads-leads-immigration-lawyers-los-angeles",
-      "bankruptcy-law-firm-99-percent-lead-conversion",
-      "e2-visa-lead-generation-for-us-immigration-lawyers-dubai",
-    ],
+    relatedStories: [2, 3, 5],
   },
   {
     slug: "website-design",
@@ -321,7 +314,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    relatedCaseStudies: ["bankruptcy-law-firm-99-percent-lead-conversion"],
+    relatedStories: [14, 12, 1],
   },
   {
     slug: "social-media-marketing",
@@ -390,7 +383,7 @@ export const services: Service[] = [
       heading: "Ready to grow your law firm with expert social media marketing?",
       text: "As a social media marketing agency specializing in law firms, Law Pro Digital is here to help you build authority, attract quality leads, and enhance client engagement across all major platforms.",
     },
-    relatedCaseStudies: ["bankruptcy-law-firm-99-percent-lead-conversion", "us-immigration-leads-dubai-meta-ads-case-study"],
+    relatedStories: [7, 15, 2],
   },
   {
     slug: "video-marketing-for-law-firms",
@@ -464,7 +457,7 @@ export const services: Service[] = [
       heading: "Ready to grow your law firm’s marketing with video?",
       text: "Partner with Law Pro Digital, the video marketing agency for law firms. Let us help you create powerful videos that engage clients and grow your practice.",
     },
-    relatedCaseStudies: ["bankruptcy-law-firm-99-percent-lead-conversion"],
+    relatedStories: [15, 7, 1],
   },
 ];
 

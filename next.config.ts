@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacyCaseStudyRedirects } from "./src/content/stories";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -30,17 +31,26 @@ const nextConfig: NextConfig = {
   async redirects() {
     const caseStudies = "/case-study/";
     return [
-      // Duplicate / dated permalinks of the bankruptcy case study.
+      // The previous case studies were replaced by the 16-story library; each old URL
+      // points to the story that answers the same question (or the library itself).
+      ...Object.entries(legacyCaseStudyRedirects).map(([slug, story]) => ({
+        source: `/${slug}/`,
+        destination: story ? `${caseStudies}${story}/` : caseStudies,
+        permanent: true,
+      })),
+      // Duplicate / dated permalinks of the old bankruptcy case study.
       {
         source: "/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/",
-        destination: "/bankruptcy-law-firm-99-percent-lead-conversion/",
+        destination: caseStudies,
         permanent: true,
       },
       {
         source: "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/",
-        destination: "/bankruptcy-law-firm-99-percent-lead-conversion/",
+        destination: caseStudies,
         permanent: true,
       },
+      // The live site's "Get A Free Call" buttons pointed here.
+      { source: "/booking/", destination: "/contact-us/", permanent: true },
       // Alternate URL of the video marketing service page.
       { source: "/video-marketing/", destination: "/video-marketing-for-law-firms/", permanent: true },
       // WordPress archive pages that only listed the case studies.

@@ -134,7 +134,7 @@ export function ContactForm() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="text-sm text-muted">We’ll only use your details to respond to your enquiry.</p>
         <button type="submit" disabled={pending} className={buttonClasses("gold", "disabled:cursor-wait disabled:opacity-70")}>
-          <span>{pending ? "Sending…" : "Send message"}</span>
+          <span>{pending ? "Sending…" : "Request my free AI lead audit"}</span>
           <ButtonArrow />
         </button>
       </div>

@@ -3,6 +3,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
+import { CheckIcon } from "@/components/ui/icons";
 import { plans, pricing } from "@/content/pricing";
 import { site } from "@/content/site";
 import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -49,36 +50,37 @@ export default function PricingPage() {
 
       <section aria-label="Plans" className="bg-paper">
         <div className="container-x section-y">
-          <ul className="grid border-t border-ink lg:grid-cols-3">
-            {plans.map((plan, i) => (
-              <li
-                key={plan.name}
-                data-reveal
-                style={{ ["--reveal-i" as string]: i }}
-                className="flex flex-col border-b border-line py-10 lg:border-r lg:border-b-0 lg:px-10 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
-              >
-                <p className="eyebrow text-brass">
-                  <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                </p>
-                <h2 className="mt-4 font-display text-h3">{plan.name}</h2>
-                <p className="mt-3 leading-relaxed text-muted lg:min-h-[2lh]">{plan.fit}</p>
-                <p className="mt-8 flex items-baseline gap-2 border-t border-line pt-6">
-                  <span className="figure text-figure text-navy">{usd(plan.price)}</span>
-                  <span className="text-muted">/ month</span>
-                </p>
-                <ul className="mt-8 grid flex-1 content-start border-t border-line">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex gap-4 border-b border-line py-3.5 leading-snug">
-                      <span aria-hidden className="mt-2.5 h-0.5 w-4 shrink-0 bg-gold" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <ButtonLink href={site.primaryCta.href} variant="ink" className="mt-10 w-full">
-                  {site.primaryCta.label}
-                </ButtonLink>
-              </li>
-            ))}
+          <ul className="grid items-stretch gap-5 lg:grid-cols-3">
+            {plans.map((plan, i) => {
+              const dark = Boolean(plan.featured);
+              return (
+                <li
+                  key={plan.name}
+                  data-reveal
+                  style={{ ["--reveal-i" as string]: i }}
+                  className={`relative flex flex-col rounded-card p-7 sm:p-9 ${dark ? "on-dark bg-navy text-white shadow-[0_30px_70px_-35px_rgba(9,20,40,0.6)]" : "bg-surface ring-1 ring-line"}`}
+                >
+                  <p className={`eyebrow tabular-nums ${dark ? "text-gold" : "text-brass"}`}>{String(i + 1).padStart(2, "0")}</p>
+                  <h2 className="mt-4 font-display text-h3 font-bold">{plan.name}</h2>
+                  <p className={`mt-3 leading-relaxed lg:min-h-[3lh] ${dark ? "text-mist" : "text-muted"}`}>{plan.fit}</p>
+                  <p className={`mt-6 flex flex-wrap items-baseline gap-x-2 border-t pt-6 ${dark ? "border-white/15" : "border-line"}`}>
+                    <span className={`figure text-figure ${dark ? "text-gold" : "text-navy"}`}>{usd(plan.price)}</span>
+                    <span className={dark ? "text-mist" : "text-muted"}>/ month {plan.priceNote}</span>
+                  </p>
+                  <ul className="mt-8 grid flex-1 content-start gap-3">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex gap-3 leading-snug">
+                        <CheckIcon className={`mt-0.5 size-4 shrink-0 ${dark ? "text-gold" : "text-brass"}`} />
+                        <span className={dark ? "text-white/90" : ""}>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <ButtonLink href={site.primaryCta.href} variant={dark ? "gold" : "ink"} className="mt-10 w-full">
+                    {site.primaryCta.label}
+                  </ButtonLink>
+                </li>
+              );
+            })}
           </ul>
           <p data-reveal className="mt-10 max-w-2xl text-muted">
             {pricing.note}
@@ -86,7 +88,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <CtaBand heading="Not sure which plan fits your firm?" text="Tell us your practice area, your city and your goals. We’ll recommend a plan on a free call." />
+      <CtaBand heading="Not sure which plan fits your firm?" text="Start with a free AI lead audit. We’ll show you where clients are slipping away and recommend a plan for your firm." />
     </>
   );
 }

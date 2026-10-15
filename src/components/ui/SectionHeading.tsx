@@ -2,12 +2,19 @@ import type { ReactNode } from "react";
 
 type Tone = "light" | "dark";
 
-/** Small label above a heading: a numbered or plain uppercase tag with a short rule. */
+/** Small label above a heading: a marker-highlighted pill, optionally numbered like a chapter. */
 export function Eyebrow({ children, tone = "light", index }: { children: ReactNode; tone?: Tone; index?: number }) {
   return (
-    <p className={`eyebrow flex items-center gap-3 ${tone === "dark" ? "text-gold" : "text-brass"}`}>
-      {index !== undefined && <span className="tabular-nums">{String(index).padStart(2, "0")}</span>}
-      <span aria-hidden className="h-px w-6 bg-current opacity-60" />
+    <p
+      className={`eyebrow inline-flex items-center gap-2.5 rounded-full px-3 py-1.5 ${
+        tone === "dark" ? "bg-white/8 text-gold ring-1 ring-inset ring-white/10" : "bg-gold-wash text-brass"
+      }`}
+    >
+      {index !== undefined ? (
+        <span className="tabular-nums opacity-70">{String(index).padStart(2, "0")}</span>
+      ) : (
+        <span aria-hidden className="size-1.5 rounded-full bg-current" />
+      )}
       {children}
     </p>
   );

@@ -1,59 +1,62 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Design tokens — "Legal Ledger"                                      */
-/* Neutral paper, ink text, the logo's navy for dark surfaces, and     */
-/* gold reserved for the primary action and key figures.              */
+/* Design tokens — "Signed"                                           */
+/* Deep navy and clean cool-grey paper, Plus Jakarta Sans headlines    */
+/* over Inter, and one warm gold kept for the primary action, key      */
+/* figures and the marker highlight.                                  */
 /* ------------------------------------------------------------------ */
 @theme {
   /* Surfaces */
-  --color-paper: #fafaf8;
+  --color-paper: #f4f6f9;
   --color-surface: #ffffff;
-  --color-wash: #f1f1ee;
-  --color-line: #e4e4e0;
+  --color-wash: #e9edf3;
+  --color-line: #dbe1ea;
 
   /* Text */
-  --color-ink: #0e1116;
-  --color-muted: #5b6270;
+  --color-ink: #0b1527;
+  --color-muted: #566176;
 
   /* Brand */
-  --color-navy: #17165a;
-  --color-navy-2: #23227a;
-  --color-navy-deep: #100f42;
-  --color-mist: #c2c1e0; /* secondary text on navy */
-  --color-gold: #f4b71a;
-  --color-gold-soft: #ffc83d;
-  --color-brass: #8a6100; /* gold as text on light surfaces (AA) */
+  --color-navy: #0f1f3d;
+  --color-navy-2: #1b3160;
+  --color-navy-deep: #091428;
+  --color-mist: #a9b5ca; /* secondary text on navy */
+  --color-gold: #d6ad3b;
+  --color-gold-soft: #e7c45f;
+  --color-gold-wash: #f6ecd0; /* marker highlight on light surfaces */
+  --color-brass: #85680f; /* gold as text on light surfaces (AA) */
+  --color-signal: #22c55e; /* "live" dots in product UI only */
 
   /* Type */
-  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  --text-display: clamp(2.75rem, 7.4vw, 6.25rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.032em;
-  --text-h1: clamp(2.4rem, 5.6vw, 4.6rem);
-  --text-h1--line-height: 1.02;
-  --text-h1--letter-spacing: -0.026em;
-  --text-h2: clamp(2rem, 4.2vw, 3.5rem);
-  --text-h2--line-height: 1.04;
-  --text-h2--letter-spacing: -0.022em;
-  --text-h3: clamp(1.45rem, 2.2vw, 1.9rem);
-  --text-h3--line-height: 1.15;
-  --text-h3--letter-spacing: -0.015em;
+  --text-display: clamp(2.4rem, 4.9vw, 4.4rem);
+  --text-display--line-height: 1.03;
+  --text-display--letter-spacing: -0.038em;
+  --text-h1: clamp(2.2rem, 4.6vw, 3.75rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.034em;
+  --text-h2: clamp(1.85rem, 3.4vw, 2.85rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h3: clamp(1.2rem, 1.7vw, 1.45rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.018em;
   --text-lead: clamp(1.1rem, 1.35vw, 1.28rem);
   --text-lead--line-height: 1.6;
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.16em;
-  --text-figure: clamp(2.75rem, 5vw, 4.25rem);
+  --text-eyebrow--letter-spacing: 0.12em;
+  --text-figure: clamp(2.4rem, 4.2vw, 3.6rem);
   --text-figure--line-height: 1;
-  --text-figure--letter-spacing: -0.03em;
+  --text-figure--letter-spacing: -0.04em;
 
   /* Radii: tags and buttons, fields and wash panels, media and cards */
-  --radius-tag: 6px;
-  --radius-field: 12px;
-  --radius-card: 20px;
+  --radius-tag: 10px;
+  --radius-field: 14px;
+  --radius-card: 24px;
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -84,7 +87,7 @@
 }
 
 :root {
-  --header-h: 72px;
+  --header-h: 76px;
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --section-y: clamp(5rem, 10vw, 8.5rem);
 
@@ -133,13 +136,12 @@ body {
   padding-block: var(--section-y);
 }
 
-/* Editorial serif headline. Weight 400 with optical sizing; hierarchy comes from
-   size. Pair with a text-display / text-h1 / text-h2 / text-h3 token, which set
-   the size, leading and tracking. */
+/* Headline face: Plus Jakarta Sans, bold and tightly tracked. Pair with a
+   text-display / text-h1 / text-h2 / text-h3 token, which set the size,
+   leading and tracking. */
 @utility font-display-tight {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 /* Small uppercase label used above headings and in data tables. */
@@ -153,14 +155,33 @@ body {
 
 @utility figure {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
+  font-weight: 700;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* Ledger rules: a faint horizontal baseline grid used on dark heroes. */
+/* A faint square grid used behind dark heroes, like a dashboard canvas. */
 @utility ledger-rules {
-  background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
-  background-size: 100% 4.5rem;
+  background-image:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+/* Marker highlight: a gold swipe behind a word or label. */
+@utility marker {
+  background-image: linear-gradient(transparent 58%, var(--color-gold-wash) 58%, var(--color-gold-wash) 92%, transparent 92%);
+  padding-inline: 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.on-dark .marker,
+.marker-dark {
+  background-image: linear-gradient(transparent 60%, rgb(214 173 59 / 0.35) 60%, rgb(214 173 59 / 0.35) 92%, transparent 92%);
+}
+
+/* Emphasis inside sans headlines is colour, not italics. */
+:is(h1, h2, h3, .font-display-tight) em {
+  font-style: normal;
 }
 
 /* ------------------------------------------------------------------ */
@@ -233,7 +254,7 @@ body {
 }
 .prose-case h2 {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
+  font-weight: 700;
   font-size: clamp(1.7rem, 2.6vw, 2.3rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -288,4 +309,64 @@ body {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--color-brass);
+}
+
+/* Story hero photograph settles in slowly on load. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-zoom {
+    animation: hero-zoom 2.4s var(--ease-out-expo) both;
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+/* Floating product cards in the hero drift gently, out of step with each other. */
+@media (prefers-reduced-motion: no-preference) {
+  .float-card {
+    animation: float-card 7s ease-in-out infinite;
+    animation-delay: var(--float-d, 0s);
+  }
+}
+@keyframes float-card {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* International map: arcs draw in once the figure is revealed; market points pulse. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .intl-arc {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.8s var(--ease-out-expo);
+  }
+  .js [data-revealed] .intl-arc {
+    stroke-dashoffset: 0;
+  }
+  .intl-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: intl-pulse 2.8s ease-out infinite;
+  }
+}
+@keyframes intl-pulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* The display face defaults to semibold; utilities such as font-bold still win. */
+@layer base {
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
 }
