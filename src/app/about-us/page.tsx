@@ -107,7 +107,7 @@ export default function AboutPage() {
       </section>
 
       <ProcessSection heading={process.heading} intro={process.intro} steps={process.steps} />
-      <div className="bg-paper pt-20 sm:pt-28">
+      <div>
         <CtaBand />
       </div>
     </>

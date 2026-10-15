@@ -93,7 +93,7 @@ export function ServicePage({ service }: { service: Service }) {
         </div>
       </nav>
 
-      <div className="bg-paper pt-20 sm:pt-28">
+      <div>
         <CtaBand heading={service.closing?.heading} text={service.closing?.text} />
       </div>
     </>
