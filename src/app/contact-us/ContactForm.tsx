@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { ArrowCircle, buttonClasses } from "@/components/ui/Button";
+import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
 import { submitContact } from "./actions";
 import { cityOptions, serviceOptions, type ContactField, type ContactState } from "./form-config";
@@ -9,7 +9,7 @@ import { cityOptions, serviceOptions, type ContactField, type ContactState } fro
 const initial: ContactState = { status: "idle" };
 
 const inputClass =
-  "mt-2 block w-full rounded-xl border-0 bg-paper px-4 py-3.5 text-ink ring-1 ring-ink/15 transition-shadow placeholder:text-slate/70 focus:outline-none focus:ring-2 focus:ring-navy aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-600";
+  "mt-2 block w-full rounded-field border-0 bg-surface px-4 py-3.5 text-ink ring-1 ring-line transition-shadow placeholder:text-muted/70 hover:ring-ink/30 focus:outline-none focus:ring-2 focus:ring-navy aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-600";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, initial);
@@ -27,11 +27,11 @@ export function ContactForm() {
 
   if (state.status === "success") {
     return (
-      <div ref={status} tabIndex={-1} role="status" className="rounded-3xl bg-ink p-10 text-paper outline-none">
-        <span className="grid size-14 place-items-center rounded-full bg-gold text-ink">
+      <div ref={status} tabIndex={-1} role="status" className="on-dark rounded-card bg-navy p-10 text-paper outline-none">
+        <span className="grid size-14 place-items-center rounded-tag bg-gold text-ink">
           <CheckIcon className="size-6" />
         </span>
-        <h2 className="mt-6 font-display text-3xl tracking-tight">Message sent</h2>
+        <h2 className="mt-6 font-display text-4xl tracking-[-0.02em]">Message sent</h2>
         <p className="mt-3 text-lg text-mist">{state.message}</p>
       </div>
     );
@@ -55,7 +55,7 @@ export function ContactForm() {
   const label = (f: ContactField, children: string, optional = false) => (
     <label htmlFor={f} className="text-sm font-semibold">
       {children}
-      {optional ? <span className="font-normal text-slate"> (optional)</span> : <span aria-hidden className="text-gold-deep"> *</span>}
+      {optional ? <span className="font-normal text-muted"> (optional)</span> : <span aria-hidden className="text-brass"> *</span>}
     </label>
   );
 
@@ -70,10 +70,10 @@ export function ContactForm() {
         const data = new FormData(e.currentTarget);
         startTransition(() => formAction(data));
       }}
-      noValidate className="relative grid gap-6 rounded-3xl bg-paper-2 p-6 sm:p-10">
+      noValidate className="relative grid gap-6 rounded-card bg-wash p-6 ring-1 ring-line sm:p-10">
       <div ref={status} tabIndex={-1} aria-live="polite" className="outline-none empty:hidden">
         {state.status === "error" && state.message && (
-          <p className="rounded-xl bg-red-50 px-4 py-3 font-medium text-red-800 ring-1 ring-red-200">{state.message}</p>
+          <p className="rounded-field bg-red-50 px-4 py-3 font-medium text-red-800 ring-1 ring-red-200">{state.message}</p>
         )}
       </div>
 
@@ -132,10 +132,10 @@ export function ContactForm() {
         {errorText("message")}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-slate">We’ll only use your details to respond to your enquiry.</p>
+        <p className="text-sm text-muted">We’ll only use your details to respond to your enquiry.</p>
         <button type="submit" disabled={pending} className={buttonClasses("gold", "disabled:cursor-wait disabled:opacity-70")}>
           <span>{pending ? "Sending…" : "Send message"}</span>
-          <ArrowCircle />
+          <ButtonArrow />
         </button>
       </div>
     </form>

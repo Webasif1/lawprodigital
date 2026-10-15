@@ -6,10 +6,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function CaseStudiesSection({ limit = 3 }: { limit?: number }) {
   return (
     <section aria-labelledby="cases-heading" className="bg-paper">
-      <div className="container-x py-24 sm:py-32">
+      <div className="container-x section-y border-t border-line">
         <div className="flex flex-wrap items-end justify-between gap-8">
-          <SectionHeading eyebrow="Case studies" title={<span id="cases-heading">The work behind the numbers</span>} />
-          <ButtonLink href="/case-study/" variant="ghost-light" data-reveal>
+          <SectionHeading eyebrow="Case studies" index={2} title={<span id="cases-heading">The work behind the numbers</span>} />
+          <ButtonLink href="/case-study/" variant="ghost-light" arrow={false} data-reveal>
             All case studies
           </ButtonLink>
         </div>

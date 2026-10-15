@@ -9,7 +9,6 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CheckIcon } from "@/components/ui/icons";
 import { absoluteUrl, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import Link from "next/link";
 
@@ -50,7 +49,7 @@ export function ServicePage({ service }: { service: Service }) {
         actions={
           <>
             <ButtonLink href={site.primaryCta.href}>{site.primaryCta.label}</ButtonLink>
-            <ButtonLink href="/case-study/" variant="ghost-dark">
+            <ButtonLink href="/case-study/" variant="ghost-dark" arrow={false}>
               See case studies
             </ButtonLink>
           </>
@@ -62,8 +61,8 @@ export function ServicePage({ service }: { service: Service }) {
       ))}
 
       {related.length > 0 && (
-        <section aria-labelledby="related-heading" className="border-t border-ink/10 bg-paper">
-          <div className="container-x py-24 sm:py-32">
+        <section aria-labelledby="related-heading" className="border-t border-line bg-paper">
+          <div className="container-x section-y">
             <SectionHeading eyebrow="Proof" title={<span id="related-heading">Related case studies</span>} />
             <div className="mt-16 grid gap-20">
               {related.map((study, i) => (
@@ -74,9 +73,9 @@ export function ServicePage({ service }: { service: Service }) {
         </section>
       )}
 
-      <nav aria-labelledby="other-services" className="border-t border-ink/10 bg-paper-2">
+      <nav aria-labelledby="other-services" className="border-t border-line bg-wash">
         <div className="container-x py-16">
-          <h2 id="other-services" className="text-xs font-bold uppercase tracking-[0.22em] text-gold-deep">
+          <h2 id="other-services" className="eyebrow text-brass">
             More services
           </h2>
           <ul className="mt-6 flex flex-wrap gap-3">
@@ -84,7 +83,7 @@ export function ServicePage({ service }: { service: Service }) {
               <li key={s.slug}>
                 <Link
                   href={serviceHref(s.slug)}
-                  className="inline-flex min-h-11 items-center rounded-full bg-paper px-5 font-semibold ring-1 ring-ink/12 transition-colors hover:bg-ink hover:text-paper"
+                  className="inline-flex min-h-11 items-center rounded-tag bg-surface px-4 font-medium ring-1 ring-line transition-colors duration-(--dur-fast) hover:bg-navy hover:text-paper hover:ring-navy"
                 >
                   {s.navLabel}
                 </Link>
@@ -94,7 +93,7 @@ export function ServicePage({ service }: { service: Service }) {
         </div>
       </nav>
 
-      <div className="pt-24 sm:pt-32 bg-paper">
+      <div className="bg-paper pt-20 sm:pt-28">
         <CtaBand heading={service.closing?.heading} text={service.closing?.text} />
       </div>
     </>
@@ -102,7 +101,7 @@ export function ServicePage({ service }: { service: Service }) {
 }
 
 function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }) {
-  const bg = alt ? "bg-paper-2" : "bg-paper";
+  const bg = alt ? "bg-wash" : "bg-paper";
   const headingId = `${section.id}-heading`;
 
   switch (section.kind) {
@@ -113,14 +112,14 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
     case "features":
       return (
         <section aria-labelledby={headingId} className={bg}>
-          <div className="container-x py-24 sm:py-32">
+          <div className="container-x section-y">
             <SectionHeading align="split" eyebrow={section.eyebrow} title={<span id={headingId}>{section.heading}</span>} intro={section.intro} />
-            <ul className={`mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink/12 sm:grid-cols-2 ${section.items.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-2 xl:grid-cols-3"}`}>
+            <ul className={`mt-16 grid border-t border-l border-line sm:grid-cols-2 ${section.items.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-2 xl:grid-cols-3"}`}>
               {section.items.map((item, i) => (
-                <li key={item.title} data-reveal style={{ ["--reveal-i" as string]: i % 3 }} className={`group flex flex-col gap-4 p-7 sm:p-8 ${bg} transition-colors duration-500 hover:bg-ink hover:text-paper`}>
-                  <span className="text-sm font-bold tabular-nums text-gold-deep transition-colors group-hover:text-gold">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="font-display text-2xl leading-tight tracking-tight">{item.title}</h3>
-                  {item.text && <p className="leading-relaxed text-slate transition-colors group-hover:text-mist">{item.text}</p>}
+                <li key={item.title} data-reveal style={{ ["--reveal-i" as string]: i % 3 }} className="group flex flex-col gap-4 border-r border-b border-line p-7 transition-colors duration-(--dur-base) hover:bg-surface sm:p-8">
+                  <span className="figure text-lg tabular-nums text-muted transition-colors duration-(--dur-fast) group-hover:text-brass">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="font-display text-[1.6rem] leading-tight tracking-[-0.015em] transition-colors duration-(--dur-fast) group-hover:text-navy">{item.title}</h3>
+                  {item.text && <p className="leading-relaxed text-muted">{item.text}</p>}
                 </li>
               ))}
             </ul>
@@ -130,7 +129,7 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
     case "tags":
       return (
         <section aria-labelledby={headingId} className={bg}>
-          <div className="container-x py-24 sm:py-28">
+          <div className="container-x section-y">
             <SectionHeading eyebrow={section.eyebrow} title={<span id={headingId}>{section.heading}</span>} intro={section.intro} />
             <ul className="mt-12 flex flex-wrap gap-3">
               {section.items.map((item, i) => (
@@ -138,14 +137,14 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
                   key={item}
                   data-reveal
                   style={{ ["--reveal-i" as string]: i % 4 }}
-                  className="rounded-full bg-ink px-6 py-3.5 font-display text-xl tracking-tight text-paper sm:text-2xl"
+                  className="rounded-tag bg-surface px-5 py-3 font-display text-xl tracking-[-0.01em] ring-1 ring-line sm:text-2xl"
                 >
                   {item}
                 </li>
               ))}
             </ul>
             {section.closing && (
-              <p data-reveal className="mt-10 max-w-2xl text-lg leading-relaxed text-slate">
+              <p data-reveal className="mt-10 max-w-2xl text-lg leading-relaxed text-muted">
                 {section.closing}
               </p>
             )}
@@ -155,7 +154,7 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
     case "prose":
       return (
         <section aria-labelledby={headingId} className={bg}>
-          <div className="container-x grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
+          <div className="container-x section-y grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <SectionHeading eyebrow={section.eyebrow} title={<span id={headingId}>{section.heading}</span>} />
             </div>
@@ -166,19 +165,17 @@ function SectionView({ section, alt }: { section: ServiceSection; alt: boolean }
                 </p>
               ))}
               {section.bullets && (
-                <ul className="mt-8 grid gap-3">
+                <ul className="mt-8 grid border-t border-line">
                   {section.bullets.map((b, i) => (
-                    <li key={b} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-4 rounded-2xl bg-ink/[0.04] p-5 text-lg leading-snug">
-                      <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-navy text-gold">
-                        <CheckIcon className="size-3.5" />
-                      </span>
+                    <li key={b} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-4 border-b border-line py-4 text-lg leading-snug">
+                      <span aria-hidden className="mt-3 h-0.5 w-5 shrink-0 bg-gold" />
                       {b}
                     </li>
                   ))}
                 </ul>
               )}
               {section.closing && (
-                <p data-reveal className="mt-8 text-lg leading-relaxed text-slate">
+                <p data-reveal className="mt-8 text-lg leading-relaxed text-muted">
                   {section.closing}
                 </p>
               )}

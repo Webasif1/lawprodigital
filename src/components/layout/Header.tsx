@@ -61,10 +61,10 @@ export function Header() {
   return (
     <header
       className={`sticky top-0 z-50 border-b bg-paper transition-[box-shadow,border-color] duration-300 ${
-        scrolled ? "border-ink/10 shadow-[0_10px_30px_-18px_rgba(9,9,26,0.35)]" : "border-transparent"
+        scrolled ? "border-line" : "border-transparent"
       }`}
     >
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded-tag focus:bg-navy focus:px-4 focus:py-2 focus:text-paper">
         Skip to content
       </a>
       <div className={`container-x flex items-center justify-between gap-6 transition-[height] duration-300 ${scrolled ? "h-16" : "h-(--header-h)"}`}>
@@ -75,13 +75,13 @@ export function Header() {
             width={site.logo.width}
             height={site.logo.height}
             priority
-            sizes="(min-width: 640px) 230px, 200px"
-            className={`w-auto transition-[height] duration-300 ${scrolled ? "h-11 sm:h-12" : "h-12 sm:h-14"}`}
+            sizes="(min-width: 640px) 200px, 180px"
+            className={`w-auto transition-[height] duration-300 ${scrolled ? "h-10 sm:h-11" : "h-11 sm:h-12"}`}
           />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-1 text-[0.95rem] font-semibold">
+          <ul className="flex items-center gap-1 text-[0.94rem] font-medium">
             <li>
               <div ref={servicesRef} className="relative" onPointerEnter={openNow} onPointerLeave={closeSoon}>
                 <button
@@ -89,7 +89,7 @@ export function Header() {
                   aria-expanded={dropdownOpen}
                   aria-controls={menuId}
                   onClick={() => (dropdownOpen ? setServicesOpen(false) : openNow())}
-                  className={`flex items-center gap-1.5 rounded-full px-4 py-2 transition-colors hover:bg-ink/5 ${isServicePath ? "text-navy" : "text-ink"}`}
+                  className={`flex items-center gap-1.5 rounded-tag px-3.5 py-2 transition-colors hover:bg-wash ${isServicePath ? "text-navy underline decoration-gold decoration-2 underline-offset-[10px]" : "text-ink"}`}
                 >
                   Services
                   <ChevronDownIcon className={`size-4 transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`} />
@@ -97,16 +97,16 @@ export function Header() {
                 <div
                   id={menuId}
                   hidden={!dropdownOpen}
-                  className="absolute left-1/2 top-full w-136 -translate-x-1/2 pt-3"
+                  className="absolute left-1/2 top-full w-144 -translate-x-1/2 pt-3"
                 >
-                  <div className="grid grid-cols-2 gap-1 rounded-2xl bg-ink p-3 text-paper shadow-2xl shadow-ink/30 ring-1 ring-white/10 motion-safe:animate-[fade_.35s_var(--ease-out-expo)_both]">
+                  <div className="on-dark grid grid-cols-2 gap-1 rounded-card bg-navy p-3 text-paper shadow-[0_24px_60px_-20px_rgba(14,17,22,0.45)] motion-safe:animate-[fade_.35s_var(--ease-out-expo)_both]">
                     {services.map((s) => (
                       <Link
                         key={s.slug}
                         href={serviceHref(s.slug)}
                         onClick={() => setServicesOpen(false)}
                         aria-current={pathname === serviceHref(s.slug) ? "page" : undefined}
-                        className="group rounded-xl p-4 transition-colors hover:bg-white/6 aria-[current=page]:bg-white/6"
+                        className="group rounded-field p-4 transition-colors hover:bg-white/7 aria-[current=page]:bg-white/7"
                       >
                         <span className="flex items-center justify-between font-semibold">
                           {s.navLabel}
@@ -124,7 +124,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className="relative rounded-full px-4 py-2 transition-colors hover:bg-ink/5 aria-[current=page]:text-navy"
+                  className="relative rounded-tag px-3.5 py-2 transition-colors hover:bg-wash aria-[current=page]:text-navy aria-[current=page]:underline aria-[current=page]:decoration-gold aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[10px]"
                 >
                   {item.label}
                 </Link>
@@ -139,7 +139,7 @@ export function Header() {
           </div>
           <button
             type="button"
-            className="grid size-11 place-items-center rounded-full ring-1 ring-ink/15 lg:hidden"
+            className="grid size-11 place-items-center rounded-tag ring-1 ring-line lg:hidden"
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             onClick={() => setMenuFor(pathname)}

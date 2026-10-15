@@ -41,6 +41,8 @@ const nextConfig: NextConfig = {
         destination: "/bankruptcy-law-firm-99-percent-lead-conversion/",
         permanent: true,
       },
+      // Alternate URL of the video marketing service page.
+      { source: "/video-marketing/", destination: "/video-marketing-for-law-firms/", permanent: true },
       // WordPress archive pages that only listed the case studies.
       { source: "/category/:slug/", destination: caseStudies, permanent: true },
       { source: "/author/:slug/", destination: caseStudies, permanent: true },

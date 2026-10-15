@@ -5,7 +5,6 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CheckIcon } from "@/components/ui/icons";
 import { cities, process, specialties } from "@/content/home";
 import { site } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -41,9 +40,9 @@ export default function AboutPage() {
       />
 
       <section aria-labelledby="mission-heading" className="bg-paper">
-        <div className="container-x grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
+        <div className="container-x section-y grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionHeading eyebrow="Who we are" title={<span id="mission-heading">We understand the legal world inside out</span>} />
+            <SectionHeading eyebrow="Who we are" title={<span id="mission-heading">We know how the legal world works</span>} />
           </div>
           <div className="grid gap-6 text-lg leading-relaxed text-ink/80 lg:col-span-7 lg:pt-10">
             <p data-reveal>
@@ -52,22 +51,19 @@ export default function AboutPage() {
               Bankruptcy, Injury, Criminal, Sexual Harassment, and other practice areas.
             </p>
             <p data-reveal>
-              With Law Pro Digital, you get more than just a marketing agency — you get a dedicated growth partner who works closely with you every
-              step of the way.
+              With Law Pro Digital, you get a dedicated growth partner, not only a marketing agency. We work closely with you every step of the way.
             </p>
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="results-heading" className="bg-paper-2">
-        <div className="container-x py-24 sm:py-32">
+      <section aria-labelledby="results-heading" className="bg-wash">
+        <div className="container-x section-y">
           <SectionHeading eyebrow="Team" align="split" title={<span id="results-heading">Expert marketing that delivers real results for legal practices</span>} />
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-14 grid border-t border-ink sm:grid-cols-2">
             {outcomes.map((o, i) => (
-              <li key={o} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-5 rounded-2xl bg-paper p-7 text-xl leading-snug">
-                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-navy text-gold">
-                  <CheckIcon className="size-4" />
-                </span>
+              <li key={o} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-5 border-b border-line py-6 text-xl leading-snug sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
+                <span aria-hidden className="figure w-7 shrink-0 pt-0.5 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
                 {o}
               </li>
             ))}
@@ -76,22 +72,22 @@ export default function AboutPage() {
       </section>
 
       <section aria-labelledby="practice-heading" className="bg-paper">
-        <div className="container-x grid gap-12 py-24 sm:py-32 lg:grid-cols-2">
+        <div className="container-x section-y grid gap-16 lg:grid-cols-2">
           <div>
             <SectionHeading eyebrow="Practice areas" title={<span id="practice-heading">Lawyers we work with</span>} />
-            <ul className="mt-10 grid gap-3">
+            <ul className="mt-10 grid border-t border-ink">
               {specialties.map((s) => (
-                <li key={s.title} data-reveal className="flex items-baseline justify-between gap-6 border-b border-ink/12 pb-3">
-                  <span className="font-display text-2xl tracking-tight">{s.title}</span>
+                <li key={s.title} data-reveal className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+                  <span className="font-display text-2xl tracking-[-0.015em]">{s.title}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <SectionHeading eyebrow="Locations" title="Cities we serve" />
-            <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-3">
+            <ul className="mt-10 grid grid-cols-2 gap-x-6 border-t border-ink">
               {cities.map((c) => (
-                <li key={c} data-reveal className="border-b border-ink/12 pb-3 text-lg">
+                <li key={c} data-reveal className="border-b border-line py-4 text-lg">
                   {c}
                 </li>
               ))}
@@ -101,7 +97,7 @@ export default function AboutPage() {
       </section>
 
       <ProcessSection heading={process.heading} intro={process.intro} steps={process.steps} />
-      <div className="bg-paper pt-24 sm:pt-32">
+      <div className="bg-paper pt-20 sm:pt-28">
         <CtaBand />
       </div>
     </>

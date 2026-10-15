@@ -6,9 +6,8 @@ import { Hero } from "@/components/sections/Hero";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ProofStats } from "@/components/sections/ProofStats";
 import { ServicesIndex } from "@/components/sections/ServicesIndex";
-import { Specialties } from "@/components/sections/Specialties";
 import { TestimonialSection } from "@/components/sections/TestimonialSection";
-import { WhyUs } from "@/components/sections/WhyUs";
+import { WhoWeServe } from "@/components/sections/WhoWeServe";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqs, process } from "@/content/home";
 import { site } from "@/content/site";
@@ -21,6 +20,10 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
 });
 
+/**
+ * Narrative: promise → proof → what we do → the work → how we work →
+ * who it's for → a client in their own words → questions → the call.
+ */
 export default function HomePage() {
   return (
     <>
@@ -29,9 +32,8 @@ export default function HomePage() {
       <ProofStats />
       <ServicesIndex />
       <CaseStudiesSection />
-      <ProcessSection heading={process.heading} intro={process.intro} steps={process.steps} />
-      <Specialties />
-      <WhyUs />
+      <ProcessSection index={3} heading={process.heading} intro={process.intro} steps={process.steps} />
+      <WhoWeServe index={4} />
       <TestimonialSection />
       <FaqList items={faqs} />
       <CtaBand />

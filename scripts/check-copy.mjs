@@ -17,12 +17,16 @@ const files = roots.flatMap(function walk(p) {
   return statSync(p).isDirectory() ? readdirSync(p).flatMap((f) => walk(join(p, f))) : /\.(ts|tsx)$/.test(p) ? [p] : [];
 });
 
+// Search-result titles and descriptions are kept verbatim from the old site to preserve SEO.
+const seoField = /^(metaTitle|metaDescription):/;
+
 let hits = 0;
 for (const file of files) {
   readFileSync(file, "utf8")
     .split("\n")
-    .forEach((line, i) => {
+    .forEach((line, i, lines) => {
       if (line.trim().startsWith("//") || line.trim().startsWith("*")) return;
+      if (seoField.test(line.trim()) || seoField.test(lines[i - 1]?.trim() ?? "")) return;
       const m = line.match(pattern);
       if (m) {
         hits++;

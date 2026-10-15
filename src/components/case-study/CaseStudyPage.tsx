@@ -46,12 +46,12 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         intro={study.summary}
       />
 
-      <section aria-label="Key results" className="border-b border-ink/10 bg-paper">
+      <section aria-label="Key results" className="border-b border-line bg-surface">
         <dl className="container-x grid gap-px py-0 sm:grid-cols-3">
           {study.stats.map((s, i) => (
-            <div key={s.label} data-reveal style={{ ["--reveal-i" as string]: i }} className="border-ink/10 py-10 sm:border-l sm:px-8 sm:first:border-l-0 sm:first:pl-0">
-              <dt className="text-sm font-semibold text-slate">{s.label}</dt>
-              <dd className="mt-2 font-display text-[clamp(2.75rem,5vw,4.25rem)] leading-none tracking-tight">
+            <div key={s.label} data-reveal style={{ ["--reveal-i" as string]: i }} className="border-b border-line py-9 last:border-b-0 sm:border-b-0 sm:border-l sm:px-8 sm:first:border-l-0 sm:first:pl-0">
+              <dt className="text-sm font-semibold text-muted">{s.label}</dt>
+              <dd className="figure mt-2 text-figure text-navy">
                 <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals} />
               </dd>
             </div>
@@ -60,9 +60,9 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
       </section>
 
       <article className="bg-paper">
-        <div className="container-x grid gap-14 py-20 lg:grid-cols-12">
+        <div className="container-x grid gap-14 py-16 sm:py-20 lg:grid-cols-12">
           <aside className="lg:col-span-4">
-            <div className="rounded-3xl bg-paper-2 p-7 lg:sticky lg:top-28">
+            <div className="border-t border-ink pt-6 lg:sticky lg:top-28">
               <dl className="grid gap-5">
                 {[
                   ["Client", study.client],
@@ -72,14 +72,14 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                   ["Published", dateFormat.format(new Date(study.published))],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="text-xs font-bold uppercase tracking-[0.18em] text-gold-deep">{k}</dt>
+                    <dt className="eyebrow text-brass">{k}</dt>
                     <dd className="mt-1 leading-snug">{v}</dd>
                   </div>
                 ))}
               </dl>
               <Link
                 href={site.primaryCta.href}
-                className="group mt-8 flex items-center justify-between rounded-2xl bg-ink px-5 py-4 font-semibold text-paper transition-colors hover:bg-navy"
+                className="group on-dark mt-8 flex items-center justify-between rounded-tag bg-navy px-5 py-4 font-semibold text-paper transition-colors duration-(--dur-fast) hover:bg-navy-2"
               >
                 Want results like this?
                 <ArrowIcon className="size-4 text-gold transition-transform group-hover:translate-x-1" />
@@ -92,20 +92,20 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         </div>
       </article>
 
-      <nav aria-labelledby="more-cases" className="border-t border-ink/10 bg-paper">
+      <nav aria-labelledby="more-cases" className="border-t border-line bg-wash">
         <div className="container-x py-20">
-          <h2 id="more-cases" className="font-display text-3xl tracking-tight sm:text-4xl">
+          <h2 id="more-cases" className="font-display-tight text-h2">
             More case studies
           </h2>
-          <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl bg-ink/12 md:grid-cols-3">
+          <ul className="mt-10 grid border-t border-ink md:grid-cols-2 lg:grid-cols-4">
             {others.map((c) => (
-              <li key={c.slug} className="bg-paper">
-                <Link href={`/${c.slug}/`} className="group flex h-full flex-col gap-6 p-7 transition-colors duration-300 hover:bg-ink hover:text-paper">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-gold-deep group-hover:text-gold">
+              <li key={c.slug} className="border-b border-line md:border-r md:even:border-r-0 lg:even:border-r lg:last:border-r-0">
+                <Link href={`/${c.slug}/`} className="group flex h-full flex-col gap-6 py-7 transition-colors duration-(--dur-base) hover:bg-surface md:px-6">
+                  <span className="eyebrow text-brass">
                     {c.category} · {c.duration}
                   </span>
-                  <span className="font-display text-xl leading-snug tracking-tight">{c.title}</span>
-                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold">
+                  <span className="font-display text-xl leading-snug tracking-[-0.01em] transition-colors group-hover:text-navy">{c.title}</span>
+                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-navy">
                     Read case study <ArrowIcon className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>

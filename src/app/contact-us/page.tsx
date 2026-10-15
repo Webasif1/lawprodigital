@@ -38,24 +38,23 @@ export default function ContactPage() {
         <div className="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="text-lg leading-relaxed text-ink/80">
-              Whether you’re looking for more leads, better reviews, or a stronger online presence, we’re ready to craft a custom strategy tailored
-              just for your law firm.
+              Whether you’re looking for more leads, better reviews, or a stronger online presence, we’re ready to build a strategy for your law firm.
             </p>
-            <h2 className="mt-12 text-xs font-bold uppercase tracking-[0.22em] text-gold-deep">What happens next</h2>
-            <ol className="mt-5 grid gap-4">
+            <h2 className="eyebrow mt-12 text-brass">What happens next</h2>
+            <ol className="mt-5 grid border-t border-line">
               {nextSteps.map((s, i) => (
-                <li key={s} className="flex gap-4 text-lg leading-snug">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink text-sm font-bold text-gold">{i + 1}</span>
-                  <span className="pt-0.5">{s}</span>
+                <li key={s} className="flex gap-4 border-b border-line py-4 text-lg leading-snug">
+                  <span className="figure w-7 shrink-0 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
+                  <span>{s}</span>
                 </li>
               ))}
             </ol>
 
             {hasDetails && (
-              <div className="mt-12 grid gap-6 border-t border-ink/12 pt-8">
+              <div className="mt-12 grid gap-6 border-t border-line pt-8">
                 {contact.phone && (
                   <p>
-                    <span className="block text-sm text-slate">Phone</span>
+                    <span className="block text-sm text-muted">Phone</span>
                     <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="font-display text-2xl tracking-tight hover:text-navy">
                       {contact.phone}
                     </a>
@@ -63,7 +62,7 @@ export default function ContactPage() {
                 )}
                 {contact.email && (
                   <p>
-                    <span className="block text-sm text-slate">Email</span>
+                    <span className="block text-sm text-muted">Email</span>
                     <a href={`mailto:${contact.email}`} className="font-display text-2xl tracking-tight break-all hover:text-navy">
                       {contact.email}
                     </a>
@@ -71,7 +70,7 @@ export default function ContactPage() {
                 )}
                 {contact.offices?.map((o) => (
                   <div key={o.label}>
-                    <h3 className="text-sm text-slate">{o.label}</h3>
+                    <h3 className="text-sm text-muted">{o.label}</h3>
                     <address className="mt-1 not-italic leading-relaxed">
                       {o.lines.map((l) => (
                         <span key={l} className="block">

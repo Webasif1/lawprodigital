@@ -27,10 +27,10 @@ function BlockView({ block }: { block: Block }) {
     }
     case "facts":
       return (
-        <dl className="my-8 grid gap-px overflow-hidden rounded-2xl bg-ink/10 sm:grid-cols-2">
+        <dl className="my-8 grid border-t border-ink sm:grid-cols-2">
           {block.items.map((f) => (
-            <div key={f.label} className="bg-paper-2 p-5">
-              <dt className="text-xs font-bold uppercase tracking-[0.18em] text-slate">{f.label}</dt>
+            <div key={f.label} className="border-b border-line py-4 sm:odd:pr-6 sm:even:pl-6 sm:even:border-l">
+              <dt className="eyebrow text-muted">{f.label}</dt>
               <dd className="mt-1.5 font-semibold leading-snug">{f.value}</dd>
             </div>
           ))}
@@ -38,10 +38,10 @@ function BlockView({ block }: { block: Block }) {
       );
     case "table":
       return (
-        <div className="my-8 overflow-x-auto rounded-2xl ring-1 ring-ink/12">
-          <table className="w-full min-w-[28rem] border-collapse text-left">
-            {block.caption && <caption className="caption-bottom px-5 py-3 text-left text-sm text-slate">{block.caption}</caption>}
-            <thead className="bg-ink text-paper">
+        <div className="my-8 overflow-x-auto rounded-field ring-1 ring-line">
+          <table className="w-full min-w-[28rem] border-collapse text-left [&_td]:align-baseline [&_th]:align-baseline">
+            {block.caption && <caption className="caption-bottom px-5 py-3 text-left text-sm text-muted">{block.caption}</caption>}
+            <thead className="bg-navy text-paper">
               <tr>
                 {block.head.map((h) => (
                   <th key={h} scope="col" className="px-5 py-3.5 text-sm font-semibold">
@@ -52,14 +52,14 @@ function BlockView({ block }: { block: Block }) {
             </thead>
             <tbody>
               {block.rows.map((row) => (
-                <tr key={row.join("|")} className="border-t border-ink/10 odd:bg-paper even:bg-paper-2/60">
+                <tr key={row.join("|")} className="border-t border-line odd:bg-surface even:bg-wash/60">
                   {row.map((cell, ci) =>
                     ci === 0 ? (
                       <th key={ci} scope="row" className="px-5 py-3.5 font-medium">
                         {cell}
                       </th>
                     ) : (
-                      <td key={ci} className="px-5 py-3.5 font-display text-lg tabular-nums tracking-tight">
+                      <td key={ci} className="figure px-5 py-3.5 text-lg tracking-tight">
                         {cell}
                       </td>
                     ),
@@ -81,14 +81,14 @@ function BlockView({ block }: { block: Block }) {
       if (!src) return null;
       return (
         <figure className="my-10">
-          <Image src={src} alt={block.alt} width={block.width} height={block.height} sizes="(min-width: 1024px) 760px, 100vw" className="h-auto w-full rounded-2xl ring-1 ring-ink/10" />
-          {block.caption && <figcaption className="mt-3 text-sm text-slate">{block.caption}</figcaption>}
+          <Image src={src} alt={block.alt} width={block.width} height={block.height} sizes="(min-width: 1024px) 760px, 100vw" className="h-auto w-full rounded-field ring-1 ring-line" />
+          {block.caption && <figcaption className="mt-3 text-sm text-muted">{block.caption}</figcaption>}
         </figure>
       );
     }
     case "video":
       return (
-        <div className="my-10 rounded-[2rem] bg-ink p-6 sm:p-10">
+        <div className="on-dark my-10 rounded-card bg-navy p-6 sm:p-10">
           <VideoTestimonial youtubeId={block.youtubeId} title={block.title} />
         </div>
       );

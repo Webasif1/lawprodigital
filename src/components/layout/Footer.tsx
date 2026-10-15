@@ -10,16 +10,16 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="grain bg-ink text-paper">
+    <footer className="on-dark bg-navy-deep text-paper">
       <div className="container-x pt-20 pb-10">
         <div className="grid gap-12 border-b border-white/10 pb-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
             {/* The logo's navy wordmark needs a light surface, so it sits on a paper tile. */}
-            <Link href="/" className="inline-block rounded-2xl bg-paper px-5 py-4" aria-label={`${site.name} — home`}>
-              <Image src={site.logo.src} alt={site.logo.alt} width={site.logo.width} height={site.logo.height} sizes="240px" className="h-12 w-auto" />
+            <Link href="/" className="inline-block rounded-field bg-paper px-5 py-4" aria-label={`${site.name} — home`}>
+              <Image src={site.logo.src} alt={site.logo.alt} width={site.logo.width} height={site.logo.height} sizes="240px" className="h-11 w-auto" />
             </Link>
-            <p className="mt-8 max-w-sm text-lg leading-relaxed text-mist">
-              Digital marketing exclusively for law firms — SEO, PPC, websites, social and video that bring clients through your door.
+            <p className="mt-8 max-w-sm font-display text-2xl leading-snug text-paper">
+              Digital marketing for law firms, and only law firms.
             </p>
             <ButtonLink href={site.primaryCta.href} className="mt-8">
               {site.primaryCta.label}
@@ -27,11 +27,11 @@ export function Footer() {
           </div>
 
           <nav aria-label="Services" className="lg:col-span-3">
-            <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Services</h2>
+            <h2 className="eyebrow text-gold">Services</h2>
             <ul className="mt-5 grid gap-3">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={serviceHref(s.slug)} className="text-paper/80 transition-colors hover:text-gold">
+                  <Link href={serviceHref(s.slug)} className="text-paper/80 transition-colors duration-(--dur-fast) hover:text-gold">
                     {s.navLabel}
                   </Link>
                 </li>
@@ -40,11 +40,11 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Quick links" className="lg:col-span-2">
-            <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Quick Links</h2>
+            <h2 className="eyebrow text-gold">Quick Links</h2>
             <ul className="mt-5 grid gap-3">
               {quickLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-paper/80 transition-colors hover:text-gold">
+                  <Link href={l.href} className="text-paper/80 transition-colors duration-(--dur-fast) hover:text-gold">
                     {l.label}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ export function Footer() {
           </nav>
 
           <div className="lg:col-span-2">
-            <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Contact</h2>
+            <h2 className="eyebrow text-gold">Contact</h2>
             <ul className="mt-5 grid gap-3 text-paper/80">
               {contact.phone && (
                 <li>
@@ -109,7 +109,7 @@ export function Footer() {
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
-          <p className="font-display italic text-paper/70">{site.tagline}</p>
+          <p className="font-display text-base italic text-paper/70">{site.tagline}</p>
         </div>
       </div>
     </footer>

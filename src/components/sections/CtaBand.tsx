@@ -1,21 +1,20 @@
 import { finalCta } from "@/content/home";
 import { contact, site } from "@/content/site";
 import { ButtonLink } from "@/components/ui/Button";
-import { HeroMark } from "@/components/three/HeroMark";
 
 type Props = { heading?: string; text?: string };
 
 export function CtaBand({ heading = finalCta.heading, text = finalCta.text }: Props) {
   return (
-    <section aria-labelledby="cta-heading" className="bg-paper px-[var(--gutter)] pb-24 sm:pb-32">
-      <div className="grain relative mx-auto max-w-[82rem] overflow-hidden rounded-[2rem] bg-navy text-paper">
-        <HeroMark decorative className="pointer-events-none absolute -right-24 -bottom-28 size-[26rem] opacity-25 sm:-right-10 sm:size-[32rem]" />
+    <section aria-labelledby="cta-heading" className="container-x bg-paper pb-20 sm:pb-28">
+      <div className="on-dark relative overflow-hidden rounded-card bg-navy text-paper">
+        <div aria-hidden className="ledger-rules pointer-events-none absolute inset-0 mask-[linear-gradient(to_left,#000,transparent_70%)]" />
         <div className="relative grid gap-10 px-6 py-16 sm:px-14 sm:py-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <h2 id="cta-heading" data-reveal className="font-display-tight text-[clamp(2.25rem,5.5vw,4.5rem)] text-balance">
+            <h2 id="cta-heading" data-reveal className="font-display-tight text-h1 text-balance">
               {heading}
             </h2>
-            <p data-reveal className="mt-6 max-w-xl text-lg leading-relaxed text-mist">
+            <p data-reveal className="mt-6 max-w-xl text-lead text-mist">
               {text}
             </p>
           </div>

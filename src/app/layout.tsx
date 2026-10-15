@@ -1,22 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { GsapScenes } from "@/components/motion/GsapScenes";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/content/site";
 import { ogImage, organizationJsonLd } from "@/lib/seo";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Headlines: an editorial newspaper serif with optical sizing.
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+// Body, UI and figures: a crisp publisher grotesk.
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
   subsets: ["latin"],
   display: "swap",
 });
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f3ec",
+  themeColor: "#fafaf8",
 };
 
 /** Runs before first paint: enables reveal styles only when JS is available. */
@@ -43,7 +47,7 @@ const bootScript = `document.documentElement.classList.add('js')`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${fraunces.variable} ${manrope.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${newsreader.variable} ${schibsted.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <JsonLd data={organizationJsonLd()} />
@@ -53,6 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <RevealObserver />
+        <GsapScenes />
       </body>
     </html>
   );

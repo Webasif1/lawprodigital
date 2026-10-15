@@ -65,12 +65,12 @@ export const services: Service[] = [
         id: "services",
         eyebrow: "What’s included",
         heading: "Our SEO services for law firms",
-        intro: "Law firms face unique challenges, so every engagement is tailored to your practice area and local market.",
+        intro: "Law firms face unique challenges, so every engagement is built around your practice area and local market.",
         items: [
           { title: "Local SEO & Google Business Profile", text: "Optimize your profile — info, photos, posts and reviews — to boost local visibility and attract nearby clients." },
           { title: "Legal Keyword Research", text: "We identify the high-converting keywords your ideal clients are actually searching for." },
           { title: "On-Page SEO", text: "Each practice-area page is optimized to rank for the services you want more cases in — no fluff." },
-          { title: "Content That Builds Authority", text: "Earn trust with compelling blog posts, FAQs and client-focused content that drives organic traffic." },
+          { title: "Content That Builds Authority", text: "Earn trust with clear, useful blog posts, FAQs and client-focused content that drives organic traffic." },
           { title: "Review & Reputation Management", text: "Amplify positive reviews to build credibility, improve local rankings and attract more cases." },
           { title: "Mobile & Technical SEO", text: "Your site will load fast, work on every device, and meet Google’s technical standards." },
           { title: "Authority-Boosting Backlinks", text: "Build foundational, high-quality backlinks to grow your firm’s online authority." },
@@ -82,7 +82,7 @@ export const services: Service[] = [
         kind: "tags",
         id: "specialties",
         eyebrow: "Practice areas",
-        heading: "SEO tailored to your legal specialty",
+        heading: "SEO built for your legal specialty",
         items: ["Immigration Lawyers", "Bankruptcy Lawyers", "Personal Injury Lawyers", "Criminal Defense Lawyers", "Sexual Harassment Lawyers"],
         closing: "Strategies are customized for your specialty and your local market.",
       },
@@ -112,7 +112,7 @@ export const services: Service[] = [
         bullets: [
           "Show up at the top when clients search for “immigration lawyer near me”",
           "Build trust with powerful content that answers your clients’ toughest questions",
-          "Manage glowing reviews that make prospects feel confident choosing you",
+          "Manage strong reviews that make prospects feel confident choosing you",
           "Outsmart your competition and grow your caseload",
         ],
       },
@@ -121,7 +121,7 @@ export const services: Service[] = [
         id: "services",
         eyebrow: "What’s included",
         heading: "Our SEO services for immigration lawyers",
-        intro: "We know immigration law firms face unique challenges, so we offer services tailored to meet your specific needs:",
+        intro: "We know immigration law firms face unique challenges, so we offer services built around your specific needs:",
         items: [
           { title: "Local SEO & Google Profile", text: "Get found in local search and Google Maps with full Google Business Profile optimization — info, photos, posts, and review management." },
           { title: "Immigration Keyword Research", text: "We identify high-converting keywords your ideal immigration clients are actually searching for — visas, asylum, and more." },
@@ -148,7 +148,7 @@ export const services: Service[] = [
     metaDescription:
       "Partner with a top law firm PPC agency. We help lawyers and attorneys win more cases with targeted Google Ads, high-converting landing pages, and proven PPC strategies.",
     eyebrow: "Law Firm PPC",
-    headline: { lead: "Get more clients with a proven", emphasis: "PPC agency", tail: "for lawyers & law firms" },
+    headline: { lead: "Get more clients with a results-driven", emphasis: "PPC agency", tail: "for lawyers & law firms" },
     intro:
       "Win more high-value cases with precision PPC for lawyers. Law Pro Digital’s experts run strategic Google Ads that turn clicks into real clients.",
     summary: "Capture ready-to-hire clients with smart ad campaigns.",
@@ -174,7 +174,7 @@ export const services: Service[] = [
           { title: "Google Search Ads", text: "Capture high-intent clients the moment they’re searching for legal help." },
           { title: "Google Display Ads", text: "Build brand awareness and retarget potential clients across the web." },
           { title: "PPC Landing Pages", text: "Convert more visitors with pages designed for legal conversion rates." },
-          { title: "Google Local Service Ads", text: "Dominate local results and get phone calls from nearby prospects." },
+          { title: "Google Local Service Ads", text: "Win the top local results and get phone calls from nearby prospects." },
           { title: "Facebook Advertising", text: "Reach your ideal audience where they spend their time." },
           { title: "Instagram Campaigns", text: "Showcase your expertise with eye-catching visuals." },
           { title: "LinkedIn Advertising", text: "Target business clients and referral partners with precision." },
@@ -195,7 +195,7 @@ export const services: Service[] = [
         heading: "We keep it simple — and powerful",
         steps: [
           { title: "Discovery & Audit", text: "We analyze your current PPC campaigns (or build new ones from scratch) and identify untapped opportunities." },
-          { title: "Strategy", text: "Every law firm gets a tailored plan based on their goals, competition, and location." },
+          { title: "Strategy", text: "Every law firm gets its own plan based on their goals, competition, and location." },
           { title: "Execution", text: "Our experts handle ad creation, landing page design, keyword research, tracking, and compliance." },
           { title: "Ongoing Management", text: "We continually optimize bids, ads, and targeting to maximize your ROI — so you get better results every month." },
           { title: "Transparent Reporting", text: "Detailed analytics show exactly how many leads you’re getting and where your investment is going." },
@@ -219,7 +219,7 @@ export const services: Service[] = [
         id: "faq",
         heading: "Frequently asked questions",
         items: [
-          { q: "What makes your law firm PPC agency different?", a: "We specialize solely in law firm PPC services with deep legal industry knowledge and proven strategies tailored to attorneys’ unique needs." },
+          { q: "What makes your law firm PPC agency different?", a: "We specialize solely in law firm PPC services with deep legal industry knowledge and tested strategies built for attorneys’ needs." },
           { q: "Do you manage all types of lawyer PPC advertising?", a: "Yes! From Google Search Ads to Facebook and YouTube campaigns, we handle all major platforms for lawyers." },
           { q: "How quickly can I see results?", a: "Most firms see increased leads within days or weeks of campaign launch — PPC is fast!" },
           { q: "Is my ad spend transparent?", a: "Absolutely. You always see where every dollar goes with detailed reporting." },
@@ -242,7 +242,7 @@ export const services: Service[] = [
     headline: { lead: "Crafting exceptional", emphasis: "websites", tail: "for law firms" },
     intro:
       "Law Pro Digital delivers expert website design for law firms, combining legal industry expertise with advanced SEO strategies to attract and convert clients effectively.",
-    summary: "Turn visitors into paying clients effortlessly.",
+    summary: "Turn visitors into paying clients.",
     sections: [
       {
         kind: "features",
@@ -254,7 +254,7 @@ export const services: Service[] = [
         items: [
           { title: "Highlight Legal Expertise", text: "Showcase your firm’s areas of expertise clearly and authoritatively." },
           { title: "Legal Compliance", text: "Ensure compliance with legal marketing ethics and guidelines." },
-          { title: "Client-Focused Navigation", text: "Seamless navigation tailored to potential clients seeking legal counsel." },
+          { title: "Client-Focused Navigation", text: "Clear navigation built for potential clients seeking legal counsel." },
           { title: "Trust Signals", text: "Attorney bios, credentials, and third-party endorsements." },
           { title: "Local Search Optimization", text: "Capture relevant local client traffic effectively." },
         ],
@@ -279,7 +279,7 @@ export const services: Service[] = [
         bullets: [
           "The complexity of your site’s design and functionality",
           "Content development including attorney profiles and practice area descriptions",
-          "SEO integration tailored for legal keywords",
+          "SEO integration built for legal keywords",
           "Post-launch support and maintenance",
         ],
         closing:
@@ -331,8 +331,8 @@ export const services: Service[] = [
       "Law Pro Digital helps law firms grow through strategic, trust-building social media marketing tailored to legal professionals — Facebook, Instagram, LinkedIn, YouTube and more.",
     eyebrow: "Social Media Marketing",
     headline: { lead: "Building a powerful", emphasis: "social media", tail: "presence for law firms" },
-    intro: "Law Pro Digital helps law firms grow through strategic, trust-building social media marketing tailored to legal professionals.",
-    summary: "Create meaningful connections with potential clients online.",
+    intro: "Law Pro Digital helps law firms grow through strategic, trust-building social media marketing built for legal professionals.",
+    summary: "Build real connections with potential clients online.",
     sections: [
       {
         kind: "features",
@@ -340,10 +340,10 @@ export const services: Service[] = [
         eyebrow: "Why Law Pro Digital",
         heading: "Why choose Law Pro Digital for your law firm’s social media marketing",
         intro:
-          "Navigating social media as a law firm requires expert precision and professionalism. Our tailored strategies ensure your message reaches the right audience — compliant, credible, and impactful.",
+          "Navigating social media as a law firm requires expert precision and professionalism. Our custom strategies ensure your message reaches the right audience — compliant, credible, and impactful.",
         items: [
           { title: "Specialized Focus", text: "We cater specifically to lawyers and law firms, including bankruptcy, immigration, personal injury, criminal defense, family, and divorce lawyers." },
-          { title: "Customized Strategy", text: "Every law firm is different. We create a personalized social media marketing strategy tailored to your practice areas and goals." },
+          { title: "Customized Strategy", text: "Every law firm is different. We create a personalized social media marketing strategy built around your practice areas and goals." },
           { title: "Comprehensive Management", text: "From content creation to ongoing social media marketing management, we handle every aspect so you can focus on your clients." },
           { title: "Data-Driven Campaigns", text: "Our targeted social media marketing campaigns use analytics and insights to maximize your ROI." },
           { title: "Trusted Consultant", text: "As your dedicated social media marketing consultant, we provide expert guidance to keep your firm ahead of trends and compliant with industry standards." },
@@ -365,7 +365,7 @@ export const services: Service[] = [
         heading: "Targeted solutions for key legal specialties",
         intro: "Our social media marketing services are uniquely designed to address the needs of various law practices.",
         items: [
-          { title: "Bankruptcy Lawyers", text: "Educate clients on debt relief options and financial recovery through compelling posts and videos." },
+          { title: "Bankruptcy Lawyers", text: "Educate clients on debt relief options and financial recovery through clear posts and videos." },
           { title: "Immigration Lawyers", text: "Share success stories and updates on immigration law changes to build trust." },
           { title: "Personal Injury Lawyers", text: "Promote client victories and injury prevention tips to attract potential claimants." },
           { title: "Criminal Defense Lawyers", text: "Highlight defense strategies and legal rights awareness campaigns." },
@@ -376,7 +376,7 @@ export const services: Service[] = [
         kind: "process",
         id: "process",
         eyebrow: "Our process",
-        heading: "Our proven process, from strategy to success",
+        heading: "Our process, from strategy to success",
         steps: [
           { title: "Discovery & Consultation", text: "Understand your firm’s goals, target audience, and current social media presence." },
           { title: "Strategy Development", text: "Design a customized roadmap incorporating keyword-rich content aligned with your practice areas." },
@@ -408,7 +408,7 @@ export const services: Service[] = [
         id: "types",
         eyebrow: "What we make",
         heading: "Types of law firm marketing videos",
-        intro: "We create a diverse range of video content tailored to meet different marketing goals.",
+        intro: "We create a diverse range of video content built for different marketing goals.",
         items: [
           { title: "Meet-the-Lawyer Videos", text: "Personalize your firm by introducing attorneys to potential clients." },
           { title: "Explainer Videos", text: "Simplify complex legal topics to educate and inform your audience." },
@@ -425,7 +425,7 @@ export const services: Service[] = [
         eyebrow: "Distribution",
         heading: "Best platforms for video marketing",
         paragraphs: [
-          "We help law firms maximize reach and engagement by leveraging top-performing video platforms. From educational content on YouTube and creative short-form videos on TikTok, to targeted campaigns on Facebook, engaging visuals on Instagram, and authority-building content on LinkedIn — we craft tailored video strategies for every audience.",
+          "We help law firms maximize reach and engagement by using top-performing video platforms. From educational content on YouTube and creative short-form videos on TikTok, to targeted campaigns on Facebook, engaging visuals on Instagram, and authority-building content on LinkedIn — we craft custom video strategies for every audience.",
         ],
       },
       {
@@ -461,7 +461,7 @@ export const services: Service[] = [
       },
     ],
     closing: {
-      heading: "Ready to elevate your law firm’s marketing with video?",
+      heading: "Ready to grow your law firm’s marketing with video?",
       text: "Partner with Law Pro Digital, the video marketing agency for law firms. Let us help you create powerful videos that engage clients and grow your practice.",
     },
     relatedCaseStudies: ["bankruptcy-law-firm-99-percent-lead-conversion"],

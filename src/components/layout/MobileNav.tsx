@@ -51,7 +51,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       aria-modal="true"
       aria-label="Site menu"
       inert={!open}
-      className={`fixed inset-0 z-60 flex flex-col overflow-y-auto bg-ink text-paper lg:hidden ${
+      className={`on-dark fixed inset-0 z-60 flex flex-col overflow-y-auto bg-navy text-paper lg:hidden ${
         // Visibility flips instantly on open (so focus can move in) and only after the fade on close.
         open
           ? "visible opacity-100 [transition:opacity_.5s_var(--ease-out-expo)]"
@@ -59,8 +59,8 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       }`}
     >
       <div className="container-x flex h-(--header-h) shrink-0 items-center justify-between">
-        <span className="font-display text-xl">{site.name}</span>
-        <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-11 place-items-center rounded-full ring-1 ring-white/20">
+        <span className="font-display text-2xl">{site.name}</span>
+        <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-11 place-items-center rounded-tag ring-1 ring-white/25">
           <span aria-hidden className="relative block size-5">
             <span className="absolute left-0 top-1/2 h-0.5 w-5 rotate-45 rounded bg-paper" />
             <span className="absolute left-0 top-1/2 h-0.5 w-5 -rotate-45 rounded bg-paper" />
@@ -73,8 +73,8 @@ export function MobileNav({ open, onClose, pathname }: Props) {
         className={`container-x flex flex-1 flex-col gap-10 pb-10 pt-6 transition-transform duration-700 ease-out-expo ${open ? "translate-y-0" : "translate-y-6"}`}
       >
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Services</p>
-          <ul className="mt-3 grid gap-1 text-xl font-semibold">
+          <p className="eyebrow text-gold">Services</p>
+          <ul className="mt-3 grid gap-0.5 text-lg font-medium">
             {services.map((s) => (
               <li key={s.slug}>
                 <Link href={serviceHref(s.slug)} aria-current={pathname === serviceHref(s.slug) ? "page" : undefined} className={linkClass}>
@@ -84,7 +84,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
             ))}
           </ul>
         </div>
-        <ul className="grid gap-1 font-display text-4xl">
+        <ul className="grid gap-1 border-t border-white/12 pt-6 font-display text-4xl">
           <li>
             <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={linkClass}>
               Home

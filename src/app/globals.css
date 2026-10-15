@@ -1,31 +1,67 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Design tokens                                                       */
-/* Palette is derived from the Law Pro Digital logo: logo navy + gold. */
+/* Design tokens — "Legal Ledger"                                      */
+/* Neutral paper, ink text, the logo's navy for dark surfaces, and     */
+/* gold reserved for the primary action and key figures.              */
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-ink: #09091a;
-  --color-ink-2: #11112b;
-  --color-ink-3: #1a1940;
-  --color-navy: #1b1a5c;
+  /* Surfaces */
+  --color-paper: #fafaf8;
+  --color-surface: #ffffff;
+  --color-wash: #f1f1ee;
+  --color-line: #e4e4e0;
+
+  /* Text */
+  --color-ink: #0e1116;
+  --color-muted: #5b6270;
+
+  /* Brand */
+  --color-navy: #17165a;
+  --color-navy-2: #23227a;
+  --color-navy-deep: #100f42;
+  --color-mist: #c2c1e0; /* secondary text on navy */
   --color-gold: #f4b71a;
-  --color-gold-soft: #ffd35e;
-  --color-gold-deep: #7a5500;
-  --color-paper: #f6f3ec;
-  --color-paper-2: #ece6d9;
-  --color-mist: #b4b3cc;
-  --color-slate: #57566e;
+  --color-gold-soft: #ffc83d;
+  --color-brass: #8a6100; /* gold as text on light surfaces (AA) */
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  /* Type */
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
 
+  --text-display: clamp(2.75rem, 7.4vw, 6.25rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.032em;
+  --text-h1: clamp(2.4rem, 5.6vw, 4.6rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.026em;
+  --text-h2: clamp(2rem, 4.2vw, 3.5rem);
+  --text-h2--line-height: 1.04;
+  --text-h2--letter-spacing: -0.022em;
+  --text-h3: clamp(1.45rem, 2.2vw, 1.9rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.015em;
+  --text-lead: clamp(1.1rem, 1.35vw, 1.28rem);
+  --text-lead--line-height: 1.6;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.16em;
+  --text-figure: clamp(2.75rem, 5vw, 4.25rem);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.03em;
+
+  /* Radii: tags and buttons, fields and wash panels, media and cards */
+  --radius-tag: 6px;
+  --radius-field: 12px;
+  --radius-card: 20px;
+
+  /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
-  --animate-marquee: marquee 48s linear infinite;
+  --animate-marquee: marquee 60s linear infinite;
   --animate-rise: rise 1.1s var(--ease-out-expo) both;
-  --animate-fade: fade 1.2s var(--ease-out-expo) both;
+  --animate-fade: fade 1s var(--ease-out-expo) both;
 }
 
 @keyframes marquee {
@@ -37,19 +73,25 @@
    so the hero heading counts as the LCP immediately. */
 @keyframes rise {
   from {
-    transform: translateY(0.32em);
+    transform: translateY(0.3em);
   }
 }
 @keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
 }
 
 :root {
-  --header-h: 76px;
+  --header-h: 72px;
   --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-y: clamp(5rem, 10vw, 8.5rem);
+
+  --dur-fast: 200ms;
+  --dur-base: 450ms;
+  --dur-slow: 900ms;
+
   color-scheme: light;
 }
 
@@ -71,38 +113,54 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-navy-2);
   outline-offset: 3px;
   border-radius: 4px;
+}
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--color-gold);
 }
 
 @utility container-x {
   width: 100%;
-  max-width: 82rem;
+  max-width: 80rem;
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+/* Editorial serif headline. Weight 400 with optical sizing; hierarchy comes from
+   size. Pair with a text-display / text-h1 / text-h2 / text-h3 token, which set
+   the size, leading and tracking. */
 @utility font-display-tight {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+  font-weight: 400;
 }
 
-/* Subtle grain on dark sections — a tiny inline SVG, no network request. */
-@utility grain {
-  position: relative;
-  isolation: isolate;
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.07;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+/* Small uppercase label used above headings and in data tables. */
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@utility figure {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Ledger rules: a faint horizontal baseline grid used on dark heroes. */
+@utility ledger-rules {
+  background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 100% 4.5rem;
 }
 
 /* ------------------------------------------------------------------ */
@@ -114,9 +172,9 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 24px, 0);
     transition:
-      opacity 0.9s var(--ease-out-expo),
+      opacity var(--dur-slow) var(--ease-out-expo),
       transform 1.1s var(--ease-out-expo);
     transition-delay: calc(var(--reveal-i, 0) * 80ms);
   }
@@ -170,25 +228,29 @@ body {
 }
 
 /* Long-form case study typography */
+.prose-case {
+  font-size: 1.0625rem;
+}
 .prose-case h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.6vw, 2.25rem);
-  line-height: 1.12;
+  font-optical-sizing: auto;
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   margin-top: 3.5rem;
   margin-bottom: 1rem;
   text-wrap: balance;
 }
 .prose-case h3 {
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.15rem;
   margin-top: 2.25rem;
   margin-bottom: 0.75rem;
 }
 .prose-case p {
   margin-block: 1rem;
   line-height: 1.75;
-  color: color-mix(in oklab, var(--color-ink) 82%, transparent);
+  color: color-mix(in oklab, var(--color-ink) 84%, transparent);
 }
 .prose-case ul,
 .prose-case ol {
@@ -200,16 +262,16 @@ body {
   position: relative;
   padding-left: 1.6rem;
   line-height: 1.65;
-  color: color-mix(in oklab, var(--color-ink) 82%, transparent);
+  color: color-mix(in oklab, var(--color-ink) 84%, transparent);
 }
 .prose-case ul > li::before {
   content: "";
   position: absolute;
   left: 0.2rem;
-  top: 0.7em;
+  top: 0.75em;
   width: 0.55rem;
-  height: 2px;
-  background: var(--color-gold-deep);
+  height: 1px;
+  background: var(--color-brass);
 }
 .prose-case ol {
   counter-reset: step;
@@ -221,8 +283,9 @@ body {
   content: counter(step, decimal-leading-zero);
   position: absolute;
   left: 0;
-  top: 0.15em;
+  top: 0.2em;
   font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-gold-deep);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-brass);
 }

@@ -10,23 +10,23 @@ export function TestimonialSection() {
   if (!study) return null;
 
   return (
-    <section aria-labelledby="testimonial-heading" className="grain overflow-hidden bg-ink-2 text-paper">
-      <div className="container-x grid items-center gap-14 py-24 sm:py-32 lg:grid-cols-12">
+    <section aria-labelledby="testimonial-heading" className="on-dark overflow-hidden bg-navy-deep text-paper">
+      <div className="container-x section-y grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <div data-reveal>
             <Eyebrow tone="dark">Client testimonial</Eyebrow>
           </div>
-          <h2 id="testimonial-heading" data-reveal className="mt-6 font-display-tight text-[clamp(2.25rem,5vw,4.25rem)]">
+          <h2 id="testimonial-heading" data-reveal className="mt-6 font-display-tight text-h1">
             Hear it from <em className="text-gold">{featuredTestimonial.client}</em>
           </h2>
-          <p data-reveal className="mt-6 max-w-xl text-lg leading-relaxed text-mist">
+          <p data-reveal className="mt-6 max-w-xl text-lead text-mist">
             After six months of working together, {featuredTestimonial.client} talked on camera about the experience.
           </p>
-          <dl data-reveal className="mt-10 grid max-w-xl grid-cols-3 gap-6 border-t border-white/12 pt-8">
+          <dl data-reveal className="mt-10 grid max-w-xl grid-cols-3 border-t border-white/15">
             {study.stats.map((s) => (
-              <div key={s.label}>
+              <div key={s.label} className="border-r border-white/15 py-6 pr-4 last:border-r-0 not-first:pl-5">
                 <dt className="text-sm text-mist">{s.label}</dt>
-                <dd className="mt-1 font-display text-3xl tracking-tight sm:text-4xl">
+                <dd className="figure mt-2 text-3xl tracking-tight sm:text-4xl">
                   {s.prefix}
                   {s.value}
                   {s.suffix}
@@ -34,9 +34,9 @@ export function TestimonialSection() {
               </div>
             ))}
           </dl>
-          <Link data-reveal href={`/${study.slug}/`} className="group mt-10 inline-flex items-center gap-3 font-semibold text-paper">
+          <Link data-reveal href={`/${study.slug}/`} className="group mt-10 inline-flex items-center gap-2 font-semibold text-paper">
             Read the full case study
-            <ArrowIcon className="size-4 text-gold transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowIcon className="size-4 text-gold transition-transform duration-(--dur-base) ease-out-expo group-hover:translate-x-1" />
           </Link>
         </div>
         <div data-reveal className="lg:col-span-5">

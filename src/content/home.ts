@@ -49,14 +49,13 @@ export const cities = [
 ];
 
 export const whyUs = {
-  eyebrow: "Why us",
+  eyebrow: "Who we serve",
   heading: "We only work with law firms",
   body: "Legal marketing has its own rules, its own costs and its own clients. Because law firms are all we do, we start on your campaigns, not on learning your industry.",
   points: [
     "A plan built for your practice area and your city.",
     "Leads and reviews tracked from the first month.",
     "Direct access to the people running your campaigns.",
-    "Law firms in Seattle, San Antonio, Aurora, Bakersfield and other cities.",
   ],
 };
 

@@ -59,7 +59,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "6 Months",
     channels: "Website Development, SEO, Social Media Management, Google Local Service Ads (LSA)",
     summary:
-      "From minimal digital presence to dominating local search and generating daily high-quality leads — through a complete website redesign, SEO, social media growth and Google LSA.",
+      "From minimal digital presence to leading local search and generating daily high-quality leads — through a complete website redesign, SEO, social media growth and Google LSA.",
     published: "2025-08-09",
     stats: [
       { value: 99, suffix: "%", label: "Lead conversion rate" },
@@ -72,7 +72,7 @@ export const caseStudies: CaseStudy[] = [
       { type: "h2", text: "Project Overview" },
       {
         type: "p",
-        text: "Over 6 months, we helped Chambers Law Firm go from minimal digital presence to dominating local search and generating daily high-quality leads. Through a complete website redesign, SEO execution, strategic social media growth, and high-converting Google LSA campaigns, we achieved a 99% conversion rate and an impressive $132 cost per lead.",
+        text: "Over 6 months, we helped Chambers Law Firm go from minimal digital presence to leading local search and generating daily high-quality leads. Through a complete website redesign, SEO execution, strategic social media growth, and high-converting Google LSA campaigns, we achieved a 99% conversion rate and an impressive $132 cost per lead.",
       },
       { type: "h2", text: "Challenges" },
       { type: "p", text: "When we began working with Chambers Law Firm:" },
@@ -178,7 +178,7 @@ export const caseStudies: CaseStudy[] = [
           "Continue scaling Google LSA campaigns to maintain a steady flow of high-quality leads.",
           "Introduce display advertising campaigns to boost brand awareness further.",
           "Maintain ongoing social media engagement with consistent, value-driven content.",
-          "Develop and optimize a full digital marketing funnel tailored for legal services growth.",
+          "Develop and optimize a full digital marketing funnel built for legal services growth.",
         ],
       },
       { type: "h2", text: "Client Testimonial" },
@@ -187,8 +187,158 @@ export const caseStudies: CaseStudy[] = [
       { type: "h2", text: "Conclusion" },
       {
         type: "p",
-        text: "This project illustrates how a strategic, data-driven approach to digital marketing can transform a legal practice’s online presence and profitability. By combining expert website development, targeted SEO, active social media management, and laser-focused paid ads, we delivered measurable results that matter — quality leads with excellent conversion rates.",
+        text: "This project illustrates how a strategic, data-driven approach to digital marketing can transform a legal practice’s online presence and profitability. By combining expert website development, targeted SEO, active social media management, and tightly targeted paid ads, we delivered measurable results that matter — quality leads with excellent conversion rates.",
       },
+    ],
+  },
+  {
+    slug: "how-i-generated-240000-in-projected-revenue-from-a-932-ad-spend-for-an-immigration-law-firm",
+    title: "How I Generated $240,000 in Projected Revenue from a $932 Ad Spend for an Immigration Law Firm",
+    shortTitle: "86 eligible EB-2 NIW candidates from $932",
+    metaTitle: "How I Generated $240,000 in Projected Revenue from a $932 Ad Spend for an Immigration Law Firm",
+    metaDescription:
+      "This case study details the strategy, execution, and remarkable results of the \"EB-2 NIW Evaluation Campaign 2.\" By implementing a precision-targeted, full-funnel digital marketing system, a $932 ad spend produced 86 qualified EB-2 NIW candidates.",
+    category: "Immigration",
+    client: "U.S. Immigration Law Firm",
+    industry: "Immigration Lawyer (EB-2 NIW)",
+    duration: "19 Days",
+    channels: "Meta Ads (Facebook & Instagram), free evaluation offer, lead qualification form",
+    summary:
+      "A free EB-2 NIW evaluation offer for PhDs and post-doctoral researchers brought 130 evaluation requests and 86 eligible candidates. At the firm’s $4,000 fee and a projected 70% signing rate, that pipeline is worth a projected $240,000.",
+    published: "2026-04-11",
+    stats: [
+      { value: 86, label: "Eligible candidates" },
+      { value: 10.84, prefix: "$", decimals: 2, label: "Cost per eligible candidate" },
+      { value: 932, prefix: "$", label: "Total ad spend" },
+    ],
+    blocks: [
+      {
+        type: "p",
+        text: "Immigration law firms often struggle to find high-value clients for specialized services like the EB-2 National Interest Waiver (NIW) at a sensible cost. Broad marketing channels bring high acquisition costs and low-quality leads.",
+      },
+      {
+        type: "p",
+        text: "This case study covers the strategy, execution and results of the “EB-2 NIW Evaluation Campaign 2.” A precision-targeted, full-funnel system turned a $932.00 advertising budget into a pipeline of 86 highly qualified candidates for a U.S.-based immigration law firm, representing a projected revenue of $240,000.",
+      },
+      {
+        type: "facts",
+        items: [
+          { label: "Client", value: "U.S. immigration law firm" },
+          { label: "Service", value: "EB-2 NIW ($4,000 fee)" },
+          { label: "Campaign dates", value: "March 14 – April 1, 2026" },
+          { label: "Platform", value: "Meta Ads (Facebook & Instagram)" },
+        ],
+      },
+      { type: "h2", text: "The Challenge" },
+      {
+        type: "p",
+        text: "The EB-2 NIW is a visa category for foreign nationals with advanced degrees or exceptional ability whose work in the U.S. would greatly benefit the nation. The audience is narrow: PhD holders, post-doctoral researchers and distinguished academic professionals.",
+      },
+      { type: "p", text: "The firm faced three hurdles in marketing this $4,000 service:" },
+      {
+        type: "list",
+        ordered: true,
+        items: [
+          "Reaching a niche audience: general advertising platforms often lack the targeting needed to reach post-doctoral researchers and academic professionals.",
+          "High cost of acquisition: search PPC for immigration keywords is expensive and drains budgets without guaranteeing qualified leads.",
+          "Quality over quantity: the firm needed candidates who met the strict EB-2 NIW requirements, not a high volume of generic inquiries that waste case managers’ time.",
+        ],
+      },
+      { type: "h2", text: "The Strategy" },
+      { type: "p", text: "We designed a full-funnel marketing system (top, middle and bottom of funnel) built on precise targeting and lead qualification." },
+      { type: "h3", text: "The free evaluation offer" },
+      {
+        type: "p",
+        text: "Instead of asking prospects to commit to a $4,000 legal service straight away, the campaign offered a low-friction entry point: a “Free EB-2 NIW Evaluation” for post-doctorates and PhDs. It gave prospects immediate value and let the firm assess eligibility before investing significant time.",
+      },
+      { type: "h3", text: "Lead qualification system" },
+      {
+        type: "p",
+        text: "At the core was an evaluation form that asked about each candidate’s academic background, publications, citations and professional achievements. Only candidates with a high likelihood of approval were passed to the firm’s case managers.",
+      },
+      { type: "h3", text: "Precise audience targeting" },
+      {
+        type: "p",
+        text: "The campaign ran on Meta Ads (Facebook and Instagram). Targeting focused on academic credentials and professional interests: PhD holders (35% of the target audience), post-doc researchers (30%) and broader academic professionals (20%), so ads reached people who already met the foundational EB-2 NIW requirements.",
+      },
+      { type: "h2", text: "Campaign Performance" },
+      { type: "p", text: "“EB-2 NIW Evaluation Campaign 2” ran from March 14 to April 1, 2026." },
+      {
+        type: "table",
+        caption: "Top-of-funnel metrics",
+        head: ["Metric", "Result"],
+        rows: [
+          ["Total ad spend", "$932.00"],
+          ["Reach", "27,629 accounts"],
+          ["Impressions", "51,637"],
+          ["Link clicks", "1,037"],
+          ["Click-through rate (CTR)", "3.82%"],
+          ["Landing page views", "901 (estimated)"],
+        ],
+      },
+      { type: "p", text: "A 3.82% CTR is well above average for the legal sector, a sign that the ad creative and the free evaluation offer resonated with the academic audience." },
+      { type: "h3", text: "Conversion and pipeline" },
+      {
+        type: "p",
+        text: "The firm received 130 evaluation requests. The qualification system identified 86 of them as highly eligible for the EB-2 NIW service: 41 eligible candidates in the first five days, and another 39 in the following five days.",
+      },
+      { type: "h2", text: "Cost Efficiency" },
+      { type: "p", text: "All figures are based on the verified total ad spend of $932.00." },
+      {
+        type: "table",
+        head: ["Metric", "Cost"],
+        rows: [
+          ["Cost per link click", "$0.90"],
+          ["Cost per evaluation request", "$7.17"],
+          ["Cost per eligible candidate", "$10.84"],
+        ],
+      },
+      { type: "h2", text: "Projected Revenue" },
+      {
+        type: "p",
+        text: "The 86 eligible candidates were in the evaluation process with the firm’s case managers at the time of writing. Based on the firm’s historical data for highly qualified NIW leads, we project a 70% retainer signing rate.",
+      },
+      {
+        type: "table",
+        caption: "Projection at a 70% signing rate",
+        head: ["Item", "Value"],
+        rows: [
+          ["Eligible candidates", "86"],
+          ["Projected clients (70%)", "60"],
+          ["Service fee", "$4,000"],
+          ["Projected revenue", "$240,000"],
+        ],
+      },
+      {
+        type: "p",
+        text: "That is a projected 25,651% return on the $932.00 ad spend (257.5x), with a projected cost of $15.53 per paying client.",
+      },
+      { type: "h3", text: "Scenario analysis" },
+      {
+        type: "table",
+        head: ["Signing rate", "Clients", "Projected revenue", "Projected ROI"],
+        rows: [
+          ["50%", "43", "$172,000", "18,354%"],
+          ["60%", "51", "$204,000", "21,788%"],
+          ["80%", "68", "$272,000", "29,084%"],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Revenue figures are projections based on eligible candidates and the firm’s signing rate. Campaign metrics are from actual performance; client confidentiality has been maintained.",
+      },
+      { type: "h2", text: "How We Help Immigration Lawyers Grow" },
+      {
+        type: "list",
+        ordered: true,
+        items: [
+          "Access to high-value clients: systems that attract clients for specialized services like EB-1, EB-2 NIW and O-1 visas.",
+          "Lower acquisition costs: precise targeting and optimized funnels lower the cost per lead and per client.",
+          "Better use of staff time: lead qualification means attorneys and case managers spend time only on prospects who are eligible and ready.",
+          "Predictable growth: data-driven systems that produce a consistent pipeline of qualified cases.",
+        ],
+      },
+      { type: "p", text: "If you are an immigration attorney who wants to build this kind of pipeline, let’s talk." },
     ],
   },
   {
@@ -296,7 +446,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "list",
         items: [
-          "EB2 NIW dominates due to its no job offer requirement and appeal to professionals in Dubai.",
+          "EB2 NIW led the results due to its no job offer requirement and appeal to professionals in Dubai.",
           "E-2 performs well among business owners and mid-level investors.",
           "EB-5 generates quality leads but lower volume, likely due to high investment threshold.",
           "EB-3 & H1B generate niche interest — mostly younger job-seeking professionals.",
@@ -308,7 +458,7 @@ export const caseStudies: CaseStudy[] = [
         ordered: true,
         items: [
           "Retargeting funnel: retarget viewers who opened the form but didn’t submit. Use testimonials, success stories, or lawyer explainer videos.",
-          "Service-specific landing pages: create separate pages or follow-up sequences tailored to EB2 NIW, E2, etc.",
+          "Service-specific landing pages: create separate pages or follow-up sequences specific to EB2 NIW, E2, etc.",
           "WhatsApp integration: add a WhatsApp CTA for direct consultation to capture more high-intent leads.",
           "Lookalike audience expansion: use lead data to create lookalikes in Dubai & surrounding expat-heavy regions.",
           "Test creative rotation: ads with immigration stories and lawyer videos tend to outperform generic graphics.",
@@ -443,14 +593,14 @@ export const caseStudies: CaseStudy[] = [
         items: [
           "Pre-qualified leads: lawyers don’t have time to chase cold contacts. We filtered for real investor intent.",
           "Legal-focused messaging: we spoke the language of U.S. immigration services with clarity and authority.",
-          "High-converting format: Facebook lead ads worked seamlessly across mobile devices — capturing leads directly within the app.",
+          "High-converting format: Facebook lead ads worked smoothly across mobile devices — capturing leads directly within the app.",
           "Immediate CRM integration: leads were routed to call support for direct follow-up, maximizing conversion potential.",
         ],
       },
       { type: "h2", text: "Conclusion" },
       {
         type: "p",
-        text: "This campaign proves that legal digital marketing doesn’t need big budgets — it needs smart execution. Whether you offer E-2, EB-5, EB-1A, or NIW visa services, the same approach helps you attract serious prospects who are ready to talk to a lawyer — not just download a checklist.",
+        text: "This campaign proves that legal digital marketing doesn’t need big budgets — it needs smart execution. Whether you offer E-2, EB-5, EB-1A, or NIW visa services, the same approach helps you attract serious prospects who are ready to talk to a lawyer, rather than only downloading a checklist.",
       },
     ],
   },
@@ -483,7 +633,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "callout",
-        text: "Can a small, laser-focused Google PPC Call-Only campaign bring in real, qualified leads for immigration and asylum law firms — without wasting money? So, we tested it.",
+        text: "Can a small, tightly targeted Google PPC Call-Only campaign bring in real, qualified leads for immigration and asylum law firms — without wasting money? So, we tested it.",
       },
       { type: "h2", text: "The Strategy: A Smart 7-Day Experiment" },
       {

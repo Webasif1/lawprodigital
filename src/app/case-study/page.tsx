@@ -37,7 +37,7 @@ export default function CaseStudiesPage() {
         intro="Real campaigns for real law firms — the strategy, the spend and the numbers, published in full."
       />
       <section aria-label="All case studies" className="bg-paper">
-        <div className="container-x grid gap-24 py-24 sm:gap-32 sm:py-32">
+        <div className="container-x section-y grid gap-24 sm:gap-32">
           {caseStudies.map((study, i) => (
             <CaseStudyCard key={study.slug} study={study} index={i} headingLevel="h2" />
           ))}

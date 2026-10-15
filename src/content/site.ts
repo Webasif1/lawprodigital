@@ -41,6 +41,7 @@ export const socials: SocialLink[] = [];
 export const mainNav: NavLink[] = [
   { label: "About", href: "/about-us/" },
   { label: "Case Studies", href: "/case-study/" },
+  { label: "Pricing", href: "/pricing/" },
   { label: "Contact", href: "/contact-us/" },
 ];
 
@@ -48,5 +49,6 @@ export const quickLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us/" },
   { label: "Case Studies", href: "/case-study/" },
+  { label: "Pricing", href: "/pricing/" },
   { label: "Contact Us", href: "/contact-us/" },
 ];
