@@ -6,7 +6,7 @@ import { ArrowUpRightIcon } from "@/components/ui/icons";
 /** Who we work with, then what it costs: the two questions a partner asks before booking a call. */
 export function FirmFitSection() {
   return (
-    <section aria-labelledby="fit-heading" className="bg-surface">
+    <section aria-labelledby="fit-heading" className="bg-paper">
       <div className="container-x section-y">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">

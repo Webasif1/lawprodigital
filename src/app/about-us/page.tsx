@@ -33,7 +33,7 @@ export default function AboutPage() {
         crumbs={[{ name: "About Us", path: "/about-us/" }]}
         title={
           <>
-            Your trusted digital marketing partner <em className="marker text-brass">dedicated to law firms</em>
+            Your trusted digital marketing partner <em className="text-gold">dedicated to law firms</em>
           </>
         }
         intro={site.description}

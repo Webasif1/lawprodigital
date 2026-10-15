@@ -53,7 +53,7 @@ export default function AiSolutionsPage() {
         crumbs={[{ name: "AI Solutions", path: "/ai-solutions/" }]}
         title={
           <>
-            AI that answers every inquiry <em className="marker text-brass">in seconds, day or night</em>
+            AI that answers every inquiry <em className="text-gold">in seconds, day or night</em>
           </>
         }
         intro={ai.body}

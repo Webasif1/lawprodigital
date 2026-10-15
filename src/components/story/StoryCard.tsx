@@ -37,9 +37,8 @@ export function StoryCard({ story, size = "default", headingLevel: H = "h3", ton
         ) : (
           <div aria-hidden className="ledger-rules absolute inset-0" />
         )}
-        <div aria-hidden className="absolute inset-0 bg-linear-to-t from-navy/90 via-navy/25 to-transparent" />
         {stat && (
-          <p className="absolute bottom-4 left-4 right-4 flex items-end gap-3 text-white">
+          <p className="absolute bottom-3 left-3 flex max-w-[calc(100%-1.5rem)] items-end gap-3 rounded-xl bg-navy/90 px-3.5 py-2.5 text-white">
             <span className={`figure shrink-0 leading-none text-gold ${feature ? "text-5xl sm:text-6xl" : stat.value.length > 7 ? "text-2xl" : "text-4xl"}`}>{stat.value}</span>
             <span className="max-w-[14rem] pb-0.5 text-xs leading-snug text-white/85">{stat.label}</span>
           </p>

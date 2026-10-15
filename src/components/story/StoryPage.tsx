@@ -58,68 +58,57 @@ export function StoryPage({ story }: { story: Story }) {
         ]}
       />
 
-      {/* Hero: the headline states the result, the photograph sets the scene. */}
-      <header className="bg-halo relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
-        <div aria-hidden className="grid-faint pointer-events-none absolute inset-0 -z-10 mask-[radial-gradient(ellipse_at_30%_30%,#000,transparent_70%)]" />
-        <div className="container-x relative pt-8 pb-32 sm:pb-40">
+      {/* Hero: the photograph sets the scene, the headline states the result. */}
+      <header className="on-dark relative isolate overflow-hidden bg-navy text-white">
+        {src && (
+          <div aria-hidden={false} className="absolute inset-0 -z-10">
+            <Image src={src} alt={story.heroAlt} fill priority sizes="100vw" className="hero-zoom object-cover" />
+            <div className="absolute inset-0 bg-navy/80" />
+          </div>
+        )}
+        <div className="container-x relative flex min-h-[min(82svh,46rem)] flex-col pt-8 pb-28 sm:pb-36">
           <nav aria-label="Breadcrumb" className="hero-fade" style={{ ["--i" as string]: 0 }}>
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-white/70">
               <li>
-                <Link href="/" className="hover:text-brass">
+                <Link href="/" className="hover:text-gold">
                   Home
                 </Link>
               </li>
-              <li aria-hidden className="text-ink/25">
+              <li aria-hidden className="text-white/30">
                 /
               </li>
               <li>
-                <Link href="/case-study/" className="hover:text-brass">
+                <Link href="/case-study/" className="hover:text-gold">
                   Case Studies
                 </Link>
               </li>
-              <li aria-hidden className="text-ink/25">
+              <li aria-hidden className="text-white/30">
                 /
               </li>
-              <li aria-current="page" className="text-ink">
+              <li aria-current="page" className="text-white">
                 Story {story.n}
               </li>
             </ol>
           </nav>
-          <div className="mt-12 grid items-center gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <p className="hero-fade eyebrow inline-flex items-center gap-2.5 rounded-full bg-white/80 px-3 py-1.5 text-brass ring-1 ring-line" style={{ ["--i" as string]: 0 }}>
-                <span className="tabular-nums">Story {String(story.n).padStart(2, "0")}</span>
-                <span aria-hidden className="size-1 rounded-full bg-current" />
-                {story.label}
-              </p>
-              <h1 className="mt-6 font-display-tight text-h1 text-balance text-navy">
-                <span className="hero-line">
-                  <span>{story.title}</span>
-                </span>
-              </h1>
-              <p className="hero-settle mt-6 max-w-2xl text-lead text-muted" style={{ ["--i" as string]: 1 }}>
-                {story.subhead}
-              </p>
-              <p className="hero-fade mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted" style={{ ["--i" as string]: 2 }}>
-                <span>{readingMinutes(story)} min read</span>
-                <span>Updated {updated}</span>
-                <span>Multi-office US immigration firm</span>
-              </p>
-            </div>
-            {src && (
-              <div className="hero-fade relative lg:col-span-5" style={{ ["--i" as string]: 1 }}>
-                <div aria-hidden className="absolute -inset-6 -z-10 rounded-full bg-[radial-gradient(circle,rgba(231,196,95,0.3),rgba(214,173,59,0.08)_50%,transparent_72%)] blur-2xl" />
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] shadow-[0_40px_80px_-40px_rgba(15,31,61,0.5)] ring-8 ring-white/70">
-                  <Image src={src} alt={story.heroAlt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="hero-zoom object-cover" />
-                </div>
-                {story.stats[0] && (
-                  <p className="absolute -bottom-6 -left-4 max-w-[15rem] rotate-[-3deg] rounded-2xl bg-white p-4 shadow-[0_20px_40px_-20px_rgba(15,31,61,0.4)] ring-1 ring-line sm:-left-8">
-                    <span className="figure block text-3xl leading-none text-brass">{story.stats[0].value}</span>
-                    <span className="mt-1.5 block text-xs leading-snug text-muted">{story.stats[0].label}</span>
-                  </p>
-                )}
-              </div>
-            )}
+          <div className="mt-auto max-w-4xl pt-16">
+            <p className="hero-fade eyebrow inline-flex items-center gap-2.5 rounded-full bg-white/10 px-3 py-1.5 text-gold ring-1 ring-inset ring-white/15 backdrop-blur" style={{ ["--i" as string]: 0 }}>
+              <span className="tabular-nums">Story {String(story.n).padStart(2, "0")}</span>
+              <span aria-hidden className="size-1 rounded-full bg-current" />
+              {story.label}
+            </p>
+            <h1 className="mt-6 font-display-tight text-h1 text-balance">
+              <span className="hero-line">
+                <span>{story.title}</span>
+              </span>
+            </h1>
+            <p className="hero-settle mt-6 max-w-2xl text-lead text-white/80" style={{ ["--i" as string]: 1 }}>
+              {story.subhead}
+            </p>
+            <p className="hero-fade mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/65" style={{ ["--i" as string]: 2 }}>
+              <span>{readingMinutes(story)} min read</span>
+              <span>Updated {updated}</span>
+              <span>Multi-office US immigration firm</span>
+            </p>
           </div>
         </div>
       </header>

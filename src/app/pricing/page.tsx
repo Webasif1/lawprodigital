@@ -42,7 +42,7 @@ export default function PricingPage() {
         crumbs={[{ name: "Pricing", path: "/pricing/" }]}
         title={
           <>
-            Plans for every stage of <em className="marker text-brass">your firm.</em>
+            Plans for every stage of <em className="text-gold">your firm.</em>
           </>
         }
         intro={pricing.intro}

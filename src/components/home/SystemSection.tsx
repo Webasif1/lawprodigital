@@ -15,9 +15,8 @@ const icons = [
 /** How a client actually chooses a lawyer, as four connected jobs. The connector fills on scroll. */
 export function SystemSection() {
   return (
-    <section aria-labelledby="system-heading" className="bg-surface py-6 sm:py-10">
-      <div className="container-x">
-        <div className="rounded-[2.5rem] bg-paper px-6 py-16 ring-1 ring-line/60 sm:px-12 sm:py-20 lg:px-16">
+    <section aria-labelledby="system-heading" className="border-y border-line bg-surface">
+      <div className="container-x section-y">
         <SectionHeading
           align="split"
           eyebrow="How we grow immigration firms"
@@ -40,7 +39,6 @@ export function SystemSection() {
             </li>
           ))}
         </ol>
-        </div>
       </div>
     </section>
   );

@@ -15,27 +15,27 @@ type Props = {
 /** Navy inner-page header: breadcrumbs, eyebrow, H1 and intro with the same CSS-only entrance as the homepage hero. */
 export function PageHero({ eyebrow, title, intro, crumbs, actions, aside }: Props) {
   return (
-    <section className="bg-halo relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
-      <div aria-hidden className="grid-faint pointer-events-none absolute inset-0 -z-10 mask-[linear-gradient(to_bottom,#000,transparent)]" />
+    <section className="on-dark relative overflow-hidden bg-navy text-paper">
+      <div aria-hidden className="ledger-rules pointer-events-none absolute inset-0 mask-[linear-gradient(to_bottom,#000,transparent)]" />
       <div className="container-x relative pt-10 pb-16 sm:pt-12 sm:pb-24">
         <nav aria-label="Breadcrumb" className="hero-fade" style={{ ["--i" as string]: 0 }}>
-          <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-mist">
             <li>
-              <Link href="/" className="hover:text-brass">
+              <Link href="/" className="hover:text-gold">
                 Home
               </Link>
             </li>
             {crumbs.map((c, i) => (
               <li key={c.path} className="flex items-center gap-2">
-                <span aria-hidden className="text-ink/25">
+                <span aria-hidden className="text-white/30">
                   /
                 </span>
                 {i === crumbs.length - 1 ? (
-                  <span aria-current="page" className="text-ink">
+                  <span aria-current="page" className="text-paper">
                     {c.name}
                   </span>
                 ) : (
-                  <Link href={c.path} className="hover:text-brass">
+                  <Link href={c.path} className="hover:text-gold">
                     {c.name}
                   </Link>
                 )}
@@ -45,17 +45,17 @@ export function PageHero({ eyebrow, title, intro, crumbs, actions, aside }: Prop
         </nav>
         <div className={`mt-14 grid gap-12 ${aside ? "lg:grid-cols-12 lg:items-end" : ""}`}>
           <div className={aside ? "lg:col-span-8" : "max-w-5xl"}>
-            <p className="hero-fade eyebrow inline-flex items-center gap-2.5 rounded-full bg-white/80 px-3 py-1.5 text-brass ring-1 ring-line" style={{ ["--i" as string]: 0 }}>
-              <span aria-hidden className="size-1.5 rounded-full bg-current" />
+            <p className="hero-fade eyebrow flex items-center gap-3 text-gold" style={{ ["--i" as string]: 0 }}>
+              <span aria-hidden className="h-px w-8 bg-gold/70" />
               {eyebrow}
             </p>
-            <h1 className="mt-6 font-display-tight text-h1 text-balance text-navy">
+            <h1 className="mt-6 font-display-tight text-h1 text-balance">
               <span className="hero-line">
                 <span>{title}</span>
               </span>
             </h1>
             {intro && (
-              <p className="hero-settle mt-7 max-w-2xl text-lead text-muted" style={{ ["--i" as string]: 1 }}>
+              <p className="hero-settle mt-7 max-w-2xl text-lead text-mist" style={{ ["--i" as string]: 1 }}>
                 {intro}
               </p>
             )}

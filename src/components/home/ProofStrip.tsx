@@ -6,8 +6,8 @@ import { ArrowUpRightIcon } from "@/components/ui/icons";
 /** Four verified figures, in HTML text so search engines and AI tools can read them. Each links to its story. */
 export function ProofStrip() {
   return (
-    <section id="results" aria-label="Results" className="scroll-mt-20 bg-surface">
-      <div className="container-x pt-6 pb-6 sm:pt-10">
+    <section id="results" aria-label="Results" className="scroll-mt-20 bg-paper">
+      <div className="container-x pt-14 pb-6 sm:pt-20">
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {proof.stats.map((s, i) => (
             <li key={s.label} data-reveal style={{ ["--reveal-i" as string]: i }}>

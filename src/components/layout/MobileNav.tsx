@@ -43,7 +43,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
     };
   }, [open, onClose]);
 
-  const linkClass = "block py-2 aria-[current=page]:text-brass";
+  const linkClass = "block py-2 aria-[current=page]:text-gold";
 
   return (
     <div
@@ -52,7 +52,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       aria-modal="true"
       aria-label="Site menu"
       inert={!open}
-      className={`bg-halo fixed inset-0 z-60 flex flex-col overflow-y-auto text-ink xl:hidden ${
+      className={`on-dark fixed inset-0 z-60 flex flex-col overflow-y-auto bg-navy-deep text-paper xl:hidden ${
         // Visibility flips instantly on open (so focus can move in) and only after the fade on close.
         open
           ? "visible opacity-100 [transition:opacity_.5s_var(--ease-out-expo)]"
@@ -60,11 +60,11 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       }`}
     >
       <div className="container-x flex h-(--header-h) shrink-0 items-center justify-between">
-        <Logo tone="light" />
-        <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-11 place-items-center rounded-tag ring-1 ring-line">
+        <Logo tone="dark" />
+        <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-11 place-items-center rounded-tag ring-1 ring-white/25">
           <span aria-hidden className="relative block size-5">
-            <span className="absolute left-0 top-1/2 h-0.5 w-5 rotate-45 rounded bg-ink" />
-            <span className="absolute left-0 top-1/2 h-0.5 w-5 -rotate-45 rounded bg-ink" />
+            <span className="absolute left-0 top-1/2 h-0.5 w-5 rotate-45 rounded bg-paper" />
+            <span className="absolute left-0 top-1/2 h-0.5 w-5 -rotate-45 rounded bg-paper" />
           </span>
         </button>
       </div>
@@ -74,7 +74,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
         className={`container-x flex flex-1 flex-col gap-10 pb-10 pt-6 transition-transform duration-700 ease-out-expo ${open ? "translate-y-0" : "translate-y-6"}`}
       >
         <div>
-          <p className="eyebrow text-brass">Services</p>
+          <p className="eyebrow text-gold">Services</p>
           <ul className="mt-3 grid gap-0.5 text-lg font-medium">
             {services.map((s) => (
               <li key={s.slug}>
@@ -85,7 +85,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
             ))}
           </ul>
         </div>
-        <ul className="grid gap-1 border-t border-line pt-6 font-display text-3xl font-bold tracking-tight">
+        <ul className="grid gap-1 border-t border-white/12 pt-6 font-display text-3xl font-bold tracking-tight">
           <li>
             <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={linkClass}>
               Home
@@ -104,7 +104,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
             {site.primaryCta.label}
           </ButtonLink>
           {contact.email && (
-            <a href={`mailto:${contact.email}`} className="text-center text-muted">
+            <a href={`mailto:${contact.email}`} className="text-center text-mist">
               {contact.email}
             </a>
           )}

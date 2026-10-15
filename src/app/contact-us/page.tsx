@@ -29,7 +29,7 @@ export default function ContactPage() {
         crumbs={[{ name: "Contact Us", path: "/contact-us/" }]}
         title={
           <>
-            Get your free <em className="marker text-brass">AI lead audit.</em>
+            Get your free <em className="text-gold">AI lead audit.</em>
           </>
         }
         intro="In 5 minutes of video, we’ll show you how your firm appears on Google, Maps and ChatGPT, and what happens when a prospect contacts you after hours."

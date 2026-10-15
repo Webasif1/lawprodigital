@@ -63,12 +63,12 @@ export function Header() {
   };
 
   const linkBase =
-    "relative whitespace-nowrap rounded-tag px-3 py-2 text-ink/75 transition-colors duration-(--dur-fast) hover:bg-ink/5 hover:text-ink aria-[current=page]:text-ink";
+    "relative whitespace-nowrap rounded-tag px-3 py-2 text-white/80 transition-colors duration-(--dur-fast) hover:bg-white/7 hover:text-white aria-[current=page]:text-white";
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b text-ink backdrop-blur-md transition-[background-color,border-color] duration-300 ${
-        scrolled ? "border-line bg-white/85" : "border-transparent bg-white/55"
+      className={`on-dark sticky top-0 z-50 border-b text-white transition-[background-color,border-color] duration-300 ${
+        scrolled ? "border-white/10 bg-navy/92 backdrop-blur-md" : "border-transparent bg-navy"
       }`}
     >
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded-tag focus:bg-gold focus:px-4 focus:py-2 focus:text-ink">
@@ -76,7 +76,7 @@ export function Header() {
       </a>
       <div className={`container-x flex items-center justify-between gap-6 transition-[height] duration-300 ${scrolled ? "h-16" : "h-(--header-h)"}`}>
         <Link href="/" className="shrink-0" aria-label={`${site.name} — home`}>
-          <Logo tone="light" />
+          <Logo tone="dark" />
         </Link>
 
         <nav aria-label="Main" className="hidden xl:block">
@@ -88,7 +88,7 @@ export function Header() {
                   aria-expanded={servicesOpen}
                   aria-controls={menuId}
                   onClick={() => (servicesOpen ? setServicesOpen(false) : openNow())}
-                  className={`${linkBase} flex items-center gap-1.5 ${isServicePath ? "text-ink" : ""}`}
+                  className={`${linkBase} flex items-center gap-1.5 ${isServicePath ? "text-white" : ""}`}
                 >
                   Services
                   <ChevronDownIcon className={`size-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -147,13 +147,13 @@ export function Header() {
           </div>
           <button
             type="button"
-            className="grid size-11 place-items-center rounded-tag ring-1 ring-line xl:hidden"
+            className="grid size-11 place-items-center rounded-tag ring-1 ring-white/20 xl:hidden"
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             onClick={() => setMenuFor(pathname)}
           >
             <span aria-hidden className="grid gap-1.5">
-              <span className="block h-0.5 w-5 rounded bg-ink" />
+              <span className="block h-0.5 w-5 rounded bg-white" />
               <span className="block h-0.5 w-3.5 justify-self-end rounded bg-gold" />
             </span>
           </button>

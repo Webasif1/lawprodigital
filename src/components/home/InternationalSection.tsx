@@ -25,18 +25,18 @@ export function InternationalSection() {
   const markets = international.markets.map((m) => ({ ...m, ...project(m.lon, m.lat), label: labelled.includes(m.name) }));
 
   return (
-    <section aria-labelledby="intl-heading" className="relative overflow-hidden bg-paper text-ink">
+    <section aria-labelledby="intl-heading" className="on-dark relative overflow-hidden bg-navy text-white">
       <div className="container-x section-y">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionHeading eyebrow="International clients" title={<span id="intl-heading">{international.heading}</span>} />
+            <SectionHeading tone="dark" eyebrow="International clients" title={<span id="intl-heading">{international.heading}</span>} />
           </div>
-          <p data-reveal className="text-lead text-muted lg:col-span-5">
+          <p data-reveal className="text-lead text-mist lg:col-span-5">
             {international.body}
           </p>
         </div>
 
-        <figure data-reveal className="relative mt-14 overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_70px_-45px_rgba(15,31,61,0.4)] ring-1 ring-line">
+        <figure data-reveal className="relative mt-14 overflow-hidden rounded-card bg-navy-deep ring-1 ring-white/10">
           <svg viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`} className="block h-auto w-full" role="img" aria-label="Map of markets where a US immigration firm reached clients, with cost per contact">
             <defs>
               <radialGradient id="intl-glow">
@@ -44,16 +44,16 @@ export function InternationalSection() {
                 <stop offset="1" stopColor="#d6ad3b" stopOpacity="0" />
               </radialGradient>
             </defs>
-            <path d={landPath} stroke="rgba(15,31,61,0.13)" strokeWidth="4.2" strokeLinecap="round" />
+            <path d={landPath} stroke="rgba(169,181,202,0.32)" strokeWidth="4.2" strokeLinecap="round" />
             {markets.map((m) => {
               const mx = (us.x + m.x) / 2;
               const my = Math.min(us.y, m.y) - 60 - Math.abs(m.x - us.x) * 0.08;
-              return <path key={`arc-${m.name}`} className="intl-arc" d={`M${us.x} ${us.y} Q${mx} ${my} ${m.x} ${m.y}`} fill="none" stroke="rgba(184,146,44,0.6)" strokeWidth="1.2" pathLength={1} />;
+              return <path key={`arc-${m.name}`} className="intl-arc" d={`M${us.x} ${us.y} Q${mx} ${my} ${m.x} ${m.y}`} fill="none" stroke="rgba(214,173,59,0.45)" strokeWidth="1.2" pathLength={1} />;
             })}
             <g>
               <circle cx={us.x} cy={us.y} r="22" fill="url(#intl-glow)" />
-              <circle cx={us.x} cy={us.y} r="5" fill="#0f1f3d" />
-              <text x={us.x} y={us.y + 22} textAnchor="middle" className="fill-navy text-[11px] font-bold">
+              <circle cx={us.x} cy={us.y} r="5" fill="#ffffff" />
+              <text x={us.x} y={us.y + 22} textAnchor="middle" className="fill-white text-[11px] font-semibold">
                 US · {international.us.cost}
               </text>
             </g>
@@ -62,28 +62,28 @@ export function InternationalSection() {
                 <circle className="intl-pulse" cx={m.x} cy={m.y} r="10" fill="url(#intl-glow)" style={{ animationDelay: `${i * 0.35}s` }} />
                 <circle cx={m.x} cy={m.y} r="3.2" fill="#d6ad3b" />
                 {m.label && (
-                  <text x={m.x + 6} y={m.y - 6} className="fill-ink/75 text-[8px] font-semibold">
+                  <text x={m.x + 6} y={m.y - 6} className="fill-white/80 text-[8px] font-semibold">
                     {m.name}
                   </text>
                 )}
               </g>
             ))}
           </svg>
-          <figcaption className="grid gap-px border-t border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
+          <figcaption className="grid gap-px border-t border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-5">
             {markets.slice(0, 5).map((m) => (
-              <div key={m.name} className="bg-white px-5 py-4">
-                <span className="figure block text-2xl text-brass">{m.cost}</span>
-                <span className="text-sm text-muted">per contact · {m.name}</span>
+              <div key={m.name} className="bg-navy-deep px-5 py-4">
+                <span className="figure block text-2xl text-gold">{m.cost}</span>
+                <span className="text-sm text-mist">per contact · {m.name}</span>
               </div>
             ))}
           </figcaption>
         </figure>
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-mist">
           <p>
-            Cost per contact by market, Feb–Oct 2026, vs <span className="font-semibold text-ink">{international.us.cost} in the US</span>. Also tested: Saudi Arabia, Turkey, Portugal and the UAE.
+            Cost per contact by market, Feb–Oct 2026, vs <span className="font-semibold text-white">{international.us.cost} in the US</span>. Also tested: Saudi Arabia, Turkey, Portugal and the UAE.
           </p>
-          <Link href="/case-study/international-clients-us-immigration-lawyer/" className="inline-flex items-center gap-2 font-semibold text-navy-2 hover:text-brass">
+          <Link href="/case-study/international-clients-us-immigration-lawyer/" className="inline-flex items-center gap-2 font-semibold text-gold hover:text-gold-soft">
             Read the international story <ArrowUpRightIcon className="size-4" />
           </Link>
         </div>

@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 type Props = { eyebrow?: string; index?: number; heading: string; intro?: string; steps: Step[]; id?: string; tone?: "dark" | "light" };
 
-export function ProcessSection({ eyebrow = "How we work", index, heading, intro, steps, id = "process-heading", tone = "light" }: Props) {
+export function ProcessSection({ eyebrow = "How we work", index, heading, intro, steps, id = "process-heading", tone = "dark" }: Props) {
   const dark = tone === "dark";
   return (
     <section aria-labelledby={id} className={dark ? "on-dark bg-navy text-paper" : "bg-surface text-ink"}>
