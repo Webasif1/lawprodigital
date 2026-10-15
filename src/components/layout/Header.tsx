@@ -66,6 +66,7 @@ export function Header() {
     "relative whitespace-nowrap rounded-tag px-3 py-2 text-white/80 transition-colors duration-(--dur-fast) hover:bg-white/7 hover:text-white aria-[current=page]:text-white";
 
   return (
+    <>
     <header
       className={`on-dark sticky top-0 z-50 border-b text-white transition-[background-color,border-color] duration-300 ${
         scrolled ? "border-white/10 bg-navy/92 backdrop-blur-md" : "border-transparent bg-navy"
@@ -159,7 +160,9 @@ export function Header() {
           </button>
         </div>
       </div>
-      <MobileNav open={mobileOpen} onClose={() => setMenuFor(null)} pathname={pathname} />
     </header>
+    {/* Outside the header: its scrolled backdrop-blur would otherwise trap this fixed, full-screen panel inside the header box. */}
+    <MobileNav open={mobileOpen} onClose={() => setMenuFor(null)} pathname={pathname} />
+    </>
   );
 }
