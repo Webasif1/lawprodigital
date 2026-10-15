@@ -11,7 +11,8 @@ export function StoriesSection() {
 
   return (
     <section aria-labelledby="stories-heading" className="bg-surface">
-      <div className="container-x section-y">
+      <div className="container-x py-6 sm:py-10">
+        <div className="rounded-[2.5rem] bg-paper px-5 py-14 ring-1 ring-line/60 sm:px-10 sm:py-20 lg:px-14">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="Case studies" title={<span id="stories-heading">{caseStudies.heading}</span>} />
           <Link href="/case-study/" className="inline-flex items-center gap-2 font-semibold text-navy-2 hover:text-brass">
@@ -27,6 +28,7 @@ export function StoriesSection() {
           {supporting.map((s) => (
             <StoryCard key={s.slug} story={s} size="compact" />
           ))}
+        </div>
         </div>
       </div>
     </section>

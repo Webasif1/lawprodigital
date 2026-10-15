@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 /** The founder's reason for working only with law firms, beside the one verified client video. */
 export function FounderSection() {
   return (
-    <section aria-labelledby="founder-heading" className="bg-aurora overflow-hidden text-ink">
+    <section aria-labelledby="founder-heading" className="bg-halo overflow-hidden text-ink">
       <div className="container-x section-y grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <SectionHeading eyebrow="Founder note" title={<span id="founder-heading">{founder.heading}</span>} />

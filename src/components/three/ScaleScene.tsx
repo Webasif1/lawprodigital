@@ -146,8 +146,8 @@ export default function ScaleScene({ active, pointer, onReady }: ScaleSceneProps
       <ambientLight intensity={0.55} />
       <hemisphereLight args={["#ffffff", "#e3e8f5", 0.9]} />
       <directionalLight position={[3, 5, 4]} intensity={2.4} />
-      <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#ece8ff" />
-      <pointLight position={[0, -1, 3]} intensity={6} distance={8} color="#fde7ef" />
+      <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#ffffff" />
+      <pointLight position={[0, -1, 3]} intensity={6} distance={8} color="#fbf1d6" />
       <Scale pointer={pointer} />
     </Canvas>
   );

@@ -15,7 +15,7 @@ type Props = {
 /** Navy inner-page header: breadcrumbs, eyebrow, H1 and intro with the same CSS-only entrance as the homepage hero. */
 export function PageHero({ eyebrow, title, intro, crumbs, actions, aside }: Props) {
   return (
-    <section className="bg-aurora relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
+    <section className="bg-halo relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
       <div aria-hidden className="grid-faint pointer-events-none absolute inset-0 -z-10 mask-[linear-gradient(to_bottom,#000,transparent)]" />
       <div className="container-x relative pt-10 pb-16 sm:pt-12 sm:pb-24">
         <nav aria-label="Breadcrumb" className="hero-fade" style={{ ["--i" as string]: 0 }}>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="bg-aurora relative -mt-(--header-h) pt-(--header-h) text-ink">
+    <section className="bg-halo relative -mt-(--header-h) pt-(--header-h) text-ink">
       <div className="container-x section-y grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <p className="eyebrow text-brass">Error 404</p>

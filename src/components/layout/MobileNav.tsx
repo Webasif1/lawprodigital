@@ -52,7 +52,7 @@ export function MobileNav({ open, onClose, pathname }: Props) {
       aria-modal="true"
       aria-label="Site menu"
       inert={!open}
-      className={`bg-aurora fixed inset-0 z-60 flex flex-col overflow-y-auto text-ink xl:hidden ${
+      className={`bg-halo fixed inset-0 z-60 flex flex-col overflow-y-auto text-ink xl:hidden ${
         // Visibility flips instantly on open (so focus can move in) and only after the fade on close.
         open
           ? "visible opacity-100 [transition:opacity_.5s_var(--ease-out-expo)]"

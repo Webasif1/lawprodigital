@@ -12,7 +12,7 @@ const variants: Record<Variant, string> = {
 };
 
 export const buttonClasses = (variant: Variant = "gold", extra = "") =>
-  `group/btn inline-flex min-h-12 items-center justify-center gap-2.5 rounded-tag px-5 text-[0.95rem] font-semibold tracking-[-0.005em] transition-[background-color,box-shadow,color] duration-(--dur-fast) ${variants[variant]} ${extra}`;
+  `group/btn inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-6 text-[0.95rem] font-semibold tracking-[-0.005em] transition-[background-color,box-shadow,color] duration-(--dur-fast) ${variants[variant]} ${extra}`;
 
 type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
   variant?: Variant;

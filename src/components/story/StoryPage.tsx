@@ -59,7 +59,7 @@ export function StoryPage({ story }: { story: Story }) {
       />
 
       {/* Hero: the headline states the result, the photograph sets the scene. */}
-      <header className="bg-aurora relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
+      <header className="bg-halo relative isolate -mt-(--header-h) overflow-hidden pt-(--header-h) text-ink">
         <div aria-hidden className="grid-faint pointer-events-none absolute inset-0 -z-10 mask-[radial-gradient(ellipse_at_30%_30%,#000,transparent_70%)]" />
         <div className="container-x relative pt-8 pb-32 sm:pb-40">
           <nav aria-label="Breadcrumb" className="hero-fade" style={{ ["--i" as string]: 0 }}>
@@ -108,7 +108,7 @@ export function StoryPage({ story }: { story: Story }) {
             </div>
             {src && (
               <div className="hero-fade relative lg:col-span-5" style={{ ["--i" as string]: 1 }}>
-                <div aria-hidden className="absolute -inset-6 -z-10 rounded-full bg-[radial-gradient(circle,rgba(231,196,95,0.3),rgba(236,232,255,0.4)_50%,transparent_72%)] blur-2xl" />
+                <div aria-hidden className="absolute -inset-6 -z-10 rounded-full bg-[radial-gradient(circle,rgba(231,196,95,0.3),rgba(214,173,59,0.08)_50%,transparent_72%)] blur-2xl" />
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] shadow-[0_40px_80px_-40px_rgba(15,31,61,0.5)] ring-8 ring-white/70">
                   <Image src={src} alt={story.heroAlt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="hero-zoom object-cover" />
                 </div>

@@ -10,7 +10,8 @@ import { ArrowUpRightIcon } from "@/components/ui/icons";
 export function ServicesGrid() {
   return (
     <section aria-labelledby="services-heading" className="bg-surface">
-      <div className="container-x section-y">
+      <div className="container-x py-6 sm:py-10">
+        <div className="rounded-[2.5rem] bg-paper px-5 py-14 ring-1 ring-line/60 sm:px-10 sm:py-20 lg:px-14">
         <SectionHeading eyebrow="Services" title={<span id="services-heading">{services.heading}</span>} />
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {offerings.map((o, i) => {
@@ -42,6 +43,7 @@ export function ServicesGrid() {
             );
           })}
         </ul>
+        </div>
       </div>
     </section>
   );

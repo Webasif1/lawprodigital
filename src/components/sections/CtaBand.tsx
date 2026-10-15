@@ -7,8 +7,8 @@ type Props = { heading?: string; text?: string };
 export function CtaBand({ heading = finalCta.heading, text = finalCta.text }: Props) {
   return (
     <section aria-labelledby="cta-heading" className="container-x pb-20 sm:pb-28">
-      <div className="on-dark relative overflow-hidden rounded-card bg-navy text-paper">
-        <div aria-hidden className="ledger-rules pointer-events-none absolute inset-0 mask-[linear-gradient(to_left,#000,transparent_70%)]" />
+      <div className="on-dark relative overflow-hidden rounded-[2.5rem] bg-navy text-paper">
+        <div aria-hidden className="pointer-events-none absolute -top-1/2 left-1/2 size-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(214,173,59,0.28),rgba(214,173,59,0.06)_40%,transparent_65%)]" />
         <div className="relative grid gap-10 px-6 py-16 sm:px-14 sm:py-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <h2 id="cta-heading" data-reveal className="font-display-tight text-h1 text-balance">
