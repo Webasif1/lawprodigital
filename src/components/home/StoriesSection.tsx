@@ -10,7 +10,7 @@ export function StoriesSection() {
   const supporting = caseStudies.supporting.map(getStoryByNumber).filter((s): s is Story => Boolean(s));
 
   return (
-    <section aria-labelledby="stories-heading" className="bg-paper">
+    <section aria-labelledby="stories-heading" className="bg-surface">
       <div className="container-x section-y">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="Case studies" title={<span id="stories-heading">{caseStudies.heading}</span>} />

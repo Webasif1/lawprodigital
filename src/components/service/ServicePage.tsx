@@ -42,14 +42,14 @@ export function ServicePage({ service }: { service: Service }) {
         title={
           <>
             {service.headline.lead && `${service.headline.lead} `}
-            <em className="text-gold">{service.headline.emphasis}</em> {service.headline.tail}
+            <em className="marker text-brass">{service.headline.emphasis}</em> {service.headline.tail}
           </>
         }
         intro={service.intro}
         actions={
           <>
             <ButtonLink href={site.primaryCta.href}>{site.primaryCta.label}</ButtonLink>
-            <ButtonLink href="/case-study/" variant="ghost-dark" arrow={false}>
+            <ButtonLink href="/case-study/" variant="ghost-light" arrow={false}>
               See case studies
             </ButtonLink>
           </>

@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 /** The four reasons leads don't become clients, one idea per card. */
 export function ProblemSection() {
   return (
-    <section aria-labelledby="problem-heading" className="bg-paper">
+    <section aria-labelledby="problem-heading" className="bg-surface">
       <div className="container-x section-y grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
@@ -17,7 +17,7 @@ export function ProblemSection() {
               key={p.title}
               data-reveal
               style={{ ["--reveal-i" as string]: i % 2 }}
-              className={`flex flex-col rounded-card p-7 ${i === 1 ? "on-dark bg-navy text-white" : "bg-surface ring-1 ring-line"}`}
+              className={`flex flex-col rounded-card p-7 ${i === 1 ? "on-dark bg-navy text-white" : "bg-paper ring-1 ring-line/60"}`}
             >
               <span className={`figure text-sm ${i === 1 ? "text-gold" : "text-brass"}`}>{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-8 font-display text-xl font-bold tracking-tight">{p.title}</h3>

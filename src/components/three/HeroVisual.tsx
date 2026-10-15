@@ -2,9 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
-import { HeroMark } from "./HeroMark";
+import { ScaleMark } from "./ScaleMark";
 
-const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
+const ScaleScene = dynamic(() => import("./ScaleScene"), { ssr: false });
 
 /** If WebGL fails at runtime (lost context, driver issue), keep the static mark. */
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -68,11 +68,11 @@ export function HeroVisual() {
 
   return (
     <div ref={box} className="relative aspect-square w-full">
-      <HeroMark className={`absolute inset-0 size-full transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`} />
+      <ScaleMark className={`absolute inset-0 size-full transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`} />
       {enabled && (
         <div className={`absolute inset-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
           <SceneBoundary>
-            <HeroScene active={active} pointer={pointer} onReady={() => setReady(true)} />
+            <ScaleScene active={active} pointer={pointer} onReady={() => setReady(true)} />
           </SceneBoundary>
         </div>
       )}

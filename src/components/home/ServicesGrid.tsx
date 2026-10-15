@@ -9,7 +9,7 @@ import { ArrowUpRightIcon } from "@/components/ui/icons";
  */
 export function ServicesGrid() {
   return (
-    <section aria-labelledby="services-heading" className="bg-paper">
+    <section aria-labelledby="services-heading" className="bg-surface">
       <div className="container-x section-y">
         <SectionHeading eyebrow="Services" title={<span id="services-heading">{services.heading}</span>} />
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

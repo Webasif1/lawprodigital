@@ -42,21 +42,21 @@ export default function CaseStudiesPage() {
         crumbs={[{ name: "Case Studies", path: "/case-study/" }]}
         title={
           <>
-            Sixteen stories. <em className="text-gold">One immigration firm.</em> Every number traced to a signed client.
+            Sixteen stories. <em className="marker text-brass">One immigration firm.</em> Every number traced to a signed client.
           </>
         }
         intro="How a multi-office US immigration law firm went from 79 to an average of 115 signed clients a month, told chapter by chapter: what we tried, what worked, what didn't, and what your firm can take from it."
         aside={
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-card bg-white/10 ring-1 ring-white/10">
+          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-card bg-line shadow-[0_30px_60px_-35px_rgba(15,31,61,0.35)] ring-1 ring-line">
             {[
               ["+45%", "Signed clients per month"],
               ["915", "New clients in 9 months"],
               ["15,738", "Ad conversations & leads"],
               ["$0.44", "Per international contact"],
             ].map(([v, l]) => (
-              <div key={l} className="flex flex-col bg-navy p-5">
-                <dt className="order-2 mt-2 text-xs text-mist">{l}</dt>
-                <dd className="figure text-3xl text-gold">{v}</dd>
+              <div key={l} className="flex flex-col bg-white/90 p-5">
+                <dt className="order-2 mt-2 text-xs text-muted">{l}</dt>
+                <dd className="figure text-3xl text-navy">{v}</dd>
               </div>
             ))}
           </dl>
