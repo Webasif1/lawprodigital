@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 type Message = { from: "client" | "ai"; text: string };
 
-/** An illustrative intake conversation qualifying an EB-2 NIW lead. */
+/** An illustrative intake conversation qualifying an F-1 student about to graduate. */
 const script: Message[] = [
-  { from: "client", text: "Hello, I saw your video about EB-2 NIW. I'm a software engineer in Lagos. Can I apply?" },
-  { from: "ai", text: "Thanks for reaching out! I can help you get started. What is your highest degree, and how many years of experience do you have?" },
-  { from: "client", text: "Master's in computer science, 7 years." },
-  { from: "ai", text: "That's a good start for an NIW review. When would you like to file: in the next 3 months, or later this year?" },
-  { from: "client", text: "As soon as possible." },
+  { from: "client", text: "Hi, I saw your video about staying in the US after graduation. I'm finishing my master's in May on an F-1 visa. What are my options?" },
+  { from: "ai", text: "Congratulations on finishing your degree! I can help you get started. What did you study, and do you have a job offer yet?" },
+  { from: "client", text: "Data analytics. I have an offer from a company in Texas." },
+  { from: "ai", text: "Thanks. Options after graduation can include OPT, STEM OPT or an H-1B, and timing matters. When does your program end?" },
+  { from: "client", text: "May 15." },
   { from: "ai", text: "I've reserved a consultation with an attorney for Thursday at 10:00 am (your time). You'll get a confirmation on WhatsApp." },
 ];
 
