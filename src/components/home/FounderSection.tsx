@@ -25,7 +25,7 @@ export function FounderSection() {
         </div>
         <div data-reveal className="lg:col-span-4 lg:col-start-9">
           <p className="eyebrow mb-4 text-center text-gold">A client in their own words</p>
-          <VideoTestimonial youtubeId={videoTestimonial.youtubeId} title={`${videoTestimonial.client} — client testimonial video`} />
+          <VideoTestimonial youtubeId={videoTestimonial.youtubeId} cover={videoTestimonial.cover} title={`${videoTestimonial.client} — client testimonial video`} />
           <p className="mt-4 text-center text-sm text-mist">
             {videoTestimonial.client} · {videoTestimonial.context}
           </p>
