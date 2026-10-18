@@ -30,7 +30,7 @@ export const site = {
 
 // TODO(owner): add the real phone number. Empty values are hidden site-wide.
 export const contact: ContactDetails = {
-  email: "hello@lawprodigital.com",
+  email: "lawprodigital@gmail.com",
   phone: undefined,
   offices: [],
 };
