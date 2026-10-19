@@ -9,6 +9,7 @@ import { Logo } from "@/components/brand/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { ArrowUpRightIcon, ChevronDownIcon } from "@/components/ui/icons";
 import { MobileNav } from "./MobileNav";
+import { CityTicker } from "./CityTicker";
 
 /**
  * Every page opens on a navy surface, so the header is navy too: it reads as
@@ -67,6 +68,7 @@ export function Header() {
 
   return (
     <>
+    <CityTicker />
     <header
       className={`on-dark sticky top-0 z-50 border-b text-white transition-[background-color,border-color] duration-300 ${
         scrolled ? "border-white/10 bg-navy/92 backdrop-blur-md" : "border-transparent bg-navy"

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { contact, quickLinks, site, socials } from "@/content/site";
 import { services, serviceHref } from "@/content/services";
-import { cities } from "@/content/home";
 import { Logo } from "@/components/brand/Logo";
 
 export function Footer() {
@@ -82,15 +81,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="py-8">
-          <h2 className="sr-only">Cities we serve</h2>
-          <p className="text-sm leading-relaxed text-mist">
-            <span className="font-semibold text-white">Serving law firms in </span>
-            {cities.join(" · ")}
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 border-t border-white/10 pt-8 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 pt-8 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
