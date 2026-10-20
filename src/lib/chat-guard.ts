@@ -3,6 +3,7 @@ import {
   businessPatterns,
   guardReplies,
   legalBusinessContext,
+  newQuestionPattern,
   personalLegalPatterns,
   smallTalkPatterns,
 } from "@/content/chat-guard-rules";
@@ -20,9 +21,10 @@ const blocked = compile(blockedPatterns);
 const personalLegal = compile(personalLegalPatterns);
 const businessContext = new RegExp(legalBusinessContext, "i");
 const smallTalk = compile(smallTalkPatterns);
+const newQuestion = new RegExp(newQuestionPattern, "i");
 const business = new RegExp(`\\b(?:${businessPatterns.join("|")})`, "i");
 
-/** Short enough to be an answer to the assistant's question ("3 offices", "Houston"). */
+/** Short enough to be an answer to the assistant's question ("3 offices", "Houston"), not a new question. */
 const SHORT_ANSWER_WORDS = 12;
 
 const offTopic: TopicCheck = { ok: false, reason: "off-topic", reply: guardReplies.offTopic };
@@ -38,7 +40,8 @@ export function checkTopic(message: string, lastAssistantReply?: string): TopicC
   if (smallTalk.some((r) => r.test(text))) return { ok: true };
 
   const answeringQuestion = Boolean(lastAssistantReply?.trim().endsWith("?"));
-  if (answeringQuestion && text.split(" ").length <= SHORT_ANSWER_WORDS) return { ok: true };
+  const isAnswer = text.split(" ").length <= SHORT_ANSWER_WORDS && !newQuestion.test(text);
+  if (answeringQuestion && isAnswer) return { ok: true };
 
   return business.test(text) ? { ok: true } : offTopic;
 }

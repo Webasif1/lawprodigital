@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CHAT_LIMITS } from "@/content/chat-copy";
 import { chatSystemPrompt } from "@/content/chat";
-import { parseMessages, sameOrigin, sseToText } from "@/lib/chat";
+import { parseMessages, sameOrigin, sseToText, stripEmphasis } from "@/lib/chat";
 
 const user = (content: string) => ({ role: "user", content });
 
@@ -91,5 +91,19 @@ describe("chatSystemPrompt", () => {
     const prompt = chatSystemPrompt();
     expect(prompt).toMatch(/at most 2 short sentences/);
     expect(prompt.length).toBeLessThan(4000);
+  });
+});
+
+describe("stripEmphasis", () => {
+  it("removes markdown bold and italics", () => {
+    expect(stripEmphasis("learn about *your* firm")).toBe("learn about your firm");
+    expect(stripEmphasis("**Client Generator** is $1,500/mo")).toBe("Client Generator is $1,500/mo");
+    expect(stripEmphasis("a _quick_ audit")).toBe("a quick audit");
+  });
+
+  it("leaves lone symbols and links alone", () => {
+    expect(stripEmphasis("5 * 3 offices")).toBe("5 * 3 offices");
+    expect(stripEmphasis("see /case-study/law-firm-cost-per-client/")).toBe("see /case-study/law-firm-cost-per-client/");
+    expect(stripEmphasis("snake_case_name")).toBe("snake_case_name");
   });
 });

@@ -23,8 +23,16 @@ describe("checkTopic: goes to the AI", () => {
     expect(checkTopic(message)).toEqual({ ok: true });
   });
 
-  it.each(["3 offices", "Houston", "about 20 a month", "yes"])("short answer %j to the assistant's question", (message) => {
-    expect(checkTopic(message, question)).toEqual({ ok: true });
+  it.each(["3 offices", "Houston", "about 20 a month", "yes", "smithlaw.com", "Mostly asylum and family cases"])(
+    "short answer %j to the assistant's question",
+    (message) => {
+      expect(checkTopic(message, question)).toEqual({ ok: true });
+    },
+  );
+
+  it("a new question after the assistant's question still passes with a business word", () => {
+    expect(checkTopic("how much does SEO cost?", question)).toEqual({ ok: true });
+    expect(checkTopic("can you tell me about your pricing", question)).toEqual({ ok: true });
   });
 });
 
@@ -42,6 +50,16 @@ describe("checkTopic: fixed off-topic reply, no AI", () => {
     "12 * 7 + 3",
   ])("%j", (message) => {
     expect(checkTopic(message)).toEqual({ ok: false, reason: "off-topic", reply: guardReplies.offTopic });
+  });
+
+  it.each([
+    "he can you tell me about koreanhive.com",
+    "can you tell me what time it si",
+    "what time is it?",
+    "Could you recommend a good movie",
+    "tell me about the history of Rome",
+  ])("a new off-topic question %j isn't treated as an answer", (message) => {
+    expect(checkTopic(message, question)).toEqual({ ok: false, reason: "off-topic", reply: guardReplies.offTopic });
   });
 
   it("doesn't treat a long unrelated message as an answer", () => {

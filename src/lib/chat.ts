@@ -29,6 +29,18 @@ export function sameOrigin(origin: string | null, host: string | null) {
   }
 }
 
+/**
+ * Removes markdown emphasis (**bold**, *italic*, _italic_) the model sometimes adds despite
+ * the plain-text rule, so the widget never shows stray asterisks. Lone symbols ("5 * 3",
+ * snake_case) are left alone.
+ */
+export function stripEmphasis(text: string) {
+  return text
+    .replace(/(\*\*|__)(?=\S)([^\n]*?\S)\1/g, "$2")
+    .replace(/(^|[^\w*])\*(?=\S)([^*\n]*?\S)\*(?![\w*])/g, "$1$2")
+    .replace(/(^|[^\w_])_(?=\S)([^_\n]*?\S)_(?![\w_])/g, "$1$2");
+}
+
 export type ChatUsage = { prompt_tokens?: number; completion_tokens?: number; cost?: number };
 
 /**

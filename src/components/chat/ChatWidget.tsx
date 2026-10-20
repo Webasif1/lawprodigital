@@ -4,6 +4,7 @@ import Link from "next/link";
 import { type FormEvent, type KeyboardEvent, type ReactNode, useEffect, useRef, useState } from "react";
 import { ArrowIcon } from "@/components/ui/icons";
 import { CHAT_LIMITS, chatCopy, OPEN_CHAT_EVENT } from "@/content/chat-copy";
+import { stripEmphasis } from "@/lib/chat";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -176,7 +177,7 @@ export default function ChatWidget() {
                 }`}
               >
                 <span className="sr-only">{m.role === "user" ? "You: " : "Assistant: "}</span>
-                {m.role === "assistant" ? linkify(m.content) : m.content}
+                {m.role === "assistant" ? linkify(stripEmphasis(m.content)) : m.content}
               </li>
             ))}
             {busy && messages.at(-1)?.role === "user" && (

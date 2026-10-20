@@ -54,6 +54,13 @@ export const smallTalkPatterns: string[] = [
 ];
 
 /**
+ * A new question rather than an answer. A short reply to the assistant's question
+ * ("Houston", "3 offices", "smithlaw.com") passes without a business word, but a new
+ * question ("can you tell me what time it is") needs one, like any first message.
+ */
+export const newQuestionPattern = String.raw`\?|^(what|what's|whats|who|who's|whom|when|where|why|how|which|whose|can|could|would|will|should|shall|is|are|am|was|were|do|does|did|have|has|tell me|show me|give me|explain|describe|define|please)\b|\b(can|could|would|will) (you|u)\b|\b(tell|show|give) me\b`;
+
+/**
  * Business topics (matched at the start of a word, so "lead" also matches "leads").
  * A message needs one of these to reach the AI, unless it is small talk or a short
  * answer to the assistant's own question.
