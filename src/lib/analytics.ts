@@ -51,3 +51,12 @@ export function trackLead(params: { service?: string } = {}) {
   if (analyticsIds.gtm) w.dataLayer?.push({ event: "generate_lead", form_name: "free_ai_lead_audit", service: params.service });
   w.fbq?.("track", "Lead");
 }
+
+/** A click on a WhatsApp link, with the page (and service, on a service page) it came from. */
+export function trackWhatsApp(params: { page: string; service?: string }) {
+  if (typeof window === "undefined") return;
+  const w = window as Win;
+  w.gtag?.("event", "whatsapp_click", { page_path: params.page, ...(params.service ? { service: params.service } : {}) });
+  if (analyticsIds.gtm) w.dataLayer?.push({ event: "whatsapp_click", page_path: params.page, service: params.service });
+  w.fbq?.("track", "Contact");
+}

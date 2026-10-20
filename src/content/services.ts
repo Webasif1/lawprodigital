@@ -651,3 +651,6 @@ export function getService(slug: string) {
 }
 
 export const serviceHref = (slug: string) => `/${slug}/`;
+
+/** slug → menu label. Small enough to hand to client components (the WhatsApp links). */
+export const serviceLabels: Record<string, string> = Object.fromEntries(services.map((s) => [s.slug, s.navLabel]));

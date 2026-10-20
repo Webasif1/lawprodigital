@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { contact, quickLinks, site, socials } from "@/content/site";
-import { services, serviceHref } from "@/content/services";
+import { services, serviceHref, serviceLabels } from "@/content/services";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/whatsapp/WhatsAppLink";
 import { Logo } from "@/components/brand/Logo";
 
 export function Footer() {
@@ -26,6 +27,10 @@ export function Footer() {
                 {contact.phone}
               </a>
             )}
+            <WhatsAppLink services={serviceLabels} className="mt-2 inline-flex items-center gap-2 text-white/80 hover:text-gold">
+              <WhatsAppIcon className="size-4" />
+              WhatsApp us
+            </WhatsAppLink>
           </div>
 
           <nav aria-label="Services" className="lg:col-span-3">

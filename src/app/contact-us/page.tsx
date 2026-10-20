@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/whatsapp/WhatsAppLink";
+import { serviceLabels } from "@/content/services";
 import { bookingUrl, contact, socials } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { ContactForm } from "./ContactForm";
@@ -71,6 +73,15 @@ export default function ContactPage() {
                     <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="font-display text-2xl tracking-tight hover:text-navy">
                       {contact.phone}
                     </a>
+                  </p>
+                )}
+                {contact.whatsapp && (
+                  <p>
+                    <span className="block text-sm text-muted">WhatsApp</span>
+                    <WhatsAppLink services={serviceLabels} className="inline-flex items-center gap-2 font-display text-2xl tracking-tight hover:text-navy">
+                      <WhatsAppIcon className="size-6 text-[#1ea952]" />
+                      Message us
+                    </WhatsAppLink>
                   </p>
                 )}
                 {contact.email && (

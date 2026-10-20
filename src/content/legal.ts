@@ -54,6 +54,7 @@ export const privacyPolicy: LegalSection[] = [
     heading: "Cookies, analytics and third parties",
     paragraphs: [
       "The website doesn’t use analytics, advertising or tracking cookies, and its fonts and images are served from our own server.",
+      "The WhatsApp buttons open WhatsApp (run by Meta) with a short message already typed in, naming the page you were on so we know what you’re asking about. You can edit or delete that text before sending, and WhatsApp’s own privacy policy applies to the chat.",
       "Client video testimonials are hosted on YouTube. Nothing is loaded from YouTube until you press play; the player then loads from YouTube’s privacy-enhanced domain (youtube-nocookie.com) and YouTube’s own privacy policy applies.",
     ],
   },

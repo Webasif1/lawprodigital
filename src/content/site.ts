@@ -10,6 +10,8 @@ export type NavLink = { label: string; href: string };
 export type ContactDetails = {
   email?: string;
   phone?: string;
+  /** WhatsApp number, digits only with country code (the format wa.me expects). */
+  whatsapp?: string;
   /** Rendered as separate lines. */
   offices?: { label: string; lines: string[] }[];
 };
@@ -38,12 +40,16 @@ export const noindex = process.env.SITE_NOINDEX ? process.env.SITE_NOINDEX === "
 /** Calendly / Cal.com link for booking a call. Hidden site-wide until set. */
 export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || undefined;
 
-// TODO(owner): add the real phone number. Empty values are hidden site-wide.
 export const contact: ContactDetails = {
   email: "lawprodigital@gmail.com",
-  phone: undefined,
+  phone: "+880 1840-830658",
+  whatsapp: "8801840830658",
   offices: [],
 };
+
+/** A wa.me link that opens a WhatsApp chat with `text` already typed in. */
+export const whatsappUrl = (text: string) =>
+  contact.whatsapp ? `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text)}` : undefined;
 
 // TODO(owner): add real LinkedIn, Facebook and YouTube URLs. Empty list renders nothing.
 export const socials: SocialLink[] = [];

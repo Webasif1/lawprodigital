@@ -1,6 +1,8 @@
 import { finalCta } from "@/content/home";
 import { contact, site } from "@/content/site";
+import { serviceLabels } from "@/content/services";
 import { ButtonLink } from "@/components/ui/Button";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/whatsapp/WhatsAppLink";
 
 type Props = { heading?: string; text?: string };
 
@@ -26,6 +28,10 @@ export function CtaBand({ heading = finalCta.heading, text = finalCta.text }: Pr
                 or call {contact.phone}
               </a>
             )}
+            <WhatsAppLink services={serviceLabels} className="inline-flex items-center gap-2 text-paper/80 hover:text-gold">
+              <WhatsAppIcon className="size-4" />
+              or message us on WhatsApp
+            </WhatsAppLink>
           </div>
         </div>
       </div>

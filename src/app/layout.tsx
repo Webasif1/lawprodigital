@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/Header";
 import { GsapScenes } from "@/components/motion/GsapScenes";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ChatMount } from "@/components/chat/ChatMount";
+import { WhatsAppButton } from "@/components/whatsapp/WhatsAppLink";
+import { serviceLabels } from "@/content/services";
 import { Analytics } from "@/components/seo/Analytics";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { noindex, site } from "@/content/site";
@@ -60,6 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <RevealObserver />
         <GsapScenes />
+        <WhatsAppButton services={serviceLabels} />
         <ChatMount />
         <Analytics />
       </body>
