@@ -85,7 +85,19 @@ export function Footer() {
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
-          <p className="font-display font-semibold text-white/70">{site.tagline}</p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <li>
+              <Link href="/privacy-policy/" className={linkClass}>
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms/" className={linkClass}>
+                Terms of Use
+              </Link>
+            </li>
+            <li className="font-display font-semibold text-white/70">{site.tagline}</li>
+          </ul>
         </div>
       </div>
     </footer>

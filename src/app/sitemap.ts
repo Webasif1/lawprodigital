@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { LEGAL_UPDATED } from "@/content/legal";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { getStories, STORIES_UPDATED } from "@/lib/stories";
@@ -14,5 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/pricing/"), changeFrequency: "monthly", priority: 0.7 },
     { url: url("/about-us/"), changeFrequency: "yearly", priority: 0.6 },
     { url: url("/contact-us/"), changeFrequency: "yearly", priority: 0.6 },
+    { url: url("/privacy-policy/"), lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
+    { url: url("/terms/"), lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
   ];
 }

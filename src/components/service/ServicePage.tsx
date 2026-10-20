@@ -1,3 +1,4 @@
+import { process as firstNinetyDays } from "@/content/home";
 import { type Service, type ServiceSection, services, serviceHref } from "@/content/services";
 import { site } from "@/content/site";
 import { StoryCard } from "@/components/story/StoryCard";
@@ -16,6 +17,9 @@ export function ServicePage({ service }: { service: Service }) {
   const path = serviceHref(service.slug);
   const related = service.relatedStories.map(getStoryByNumber).filter((s): s is Story => Boolean(s));
   const faq = service.sections.find((s) => s.kind === "faq");
+  // Pages without their own process show how every engagement starts, so each service page
+  // answers "what happens after I get in touch?".
+  const hasProcess = service.sections.some((s) => s.kind === "process");
   const others = services.filter((s) => s.slug !== service.slug);
 
   const jsonLd: object[] = [
@@ -71,6 +75,10 @@ export function ServicePage({ service }: { service: Service }) {
             </div>
           </div>
         </section>
+      )}
+
+      {!hasProcess && (
+        <ProcessSection id="engagement-process-heading" eyebrow="First 90 days" heading={firstNinetyDays.heading} intro={firstNinetyDays.intro} steps={firstNinetyDays.steps} />
       )}
 
       <nav aria-labelledby="other-services" className="border-t border-line bg-wash">

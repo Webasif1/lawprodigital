@@ -20,7 +20,7 @@ export function CityTicker() {
       <div className="container-x flex h-9 items-center gap-2">
         <p className="hidden shrink-0 font-semibold text-white sm:block">Serving law firms in</p>
         <div className="min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_2.5rem,black_calc(100%-2.5rem),transparent)] motion-reduce:overflow-x-auto">
-          {/* Two identical copies; the track shifts by half its width, so the loop is seamless. */}
+          {/* Two identical copies; the track shifts by half its width, so the loop has no visible jump. */}
           <div className="flex w-max animate-[marquee_45s_linear_infinite] hover:[animation-play-state:paused]">
             <CityList />
             <CityList hidden />

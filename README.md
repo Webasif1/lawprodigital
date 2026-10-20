@@ -14,7 +14,7 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-Deployment to cPanel is covered in **[DEPLOYMENT.md](DEPLOYMENT.md)**.
+Deployment to cPanel is covered in **[docs/CPANEL_DEPLOYMENT.md](docs/CPANEL_DEPLOYMENT.md)**; audits and the launch checklist are in [`docs/`](docs/).
 
 ## Where things live
 
@@ -63,5 +63,7 @@ Deployment to cPanel is covered in **[DEPLOYMENT.md](DEPLOYMENT.md)**.
 npm run lint
 npm run typecheck
 npm run lint:copy   # banned-word check from COPY_RULES.md
+npm test            # Vitest unit tests (contact validation, rate limit, content, SEO helpers)
 npm run build:standalone
+npm run test:e2e    # Playwright on the built bundle: routes, redirects, headers, a11y, forms
 ```

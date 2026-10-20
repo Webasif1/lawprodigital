@@ -43,3 +43,7 @@ next-env.d.ts
 AGENTS.md
 .claude
 .kilo
+
+# test output
+/test-results/
+/playwright-report/

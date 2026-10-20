@@ -25,7 +25,7 @@
   --color-gold: #d6ad3b;
   --color-gold-soft: #e7c45f;
   --color-gold-wash: #f6ecd0; /* marker highlight on light surfaces */
-  --color-brass: #85680f; /* gold as text on light surfaces (AA) */
+  --color-brass: #7a5f0d; /* gold as text on light surfaces (AA, incl. on gold-wash and wash) */
   --color-signal: #22c55e; /* "live" dots in product UI only */
 
   /* Type */
