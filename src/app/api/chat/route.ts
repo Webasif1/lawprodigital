@@ -13,7 +13,8 @@ import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const DEFAULT_MODEL = "anthropic/claude-haiku-4.5";
+// Cheap, fast and non-reasoning (no hidden thinking tokens): about $0.0001 per reply.
+const DEFAULT_MODEL = "google/gemini-2.5-flash-lite";
 const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
 /**

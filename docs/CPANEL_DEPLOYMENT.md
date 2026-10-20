@@ -94,7 +94,7 @@ a message was sent.
 | Variable | Required | Example | Notes |
 | --- | --- | --- | --- |
 | `OPENROUTER_API_KEY` | For the chat | `sk-or-v1-…` | From openrouter.ai/keys. Set a monthly credit limit on the key. Without it the chat is hidden. |
-| `OPENROUTER_MODEL` | No | `anthropic/claude-haiku-4.5` | Any OpenRouter model ID; the default is fast and low-cost |
+| `OPENROUTER_MODEL` | No | `google/gemini-2.5-flash-lite` | Any OpenRouter model ID. The default costs about $0.0001 per reply; avoid reasoning models, which spend hidden tokens |
 
 The browser never talks to OpenRouter: it posts to `/api/chat/`, which adds the key and only accepts requests
 from this site's own pages.
