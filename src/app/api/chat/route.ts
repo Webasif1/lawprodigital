@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { chatSystemPrompt } from "@/content/chat";
 import { site } from "@/content/site";
 import { type ChatMessage, type ChatUsage, parseMessages, sameOrigin, sseToText } from "@/lib/chat";
+import { checkTopic } from "@/lib/chat-guard";
 import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 
 /**
@@ -57,6 +58,16 @@ export async function POST(request: Request) {
     messages = null;
   }
   if (!messages) return json({ error: "invalid" }, 400);
+
+  // Rule-based topic check (no AI): off-topic questions get a fixed reply and cost nothing.
+  const lastReply = messages.findLast((m) => m.role === "assistant")?.content;
+  const topic = checkTopic(messages[messages.length - 1].content, lastReply);
+  if (!topic.ok) {
+    console.log(`[chat] answered by rule: ${topic.reason}`);
+    return new Response(topic.reply, {
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Chat-Source": "rule" },
+    });
+  }
 
   let upstream: Response;
   try {
