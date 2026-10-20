@@ -89,6 +89,36 @@ Verification → App passwords), not the account password. Gmail only sends as t
 If the SMTP variables are missing, the form shows "temporarily unavailable" and logs the reason. It never pretends
 a message was sent.
 
+### Live AI chat (server-only, read at request time)
+
+| Variable | Required | Example | Notes |
+| --- | --- | --- | --- |
+| `OPENROUTER_API_KEY` | For the chat | `sk-or-v1-…` | From openrouter.ai/keys. Set a monthly credit limit on the key. Without it the chat is hidden. |
+| `OPENROUTER_MODEL` | No | `anthropic/claude-haiku-4.5` | Any OpenRouter model ID; the default is fast and low-cost |
+
+The browser never talks to OpenRouter: it posts to `/api/chat`, which adds the key, limits each IP to 20
+messages per 10 minutes (300 site-wide), and only accepts requests from this site's own pages.
+
+### Analytics and booking (baked in at build time)
+
+`NEXT_PUBLIC_*` values are compiled into the pages and the Content-Security-Policy, so they must be set **before
+`npm run build`** (Option A: add them in Setup Node.js App, then run the build; Option B: set them in the shell
+where you build). Change one, rebuild. Any that are empty simply aren't loaded.
+
+| Variable | Example | Loads |
+| --- | --- | --- |
+| `NEXT_PUBLIC_GA4_ID` | `G-XXXXXXXXXX` | Google Analytics 4 (fires `generate_lead` on a sent form) |
+| `NEXT_PUBLIC_GTM_ID` | `GTM-XXXXXXX` | Google Tag Manager (pushes `generate_lead` to the dataLayer) |
+| `NEXT_PUBLIC_META_PIXEL_ID` | `1234567890` | Meta Pixel (`PageView`, `Lead` on a sent form) |
+| `NEXT_PUBLIC_CLARITY_ID` | `abcdefghij` | Microsoft Clarity |
+| `NEXT_PUBLIC_BOOKING_URL` | `https://calendly.com/…` | "Book a call" on the contact page and after the form is sent |
+
+### Indexing
+
+Vercel deployments (`lawprodigital.vercel.app`, previews) are noindexed automatically and their robots.txt
+disallows everything, because production is this cPanel app. `SITE_NOINDEX=true` forces noindex anywhere (for a
+staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it before building.
+
 ## HTTPS and the domain
 
 - Turn on **AutoSSL** (cPanel → SSL/TLS Status) before pointing the domain at the app. The app sends

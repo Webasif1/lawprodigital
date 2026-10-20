@@ -34,7 +34,7 @@ export function VideoTestimonial({ youtubeId, title, cover }: Props) {
             <>
               <Image
                 src={cover}
-                alt=""
+                alt={title}
                 fill
                 sizes="(min-width: 640px) 22rem, 100vw"
                 className="object-cover transition-transform duration-(--dur-slow) ease-out-expo group-hover:scale-[1.03]"
@@ -49,7 +49,7 @@ export function VideoTestimonial({ youtubeId, title, cover }: Props) {
           </span>
           <span className="relative font-display text-2xl font-bold leading-tight">Play client video</span>
           <span className="relative text-sm text-mist">Loads from YouTube</span>
-          <span className="sr-only">{title}</span>
+          {!cover && <span className="sr-only">{title}</span>}
         </button>
       )}
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { OPEN_CHAT_EVENT } from "@/content/chat-copy";
 
 type Message = { from: "client" | "ai"; text: string };
 
@@ -95,6 +96,17 @@ export function ChatDemo() {
         </ol>
       </div>
       <p className="mt-4 text-center text-xs text-mist">Illustrative example of an AI intake conversation</p>
+      {/* Shown only once the live chat has loaded (the widget sets data-chat="on" on <html>). */}
+      <div className="mt-4 hidden justify-center in-data-[chat=on]:flex">
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event(OPEN_CHAT_EVENT))}
+          className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-semibold text-gold ring-1 ring-gold/50 transition-colors hover:bg-gold hover:text-ink"
+        >
+          Try the live version
+          <span aria-hidden>→</span>
+        </button>
+      </div>
     </div>
   );
 }

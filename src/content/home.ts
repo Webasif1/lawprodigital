@@ -126,31 +126,38 @@ export const specialties = [
   { title: "Sexual Harassment Lawyers" },
 ];
 
-export const cities = [
-  "Seattle, WA",
-  "San Antonio, TX",
-  "Aurora, CO",
-  "Bakersfield, CA",
-  "Houston, TX",
-  "Dallas, TX",
-  "Annapolis, MD",
-  "Denver, CO",
-  "Indianapolis, IN",
-  "New York, NY",
-];
-
 export const pricingTeaser = [
   { name: "Client Generator", price: "$1,500/mo", note: "+ ad spend", text: "Meta & Google Ads, landing page, AI intake chatbot, monthly scorecard" },
   { name: "Authority Builder", price: "$2,500/mo", note: "", text: "SEO, AEO/GEO, Google Business Profile, content, reviews" },
   { name: "Market Dominance", price: "$5,000/mo", note: "+ ad spend", text: "Everything, plus AI voice agent, video, multi-office reporting" },
 ];
 
-export const founder = {
+export type Founder = {
+  heading: string;
+  quote: string;
+  name: string;
+  role: string;
+  /** Square portrait in /public. Hidden until set. */
+  photo?: { src: string; width: number; height: number };
+  /** YouTube ID of the 60-second intro video. Hidden until set. */
+  videoId?: string;
+  videoCover?: string;
+  /** Personal profiles (LinkedIn, Upwork). Also used as the Person schema's sameAs. */
+  links: { label: string; href: string }[];
+};
+
+export const founder: Founder = {
   heading: "Why we only work with law firms",
   quote:
     "I've spent years running marketing inside a multi-office immigration firm: the ads, the content, the Google profiles and the monthly reports. Law Pro Digital brings that same system to firms like yours.",
-  // TODO(owner): add the founder's name, photo and 60-second video.
-  attribution: "Founder, Law Pro Digital",
+  name: "Bellal Hosen",
+  role: "Founder, Law Pro Digital",
+  // TODO(owner): drop the portrait at public/images/founder/bellal-hosen.jpg, then uncomment.
+  // photo: { src: "/images/founder/bellal-hosen.jpg", width: 800, height: 800 },
+  // TODO(owner): add the YouTube ID of the 60-second founder video.
+  // videoId: "",
+  // TODO(owner): add the founder's LinkedIn and Upwork profile URLs.
+  links: [],
 };
 
 export const faqs: Faq[] = [
@@ -183,4 +190,19 @@ export const faqs: Faq[] = [
 export const finalCta = {
   heading: "Find out how many clients you're missing",
   text: "In 5 minutes of video, we'll show you how your firm appears on Google, Maps and ChatGPT, and what happens when a prospect contacts you after hours.",
+};
+
+/** "Law Pro vs a typical agency": every Law Pro line is something the case studies show we do. */
+export const comparison = {
+  heading: "What changes when you work with us",
+  intro: "Most agencies report what's easy to count. We report what your firm actually earns from.",
+  columns: { us: "Law Pro Digital", them: "A typical agency" },
+  rows: [
+    { topic: "What success means", us: "Signed clients, by office and service", them: "Clicks, impressions and cost per lead" },
+    { topic: "Monthly report", us: "A scorecard from first click to signed client, with next steps", them: "A dashboard of traffic and rankings" },
+    { topic: "Where budget goes", us: "To the offices and services with the lowest cost per signed client", them: "Wherever leads look cheapest" },
+    { topic: "After-hours leads", us: "An AI assistant replies in under 60 seconds, day or night", them: "A form or voicemail until the next morning" },
+    { topic: "Who we work with", us: "Law firms only, immigration first", them: "Any industry that pays" },
+    { topic: "Proof", us: "16 case studies with real numbers, including the tests that failed", them: "Logos and percentages without context" },
+  ],
 };

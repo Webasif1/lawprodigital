@@ -1,20 +1,24 @@
 import type { NextConfig } from "next";
 import { legacyCaseStudyRedirects } from "./src/content/stories";
+import { analyticsCspSources } from "./src/lib/analytics";
 
 const isDev = process.env.NODE_ENV !== "production";
 
 // Pages are prerendered, so a per-request nonce isn't available: Next's inline
 // bootstrap/RSC scripts need 'unsafe-inline'. Everything else is locked to this origin,
-// plus the click-to-load YouTube player. See docs/SECURITY_REPORT.md.
+// plus the click-to-load YouTube player and whichever analytics tools have an ID set
+// (src/lib/analytics.ts). See docs/SECURITY_REPORT.md.
+const extra = analyticsCspSources();
+const more = (d: keyof typeof extra) => (extra[d].length ? ` ${extra[d].join(" ")}` : "");
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${more("script-src")}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  `img-src 'self' data: blob:${more("img-src")}`,
   "font-src 'self'",
   "media-src 'self'",
-  `connect-src 'self'${isDev ? " ws: wss:" : ""}`,
-  "frame-src https://www.youtube-nocookie.com",
+  `connect-src 'self'${isDev ? " ws: wss:" : ""}${more("connect-src")}`,
+  `frame-src https://www.youtube-nocookie.com${more("frame-src")}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -46,6 +50,8 @@ const nextConfig: NextConfig = {
 
   // Self-contained server bundle for the cPanel Node.js app (see DEPLOYMENT.md).
   output: "standalone",
+  // The chat route reads the case study library at runtime for its facts; ship it with the server.
+  outputFileTracingIncludes: { "/api/chat": ["./src/content/source/case-studies.md"] },
 
   // The previous WordPress site served every page with a trailing slash; keep the exact URLs.
   trailingSlash: true,

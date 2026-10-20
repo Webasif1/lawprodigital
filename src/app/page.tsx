@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AiSection } from "@/components/home/AiSection";
+import { ComparisonSection } from "@/components/home/ComparisonSection";
 import { FirmFitSection } from "@/components/home/FirmFitSection";
 import { FounderSection } from "@/components/home/FounderSection";
 import { InternationalSection } from "@/components/home/InternationalSection";
@@ -24,7 +25,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /**
- * Narrative: promise → proof → the problem → the system → what we do →
+ * Narrative: promise → proof → the problem → the system → how that differs
+ * from a typical agency → what we do →
  * AI intake → the stories → markets abroad → the first 90 days → who it's
  * for and what it costs → why we do it → questions → the audit.
  */
@@ -36,6 +38,7 @@ export default function HomePage() {
       <ProofStrip />
       <ProblemSection />
       <SystemSection />
+      <ComparisonSection />
       <ServicesGrid />
       <AiSection />
       <StoriesSection />

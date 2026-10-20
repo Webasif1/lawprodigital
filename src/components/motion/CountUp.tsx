@@ -31,7 +31,7 @@ export function CountUp({ value, prefix = "", suffix = "", decimals = 0, classNa
         if (!entry.isIntersecting) return;
         io.disconnect();
         const start = performance.now();
-        const duration = 1600;
+        const duration = 900;
         const tick = (now: number) => {
           const t = Math.min(1, (now - start) / duration);
           const eased = 1 - Math.pow(1 - t, 4);
@@ -41,7 +41,7 @@ export function CountUp({ value, prefix = "", suffix = "", decimals = 0, classNa
         el.textContent = `${prefix}${format(0, decimals)}${suffix}`;
         frame = requestAnimationFrame(tick);
       },
-      { threshold: 0.6 },
+      { threshold: 0.3 },
     );
     io.observe(el);
     return () => {

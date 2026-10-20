@@ -2,22 +2,23 @@ import { describe, expect, it } from "vitest";
 import {
   MAX,
   buildEnquiryEmail,
-  clientIp,
-  createRateLimiter,
   escapeHtml,
   looksAutomated,
+  normalizeWebsite,
   readValues,
   validateContact,
   type ContactValues,
 } from "@/app/contact-us/validate";
-import { cityOptions, serviceOptions } from "@/app/contact-us/form-config";
+import { serviceOptions } from "@/app/contact-us/form-config";
+import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 
 const valid: ContactValues = {
   firstName: "Test",
   lastName: "Person",
   email: "test@example.com",
+  firmWebsite: "examplelaw.com",
   phone: "+1 (555) 010-0000",
-  city: cityOptions[0],
+  city: "Houston, TX",
   service: serviceOptions[0],
   message: "We are a two-attorney immigration firm.",
 };
@@ -34,12 +35,16 @@ describe("validateContact", () => {
   });
 
   it("accepts the optional fields left empty", () => {
-    expect(validateContact({ ...valid, lastName: "", phone: "", city: "", service: "" })).toEqual({});
+    expect(validateContact({ ...valid, lastName: "", phone: "", city: "", service: "", message: "" })).toEqual({});
   });
 
-  it("requires first name, email and message", () => {
-    const errors = validateContact({ ...valid, firstName: "", email: "", message: "" });
-    expect(Object.keys(errors).sort()).toEqual(["email", "firstName", "message"]);
+  it("requires first name, email and the firm website", () => {
+    const errors = validateContact({ ...valid, firstName: "", email: "", firmWebsite: "" });
+    expect(Object.keys(errors).sort()).toEqual(["email", "firmWebsite", "firstName"]);
+  });
+
+  it.each(["not a site", "javascript:alert(1)", "ftp://examplelaw.com", "localhost", "x".repeat(MAX.website + 1)])("rejects website %j", (firmWebsite) => {
+    expect(validateContact({ ...valid, firmWebsite }).firmWebsite).toBeDefined();
   });
 
   it.each(["not-an-email", "a@b", "a b@example.com", "a@example.com\r\nBcc: x@evil.test"])("rejects email %j", (email) => {
@@ -53,19 +58,25 @@ describe("validateContact", () => {
       lastName: "x".repeat(MAX.name + 1),
       email: `${"x".repeat(MAX.email)}@example.com`,
       phone: "1".repeat(MAX.phone + 1),
+      city: "x".repeat(MAX.city + 1),
       message: "x".repeat(MAX.message + 1),
     });
-    expect(Object.keys(errors).sort()).toEqual(["email", "firstName", "lastName", "message", "phone"]);
+    expect(Object.keys(errors).sort()).toEqual(["city", "email", "firstName", "lastName", "message", "phone"]);
   });
 
   it("rejects phone numbers with letters", () => {
     expect(validateContact({ ...valid, phone: "call me maybe" }).phone).toBeDefined();
   });
 
-  it("only allows cities and services from the lists", () => {
-    const errors = validateContact({ ...valid, city: "Atlantis", service: "<script>" });
-    expect(errors.city).toBeDefined();
-    expect(errors.service).toBeDefined();
+  it("only allows services from the list", () => {
+    expect(validateContact({ ...valid, service: "<script>" }).service).toBeDefined();
+  });
+});
+
+describe("normalizeWebsite", () => {
+  it("assumes https for a bare domain and keeps an explicit scheme", () => {
+    expect(normalizeWebsite("smithlaw.com")).toBe("https://smithlaw.com/");
+    expect(normalizeWebsite("http://www.smith-law.co.uk/team")).toBe("http://www.smith-law.co.uk/team");
   });
 });
 
@@ -135,5 +146,9 @@ describe("email output", () => {
     expect(email.subject).not.toMatch(/[\r\n]/);
     expect(email.html).not.toContain("<b>hi</b>");
     expect(email.html).toContain("&lt;b&gt;hi&lt;/b&gt;<br>there");
+  });
+
+  it("includes the normalized website", () => {
+    expect(buildEnquiryEmail(valid).text).toContain("Website: https://examplelaw.com/");
   });
 });

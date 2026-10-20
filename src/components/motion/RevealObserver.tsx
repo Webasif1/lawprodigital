@@ -39,7 +39,7 @@ export function RevealObserver() {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -4% 0px", threshold: 0 },
     );
     const observeAll = (scope: ParentNode) => {
       if (scope instanceof Element && scope.matches(SELECTOR)) io.observe(scope);

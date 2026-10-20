@@ -5,7 +5,7 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { cities, process, specialties } from "@/content/home";
+import { process, specialties } from "@/content/home";
 import { site } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import Link from "next/link";
@@ -94,14 +94,11 @@ export default function AboutPage() {
             </ul>
           </div>
           <div>
-            <SectionHeading eyebrow="Locations" title="Cities we serve" />
-            <ul className="mt-10 grid grid-cols-2 gap-x-6 border-t border-ink">
-              {cities.map((c) => (
-                <li key={c} data-reveal className="border-b border-line py-4 text-lg">
-                  {c}
-                </li>
-              ))}
-            </ul>
+            <SectionHeading eyebrow="Locations" title="Nationwide, fully remote" />
+            <p data-reveal className="mt-10 border-t border-ink pt-6 text-lg text-muted">
+              We work with law firms across the United States, from solo practices to multi-office firms. Campaigns,
+              reporting and strategy calls all run remotely, so your location never limits what we can do.
+            </p>
           </div>
         </div>
       </section>

@@ -3,7 +3,8 @@
 import { headers } from "next/headers";
 import nodemailer from "nodemailer";
 import type { ContactState } from "./form-config";
-import { buildEnquiryEmail, clientIp, createRateLimiter, looksAutomated, readValues, validateContact } from "./validate";
+import { clientIp, createRateLimiter } from "@/lib/rate-limit";
+import { buildEnquiryEmail, looksAutomated, readValues, validateContact } from "./validate";
 
 // 5 messages per IP and 30 in total per 10 minutes.
 const rateLimited = createRateLimiter({ windowMs: 10 * 60 * 1000, perKey: 5, global: 30 });

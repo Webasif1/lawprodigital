@@ -4,9 +4,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { GsapScenes } from "@/components/motion/GsapScenes";
 import { RevealObserver } from "@/components/motion/RevealObserver";
+import { ChatMount } from "@/components/chat/ChatMount";
+import { Analytics } from "@/components/seo/Analytics";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { site } from "@/content/site";
-import { ogImage, organizationJsonLd } from "@/lib/seo";
+import { noindex, site } from "@/content/site";
+import { founderJsonLd, ogImage, organizationJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 // Headlines and figures: a geometric grotesk with confident bold weights.
@@ -34,6 +36,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: site.name, type: "website", locale: "en_US", images: [ogImage] },
   twitter: { card: "summary_large_image", images: [ogImage.url] },
   formatDetection: { telephone: false },
+  ...(noindex ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {
@@ -49,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={founderJsonLd()} />
         <Header />
         <main id="main" className="flex-1">
           {children}
@@ -56,6 +60,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <RevealObserver />
         <GsapScenes />
+        <ChatMount />
+        <Analytics />
       </body>
     </html>
   );

@@ -226,6 +226,191 @@ export const services: Service[] = [
     relatedStories: [2, 3, 5],
   },
   {
+    slug: "facebook-instagram-ads-for-law-firms",
+    navLabel: "Facebook & Instagram Ads",
+    metaTitle: "Facebook & Instagram Ads for Law Firms | Meta Ads for Lawyers",
+    metaDescription:
+      "Meta Ads for law firms, judged on signed clients. 117 campaigns for a multi-office immigration firm produced 15,738 conversations and leads at $4.36 each.",
+    eyebrow: "Facebook & Instagram Ads",
+    headline: { lead: "Meta Ads that turn", emphasis: "conversations", tail: "into signed clients" },
+    intro:
+      "Messaging-first Facebook and Instagram campaigns, organized by office and by service, and measured every month against the clients your firm actually signs.",
+    summary: "Messaging-first Meta campaigns, judged on signed clients.",
+    sections: [
+      {
+        kind: "prose",
+        id: "results",
+        eyebrow: "What it produced",
+        heading: "15,738 conversations and leads in nine months",
+        paragraphs: [
+          "For a multi-office US immigration law firm, 117 Meta campaigns produced 15,738 conversations and lead-form leads between February and October 2026, at $4.36 each. In the months with office-level data, the four US offices signed one client for roughly every 21 ad conversations.",
+          "The ads didn’t work because they were clever. They worked because each campaign answered one specific question for one office, opened a conversation in Messenger or WhatsApp, and was judged on whether that conversation became a signed client.",
+        ],
+      },
+      {
+        kind: "features",
+        id: "services",
+        eyebrow: "What we run",
+        heading: "What’s included",
+        items: [
+          { title: "Messaging-first campaigns", text: "Ads that open a Messenger or WhatsApp conversation, so prospects ask their question instead of filling in a form." },
+          { title: "A campaign per office and service", text: "Separate campaigns for each office and each high-demand service, so budget follows what each one signs." },
+          { title: "Attorney-led video creative", text: "Short, clear videos with your attorney on camera, built for how people scroll on Facebook and Instagram." },
+          { title: "Rapid-response campaigns", text: "When a Visa Bulletin or policy update lands, campaigns answering the new question go live within days." },
+          { title: "Lead forms and AI follow-up", text: "Instant forms connected to your intake, with an AI assistant that replies in seconds, day or night." },
+          { title: "Budget by signed client", text: "We move spend to the offices and services with the lowest cost per signed client, not the cheapest lead." },
+          { title: "Monthly scorecard", text: "From ad conversation to signed client, by office and service, with the next steps for the coming month." },
+        ],
+      },
+      {
+        kind: "prose",
+        id: "cost",
+        eyebrow: "Cost per lead vs cost per client",
+        heading: "The cheapest leads aren’t the cheapest clients",
+        paragraphs: [
+          "In the same firm, the office with the most expensive ad conversations ($10.44 each) had the lowest Meta spend per signed client ($56). An office with cheaper conversations ($7.01) cost $264 per client.",
+          "That’s why every campaign we run reports on signed clients. Budgeting by cost per lead would have moved money in exactly the wrong direction.",
+        ],
+      },
+      {
+        kind: "tags",
+        id: "campaigns",
+        eyebrow: "Campaign types",
+        heading: "Campaigns we’ve run for immigration firms",
+        items: ["EB-2 NIW", "Asylum", "Naturalization (N-400)", "K-1 fiancé visas", "I-485 green cards", "Religious-worker visas", "Denied-case reviews", "Visa Bulletin updates", "Free webinars"],
+        closing: "We also support bankruptcy and personal injury firms.",
+      },
+      {
+        kind: "process",
+        id: "process",
+        eyebrow: "How we work",
+        heading: "From audit to scale",
+        steps: [
+          { title: "Free AI lead audit", text: "We review your current ads, pages and what happens when a prospect messages you after hours." },
+          { title: "Tracking first", text: "Conversations, forms and calls are tagged by office and service before any budget goes up." },
+          { title: "Launch and test", text: "Small budgets per service and market, with video-led creative." },
+          { title: "Scale what signs", text: "Budget moves to the campaigns with the lowest cost per signed client." },
+        ],
+      },
+      {
+        kind: "faq",
+        id: "faq",
+        heading: "Frequently asked questions",
+        items: [
+          {
+            q: "Do Facebook ads work for law firms?",
+            a: "They can, when they’re built around conversations and judged on signed clients. For one multi-office immigration firm, 117 Meta campaigns produced 15,738 conversations and leads in nine months, and the US offices signed about one client for every 21 conversations.",
+          },
+          {
+            q: "How much should a law firm spend on Meta Ads?",
+            a: "It depends on your offices, services and how many new clients you can take on. We start with small tests per service, then move budget to whatever has the lowest cost per signed client. Our Client Generator plan is $1,500 a month plus ad spend.",
+          },
+          {
+            q: "Are Facebook and Instagram ads allowed for lawyers?",
+            a: "Yes, but your state bar’s advertising rules still apply. We write ads that stay factual and never promise case outcomes.",
+          },
+          {
+            q: "What does an immigration lead cost on Meta?",
+            a: "In one firm’s 2026 campaigns it ranged from $3.23 per contact for naturalization (N-400) to $9.74 for I-485 green cards. Niche services with a clear audience were consistently cheaper.",
+          },
+        ],
+      },
+    ],
+    closing: {
+      heading: "See what your Meta Ads could be doing",
+      text: "Get a free AI lead audit: a short video review of your ads, pages and after-hours follow-up, with the first changes we’d make.",
+    },
+    relatedStories: [2, 3, 4],
+  },
+  {
+    slug: "ai-search-optimization-for-lawyers",
+    navLabel: "AI Search (AEO/GEO)",
+    metaTitle: "AI Search Optimization for Lawyers | AEO & GEO for Law Firms",
+    metaDescription:
+      "Get your law firm recommended by ChatGPT, Google AI Overviews and Bing. Answer-first content that grew one immigration firm’s Google clicks 81% and doubled its ChatGPT visitors.",
+    eyebrow: "AI Search (AEO/GEO)",
+    headline: { lead: "Get your firm", emphasis: "recommended", tail: "by ChatGPT and Google" },
+    intro:
+      "More clients now ask ChatGPT, Google’s AI Overviews and Bing which lawyer to call. Answer engine optimization (AEO) and generative engine optimization (GEO) help make sure the answer includes your firm.",
+    summary: "Show up when clients ask ChatGPT and Google’s AI.",
+    sections: [
+      {
+        kind: "prose",
+        id: "results",
+        eyebrow: "What it produced",
+        heading: "+81% Google clicks and twice the ChatGPT visitors",
+        paragraphs: [
+          "Between December 2025 and May 2026, a US immigration firm’s Google clicks rose 81% (3,770 to 6,810 a month), its average position improved from 13 to 8, and monthly visitors from ChatGPT more than doubled (170 to 366).",
+          "A mid-2026 website migration caused a dip, which we’re actively recovering. We publish that part too, because it’s what happens in real SEO.",
+        ],
+      },
+      {
+        kind: "features",
+        id: "services",
+        eyebrow: "What we do",
+        heading: "What’s included",
+        items: [
+          { title: "AI visibility check", text: "We ask ChatGPT, Google and Bing the questions your clients ask, and record whether your firm comes up." },
+          { title: "Answer-first service pages", text: "Key pages rewritten so the first lines answer the question directly, the way AI tools quote them." },
+          { title: "FAQ content from real questions", text: "Content built around the questions prospects actually ask your intake team." },
+          { title: "Consistent firm details everywhere", text: "One entity description, matching profiles and structured data, so AI tools know exactly who you are." },
+          { title: "Schema markup", text: "Organization, FAQ, article and breadcrumb data on every page." },
+          { title: "Google Business Profile", text: "Optimized profiles for each office, which feed both Maps and AI answers." },
+          { title: "Monthly AI referral tracking", text: "Visits from ChatGPT, Bing and other AI tools tracked next to Google, every month." },
+        ],
+      },
+      {
+        kind: "prose",
+        id: "organic",
+        eyebrow: "Inquiries you don’t pay for",
+        heading: "From 20 to 98 free website inquiries a month",
+        paragraphs: [
+          "Answer-first content for Google and AI search also grew a multi-office immigration firm’s organic website inquiries from 20 in May 2026 to 98 in July, and they held above 80 a month after that.",
+        ],
+      },
+      {
+        kind: "process",
+        id: "process",
+        eyebrow: "How we work",
+        heading: "How AI search optimization works",
+        steps: [
+          { title: "Check what AI says today", text: "Part of your free AI lead audit: how ChatGPT, Google and Maps describe your firm right now." },
+          { title: "Fix the foundations", text: "Firm details, schema, Google profiles and the pages AI tools pull from." },
+          { title: "Publish answer-first content", text: "Service pages and FAQs that answer real client questions in the first lines." },
+          { title: "Track and report", text: "Google clicks, positions and AI referrals in your monthly scorecard." },
+        ],
+      },
+      {
+        kind: "faq",
+        id: "faq",
+        heading: "Frequently asked questions",
+        items: [
+          {
+            q: "What is AEO and GEO for law firms?",
+            a: "Answer engine optimization (AEO) and generative engine optimization (GEO) make your firm’s content easy for AI tools like ChatGPT and Google’s AI Overviews to find, trust and quote. It builds on SEO, with more focus on direct answers, consistent firm details and structured data.",
+          },
+          {
+            q: "Can you guarantee ChatGPT will recommend my firm?",
+            a: "No one can guarantee that. What we can do is make your firm’s information clear, consistent and easy to quote, and track AI referrals every month so you can see the trend.",
+          },
+          {
+            q: "Is AI search optimization different from SEO?",
+            a: "It overlaps a lot. Good SEO is the foundation; AI search adds answer-first formatting, consistent firm details across the web, and tracking of AI referrals. Our Authority Builder plan covers both.",
+          },
+          {
+            q: "How long does it take?",
+            a: "In our case study, Google clicks rose 81% over about six months. Timelines depend on your site, your competition and how much content you already have.",
+          },
+        ],
+      },
+    ],
+    closing: {
+      heading: "Does ChatGPT recommend your firm?",
+      text: "Find out in your free AI lead audit: a short video showing how your firm appears on Google, Maps and ChatGPT, and what we’d fix first.",
+    },
+    relatedStories: [12, 14, 13],
+  },
+  {
     slug: "website-design",
     navLabel: "Website Design",
     metaTitle: "Law Firm Website Design That Converts Visitors Into Clients",

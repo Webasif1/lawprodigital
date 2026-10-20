@@ -4,8 +4,10 @@ import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
+import { bookingUrl } from "@/content/site";
+import { trackLead } from "@/lib/analytics";
 import { submitContact } from "./actions";
-import { cityOptions, serviceOptions, type ContactField, type ContactState } from "./form-config";
+import { serviceOptions, type ContactField, type ContactState } from "./form-config";
 
 const initial: ContactState = { status: "idle" };
 
@@ -24,6 +26,7 @@ export function ContactForm() {
 
   useEffect(() => {
     if (state.status !== "idle") status.current?.focus();
+    if (state.status === "success") trackLead();
   }, [state]);
 
   if (state.status === "success") {
@@ -34,6 +37,16 @@ export function ContactForm() {
         </span>
         <h2 className="mt-6 font-display text-4xl tracking-[-0.02em]">Message sent</h2>
         <p className="mt-3 text-lg text-mist">{state.message}</p>
+        {bookingUrl && (
+          <div className="mt-8 border-t border-white/15 pt-8">
+            <p className="text-mist">Want to skip the back-and-forth? Pick a time for your audit walkthrough now.</p>
+            <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("gold", "mt-5")}>
+              <span>Book a call</span>
+              <ButtonArrow />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </div>
+        )}
       </div>
     );
   }
@@ -102,18 +115,27 @@ export function ContactForm() {
           {errorText("email")}
         </div>
         <div>
+          {label("firmWebsite", "Your firm’s website")}
+          <input
+            {...fieldProps("firmWebsite")}
+            type="text"
+            inputMode="url"
+            autoComplete="url"
+            placeholder="yourfirm.com"
+            required
+            maxLength={200}
+            className={inputClass}
+          />
+          {errorText("firmWebsite")}
+        </div>
+        <div>
           {label("phone", "Phone", true)}
           <input {...fieldProps("phone")} type="tel" autoComplete="tel" maxLength={40} className={inputClass} />
           {errorText("phone")}
         </div>
         <div>
-          {label("city", "City", true)}
-          <select {...fieldProps("city")} className={inputClass}>
-            <option value="">Select your city</option>
-            {cityOptions.map((c) => (
-              <option key={c}>{c}</option>
-            ))}
-          </select>
+          {label("city", "City or state", true)}
+          <input {...fieldProps("city")} type="text" autoComplete="address-level2" maxLength={80} className={inputClass} />
           {errorText("city")}
         </div>
         <div>
@@ -128,8 +150,8 @@ export function ContactForm() {
         </div>
       </div>
       <div>
-        {label("message", "Message")}
-        <textarea {...fieldProps("message")} rows={6} required maxLength={5000} className={`${inputClass} resize-y`} />
+        {label("message", "Anything we should know?", true)}
+        <textarea {...fieldProps("message")} rows={5} maxLength={5000} className={`${inputClass} resize-y`} />
         {errorText("message")}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-4">

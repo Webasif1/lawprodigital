@@ -6,7 +6,7 @@ const PORT = Number(process.env.E2E_PORT ?? 3100);
  * End-to-end tests run against the production standalone bundle — the same
  * `node server.js` that cPanel/Passenger starts. Build it first:
  *   npm run build:standalone && npm run test:e2e
- * SMTP variables are blanked so the contact form never sends real email.
+ * SMTP and OpenRouter variables are blanked so tests never send email or call the model.
  */
 export default defineConfig({
   testDir: "tests/e2e",
@@ -23,6 +23,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
-    env: { PORT: String(PORT), HOSTNAME: "127.0.0.1", SMTP_HOST: "", SMTP_USER: "", SMTP_PASS: "", CONTACT_TO: "" },
+    env: { PORT: String(PORT), HOSTNAME: "127.0.0.1", SMTP_HOST: "", SMTP_USER: "", SMTP_PASS: "", CONTACT_TO: "", OPENROUTER_API_KEY: "" },
   },
 });

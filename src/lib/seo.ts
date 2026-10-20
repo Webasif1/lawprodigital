@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { contact, site, socials } from "@/content/site";
+import { founder } from "@/content/home";
 
 export const ogImage = { url: "/brand/og.png", width: 1200, height: 630, alt: "More signed clients for US immigration law firms, powered by AI — Law Pro Digital" };
 
@@ -74,6 +75,25 @@ export function organizationJsonLd() {
     ...(contact.email || contact.phone
       ? { contactPoint: { "@type": "ContactPoint", contactType: "sales", ...(contact.email ? { email: contact.email } : {}), ...(contact.phone ? { telephone: contact.phone } : {}), areaServed: "US" } }
       : {}),
+    ...(sameAs.length ? { sameAs } : {}),
+    founder: { "@id": FOUNDER_ID },
+  };
+}
+
+const FOUNDER_ID = `${site.url}/#founder`;
+
+export function founderJsonLd() {
+  const sameAs = founder.links.map((l) => l.href);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": FOUNDER_ID,
+    name: founder.name,
+    jobTitle: "Founder",
+    worksFor: { "@id": `${site.url}/#organization` },
+    url: absoluteUrl("/about-us/"),
+    ...(founder.photo ? { image: absoluteUrl(founder.photo.src) } : {}),
+    knowsAbout: serviceTypes,
     ...(sameAs.length ? { sameAs } : {}),
   };
 }

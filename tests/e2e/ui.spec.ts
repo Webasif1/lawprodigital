@@ -79,7 +79,9 @@ test.describe("contact form", () => {
     await expect(page.getByText("Please check the highlighted fields.")).toBeVisible();
     await expect(page.locator("#firstName")).toHaveAttribute("aria-invalid", "true");
     await expect(page.locator("#email")).toHaveAttribute("aria-invalid", "true");
-    await expect(page.locator("#message")).toHaveAttribute("aria-invalid", "true");
+    await expect(page.locator("#firmWebsite")).toHaveAttribute("aria-invalid", "true");
+    // The message is optional.
+    await expect(page.locator("#message")).not.toHaveAttribute("aria-invalid", "true");
   });
 
   test("keeps typed values and rejects an invalid email", async ({ page }) => {
@@ -98,10 +100,49 @@ test.describe("contact form", () => {
     await page.goto("/contact-us/");
     await page.fill("#firstName", "Test");
     await page.fill("#email", "test@example.com");
+    await page.fill("#firmWebsite", "examplelaw.com");
     await page.fill("#message", "Automated test — SMTP is disabled for this run.");
     await page.waitForTimeout(2600);
     await page.getByRole("button", { name: /Request my free AI lead audit/i }).click();
     await expect(page.getByText("Our contact form is temporarily unavailable. Please try again later.")).toBeVisible();
     await expect(page.getByText("Message sent")).toHaveCount(0);
+  });
+});
+
+test.describe("trust and launch fixes", () => {
+  test("the top strip says nationwide and lists no cities", async ({ page }) => {
+    await page.goto("/");
+    const strip = page.getByRole("region", { name: "Where we work" });
+    await expect(strip).toContainText("Serving US law firms nationwide");
+    await expect(strip).not.toContainText("Seattle");
+  });
+
+  test("the founder is named, with Person schema linked from the organization", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#founder-heading").locator("xpath=ancestor::section")).toContainText("Bellal Hosen");
+    const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const person = ld.map((t) => JSON.parse(t)).find((d) => d["@type"] === "Person");
+    expect(person?.name).toBe("Bellal Hosen");
+  });
+
+  test("the comparison is readable at every width", async ({ page, isMobile }) => {
+    await page.goto("/");
+    const section = page.locator("#compare-heading").locator("xpath=ancestor::section");
+    if (isMobile) await expect(section.getByRole("list")).toBeVisible();
+    else await expect(section.getByRole("table")).toBeVisible();
+  });
+
+  test("the chat stays hidden when no OpenRouter key is set", async ({ page, request }) => {
+    expect(await (await request.get("/api/chat/")).json()).toEqual({ enabled: false });
+    await page.goto("/");
+    await page.waitForTimeout(1800);
+    await expect(page.getByRole("button", { name: /Ask us anything/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /Try the live version/i })).toBeHidden();
+  });
+
+  test("robots.txt has no Host line and points to the sitemap", async ({ request }) => {
+    const robots = await (await request.get("/robots.txt")).text();
+    expect(robots).not.toMatch(/^Host:/im);
+    expect(robots).toContain("Sitemap: https://lawprodigital.com/sitemap.xml");
   });
 });

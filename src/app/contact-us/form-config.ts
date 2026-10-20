@@ -1,8 +1,3 @@
-import { cities } from "@/content/home";
-
-/** Options carried over from the original contact form, plus the services on the new homepage. */
-export const cityOptions: string[] = [...cities];
-
 export const serviceOptions: string[] = [
   "Free AI lead audit",
   "Meta Ads (Facebook & Instagram)",
@@ -18,7 +13,7 @@ export const serviceOptions: string[] = [
   "Video Marketing",
 ];
 
-export type ContactField = "firstName" | "lastName" | "email" | "phone" | "city" | "service" | "message";
+export type ContactField = "firstName" | "lastName" | "email" | "firmWebsite" | "phone" | "city" | "service" | "message";
 
 export type ContactState = {
   status: "idle" | "success" | "error";

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { contact, socials } from "@/content/site";
+import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
+import { bookingUrl, contact, socials } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { ContactForm } from "./ContactForm";
 
@@ -49,6 +50,18 @@ export default function ContactPage() {
                 </li>
               ))}
             </ol>
+
+            {bookingUrl && (
+              <div className="mt-12 rounded-card bg-surface p-6 ring-1 ring-line">
+                <h2 className="font-display text-xl font-bold tracking-tight">Prefer to pick a time?</h2>
+                <p className="mt-2 text-muted">Book a strategy call directly in our calendar.</p>
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("ink", "mt-5")}>
+                  <span>Book a call</span>
+                  <ButtonArrow />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </div>
+            )}
 
             {hasDetails && (
               <div className="mt-12 grid gap-6 border-t border-line pt-8">

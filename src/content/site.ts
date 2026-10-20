@@ -14,7 +14,7 @@ export type ContactDetails = {
   offices?: { label: string; lines: string[] }[];
 };
 
-export type SocialLink = { label: "Facebook" | "Twitter" | "YouTube" | "LinkedIn" | "Instagram"; href: string };
+export type SocialLink = { label: "Facebook" | "Twitter" | "YouTube" | "LinkedIn" | "Instagram" | "Upwork"; href: string };
 
 export const site = {
   name: "Law Pro Digital",
@@ -27,6 +27,16 @@ export const site = {
   logo: { src: "/brand/logo-mark-512.png", width: 512, height: 512, alt: "Law Pro Digital logo" },
   primaryCta: { label: "Get Your Free AI Lead Audit", href: "/contact-us/" },
 } as const;
+
+/**
+ * Keep search engines off non-production copies. Production runs on cPanel, so any
+ * Vercel deployment (lawprodigital.vercel.app, previews) is noindexed by default.
+ * SITE_NOINDEX=true|false overrides this either way.
+ */
+export const noindex = process.env.SITE_NOINDEX ? process.env.SITE_NOINDEX === "true" : Boolean(process.env.VERCEL);
+
+/** Calendly / Cal.com link for booking a call. Hidden site-wide until set. */
+export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || undefined;
 
 // TODO(owner): add the real phone number. Empty values are hidden site-wide.
 export const contact: ContactDetails = {
