@@ -11,10 +11,17 @@ export const chatCopy = {
   disclaimer: "AI assistant. It can make mistakes, and it doesn’t give legal advice.",
   placeholder: "Type your message…",
   error: "Sorry, I couldn’t reply just now. Please try again, or use the contact form.",
-  busy: "Lots of messages right now. Please wait a minute and try again.",
+  busy: "Lots of messages right now. Please wait a few minutes and try again.",
+  handoff: "Let’s continue properly: your free AI lead audit shows exactly where your firm is losing leads.",
+  handoffCta: "Get your free AI lead audit",
 };
 
-export const CHAT_LIMITS = { turns: 16, chars: 600 } as const;
+/**
+ * Kept small on purpose: every message re-sends the history, so these bound the tokens per reply.
+ * turns = messages sent to the model; chars = a visitor message; assistantChars = a past reply
+ * (trimmed by the widget); perConversation = visitor messages before handing off to the audit.
+ */
+export const CHAT_LIMITS = { turns: 8, chars: 400, assistantChars: 400, perConversation: 10 } as const;
 
 /** Dispatched on window to open the chat from anywhere (e.g. the homepage demo). */
 export const OPEN_CHAT_EVENT = "lpd:open-chat";

@@ -96,8 +96,23 @@ a message was sent.
 | `OPENROUTER_API_KEY` | For the chat | `sk-or-v1-…` | From openrouter.ai/keys. Set a monthly credit limit on the key. Without it the chat is hidden. |
 | `OPENROUTER_MODEL` | No | `anthropic/claude-haiku-4.5` | Any OpenRouter model ID; the default is fast and low-cost |
 
-The browser never talks to OpenRouter: it posts to `/api/chat`, which adds the key, limits each IP to 20
-messages per 10 minutes (300 site-wide), and only accepts requests from this site's own pages.
+The browser never talks to OpenRouter: it posts to `/api/chat/`, which adds the key and only accepts requests
+from this site's own pages.
+
+**Cost controls** (change them in `CHAT_RATE` in `src/app/api/chat/route.ts` and `CHAT_LIMITS` in
+`src/content/chat-copy.ts`):
+
+| Limit | Value |
+| --- | --- |
+| Messages per visitor (IP) | 8 per 10 minutes, 40 per day |
+| Messages site-wide | 300 per 10 minutes, **800 per day** (hard daily ceiling) |
+| Reply length | `max_tokens: 160`; the prompt asks for 2 short sentences |
+| History sent per message | last 8 messages; visitor messages ≤ 400 chars, past replies trimmed to 400 |
+| Conversation length | after 10 visitor messages the widget hands off to the free audit |
+
+Counters are in memory and reset when the app restarts. Each reply logs one line with its token counts (never the
+message text), e.g. `[chat] tokens in=950 out=42 cost=$0.0012`, so you can check real cost in the app's log. As a
+final safety net, set a monthly credit limit on the key at openrouter.ai.
 
 ### Analytics and booking (baked in at build time)
 

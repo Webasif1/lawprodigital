@@ -115,6 +115,15 @@ describe("createRateLimiter", () => {
     expect([limited("1", 0), limited("2", 0), limited("3", 0), limited("4", 0)]).toEqual([false, false, false, true]);
   });
 
+  it("supports a daily window (used by the chat's daily caps)", () => {
+    const day = 24 * 60 * 60 * 1000;
+    const limited = createRateLimiter({ windowMs: day, perKey: 2, global: 100 });
+    expect(limited("a", 0)).toBe(false);
+    expect(limited("a", 60_000)).toBe(false);
+    expect(limited("a", 12 * 60 * 60 * 1000)).toBe(true);
+    expect(limited("a", day + 1)).toBe(false);
+  });
+
   it("evicts least recently used keys instead of resetting everyone", () => {
     const limited = createRateLimiter({ windowMs: 1000, perKey: 1, global: 1000, maxKeys: 3 });
     limited("x1", 0);

@@ -6,6 +6,12 @@ import { parseMessages, sameOrigin, sseToText } from "@/lib/chat";
 const user = (content: string) => ({ role: "user", content });
 
 describe("parseMessages", () => {
+  it("keeps history small", () => {
+    expect(CHAT_LIMITS.turns).toBeLessThanOrEqual(8);
+    expect(CHAT_LIMITS.chars).toBeLessThanOrEqual(400);
+    expect(parseMessages({ messages: [{ role: "assistant", content: "x".repeat(CHAT_LIMITS.assistantChars + 1) }, user("hi")] })).toBeNull();
+  });
+
   it("accepts a conversation that ends with the visitor", () => {
     expect(parseMessages({ messages: [user(" hi "), { role: "assistant", content: "Hello" }, user("Prices?")] })).toEqual([
       { role: "user", content: "hi" },
@@ -55,6 +61,21 @@ describe("sseToText", () => {
     });
     expect(await new Response(source.pipeThrough(sseToText())).text()).toBe("Hello");
   });
+
+  it("marks a reply cut off by max_tokens and reports usage", async () => {
+    const enc = new TextEncoder();
+    const source = new ReadableStream<Uint8Array>({
+      start(c) {
+        c.enqueue(enc.encode('data: {"choices":[{"delta":{"content":"We run Meta"},"finish_reason":"length"}]}\n\n'));
+        c.enqueue(enc.encode('data: {"choices":[],"usage":{"prompt_tokens":812,"completion_tokens":160}}\n\n'));
+        c.close();
+      },
+    });
+    const usage: unknown[] = [];
+    const text = await new Response(source.pipeThrough(sseToText({ onUsage: (u) => usage.push(u) }))).text();
+    expect(text).toBe("We run Meta…");
+    expect(usage).toEqual([{ prompt_tokens: 812, completion_tokens: 160 }]);
+  });
 });
 
 describe("chatSystemPrompt", () => {
@@ -62,7 +83,13 @@ describe("chatSystemPrompt", () => {
     const prompt = chatSystemPrompt();
     expect(prompt).toContain("15,738");
     expect(prompt).toContain("/case-study/facebook-ads-for-immigration-lawyers/");
-    expect(prompt).toMatch(/Never give legal or immigration advice/);
+    expect(prompt).toMatch(/No legal or immigration advice/);
     expect(prompt).toMatch(/Never invent numbers/);
+  });
+
+  it("asks for short replies and stays compact (it's re-sent with every message)", () => {
+    const prompt = chatSystemPrompt();
+    expect(prompt).toMatch(/at most 2 short sentences/);
+    expect(prompt.length).toBeLessThan(4000);
   });
 });

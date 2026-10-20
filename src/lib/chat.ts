@@ -13,7 +13,7 @@ export function parseMessages(body: unknown): ChatMessage[] | null {
     const content = (m as ChatMessage)?.content;
     if ((role !== "user" && role !== "assistant") || typeof content !== "string") return null;
     const text = content.trim();
-    if (!text || text.length > (role === "user" ? CHAT_LIMITS.chars : CHAT_LIMITS.chars * 4)) return null;
+    if (!text || text.length > (role === "user" ? CHAT_LIMITS.chars : CHAT_LIMITS.assistantChars)) return null;
     out.push({ role, content: text });
   }
   return out.at(-1)?.role === "user" ? out : null;
@@ -29,8 +29,14 @@ export function sameOrigin(origin: string | null, host: string | null) {
   }
 }
 
-/** Turns OpenAI-style server-sent events into a plain stream of reply text. */
-export function sseToText() {
+export type ChatUsage = { prompt_tokens?: number; completion_tokens?: number; cost?: number };
+
+/**
+ * Turns OpenAI-style server-sent events into a plain stream of reply text. A reply cut off
+ * by max_tokens ends with "…" so the cut is visible; usage (sent on the final event when
+ * requested) goes to onUsage.
+ */
+export function sseToText({ onUsage }: { onUsage?: (usage: ChatUsage) => void } = {}) {
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();
   let buffer = "";
@@ -39,8 +45,12 @@ export function sseToText() {
     const data = line.slice(5).trim();
     if (!data || data === "[DONE]") return;
     try {
-      const delta = JSON.parse(data)?.choices?.[0]?.delta?.content;
+      const event = JSON.parse(data);
+      const choice = event?.choices?.[0];
+      const delta = choice?.delta?.content;
       if (typeof delta === "string" && delta) controller.enqueue(encoder.encode(delta));
+      if (choice?.finish_reason === "length") controller.enqueue(encoder.encode("…"));
+      if (event?.usage) onUsage?.(event.usage);
     } catch {
       // Ignore a malformed event rather than dropping the whole reply.
     }

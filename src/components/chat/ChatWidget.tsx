@@ -22,11 +22,14 @@ function linkify(text: string): ReactNode[] {
   );
 }
 
-/** What the API sees: the latest turns, starting with a visitor message (the greeting isn't sent). */
+/**
+ * What the API sees: the latest turns, starting with a visitor message (the greeting isn't
+ * sent), with past replies trimmed. Every message re-sends this, so it stays small.
+ */
 function history(messages: Msg[]) {
-  const recent = messages.slice(-(CHAT_LIMITS.turns - 1));
+  const recent = messages.slice(-CHAT_LIMITS.turns);
   while (recent[0]?.role === "assistant") recent.shift();
-  return recent;
+  return recent.map((m) => (m.role === "assistant" ? { ...m, content: m.content.slice(0, CHAT_LIMITS.assistantChars) } : m));
 }
 
 export default function ChatWidget() {
@@ -64,9 +67,12 @@ export default function ChatWidget() {
     window.setTimeout(() => launcher.current?.focus(), 0);
   };
 
+  // After this many visitor messages, hand off to the audit instead of chatting on.
+  const handedOff = messages.filter((m) => m.role === "user").length >= CHAT_LIMITS.perConversation;
+
   async function send(text: string) {
     const content = text.trim().slice(0, CHAT_LIMITS.chars);
-    if (!content || busy) return;
+    if (!content || busy || handedOff) return;
     const next: Msg[] = [...messages, { role: "user", content }];
     setMessages(next);
     setInput("");
@@ -205,30 +211,44 @@ export default function ChatWidget() {
                 {error}
               </p>
             )}
-            <div className="flex items-end gap-2">
-              <label htmlFor="chat-input" className="sr-only">
-                Message
-              </label>
-              <textarea
-                ref={field}
-                id="chat-input"
-                rows={1}
-                value={input}
-                maxLength={CHAT_LIMITS.chars}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={onKeyDown}
-                placeholder={chatCopy.placeholder}
-                className="max-h-32 min-h-11 flex-1 resize-none rounded-field border-0 bg-wash px-3.5 py-2.5 text-[0.95rem] ring-1 ring-line placeholder:text-muted/70 focus:ring-2 focus:ring-navy focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={busy || !input.trim()}
-                className="grid size-11 shrink-0 place-items-center rounded-full bg-gold text-ink transition-colors hover:bg-gold-soft disabled:opacity-50"
-              >
-                <ArrowIcon aria-hidden className="size-4" />
-                <span className="sr-only">Send</span>
-              </button>
-            </div>
+            {handedOff && !busy ? (
+              <div className="rounded-field bg-wash p-3 ring-1 ring-line">
+                <p className="text-sm">{chatCopy.handoff}</p>
+                <Link
+                  href="/contact-us/"
+                  onClick={close}
+                  className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-tag bg-gold px-4 text-sm font-semibold text-ink transition-colors hover:bg-gold-soft"
+                >
+                  {chatCopy.handoffCta}
+                  <ArrowIcon aria-hidden className="size-4" />
+                </Link>
+              </div>
+            ) : (
+              <div className="flex items-end gap-2">
+                <label htmlFor="chat-input" className="sr-only">
+                  Message
+                </label>
+                <textarea
+                  ref={field}
+                  id="chat-input"
+                  rows={1}
+                  value={input}
+                  maxLength={CHAT_LIMITS.chars}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={onKeyDown}
+                  placeholder={chatCopy.placeholder}
+                  className="max-h-32 min-h-11 flex-1 resize-none rounded-field border-0 bg-wash px-3.5 py-2.5 text-[0.95rem] ring-1 ring-line placeholder:text-muted/70 focus:ring-2 focus:ring-navy focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={busy || !input.trim()}
+                  className="grid size-11 shrink-0 place-items-center rounded-full bg-gold text-ink transition-colors hover:bg-gold-soft disabled:opacity-50"
+                >
+                  <ArrowIcon aria-hidden className="size-4" />
+                  <span className="sr-only">Send</span>
+                </button>
+              </div>
+            )}
             <p className="mt-2 text-[0.7rem] text-muted">{chatCopy.disclaimer}</p>
           </form>
         </div>
