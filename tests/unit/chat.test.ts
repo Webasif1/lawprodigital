@@ -9,6 +9,8 @@ describe("parseMessages", () => {
   it("keeps history small", () => {
     expect(CHAT_LIMITS.turns).toBeLessThanOrEqual(8);
     expect(CHAT_LIMITS.chars).toBeLessThanOrEqual(400);
+    // The audit handoff must come before the per-IP burst limit (8 per 10 minutes) blocks the visitor.
+    expect(CHAT_LIMITS.perConversation).toBeLessThan(8);
     expect(parseMessages({ messages: [{ role: "assistant", content: "x".repeat(CHAT_LIMITS.assistantChars + 1) }, user("hi")] })).toBeNull();
   });
 

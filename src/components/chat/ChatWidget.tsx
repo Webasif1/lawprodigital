@@ -145,7 +145,7 @@ export default function ChatWidget() {
           aria-modal="false"
           aria-labelledby="chat-title"
           onKeyDown={(e) => e.key === "Escape" && close()}
-          className="fixed inset-x-3 bottom-3 z-40 flex h-[min(38rem,calc(100dvh-1.5rem))] flex-col overflow-hidden rounded-card bg-surface text-ink shadow-[0_30px_80px_-24px_rgba(8,18,38,0.55)] ring-1 ring-line motion-safe:animate-[chat-in_220ms_var(--ease-out-expo)] sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-[24rem]"
+          className="fixed inset-x-3 bottom-3 z-55 flex h-[min(38rem,calc(100dvh-1.5rem))] flex-col overflow-hidden rounded-card bg-surface text-ink shadow-[0_30px_80px_-24px_rgba(8,18,38,0.55)] ring-1 ring-line motion-safe:animate-[chat-in_220ms_var(--ease-out-expo)] sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-[24rem]"
         >
           <div className="on-dark flex items-center gap-3 bg-navy px-4 py-3 text-paper">
             <span aria-hidden className="grid size-9 place-items-center rounded-full bg-gold font-display text-xs font-extrabold text-ink">
