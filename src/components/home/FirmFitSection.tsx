@@ -52,7 +52,7 @@ export function FirmFitSection() {
                 className={`flex flex-col rounded-card p-7 ${featured ? "on-dark bg-navy text-white" : "bg-surface ring-1 ring-line"}`}
               >
                 <h3 className="font-display text-xl font-bold tracking-tight">{p.name}</h3>
-                <p className="mt-6 flex items-baseline gap-2">
+                <p className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className={`figure text-4xl ${featured ? "text-gold" : "text-ink"}`}>{p.price}</span>
                   {p.note && <span className={`text-sm ${featured ? "text-mist" : "text-muted"}`}>{p.note}</span>}
                 </p>

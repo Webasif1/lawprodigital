@@ -1,5 +1,11 @@
 # Security report
 
+> **Superseded in part (2026-10-23).** The attack surface below predates the AI chat. There are now two
+> server inputs, the `submitContact` Server Action and the `/api/chat/` route handler (GET/POST, proxied to
+> OpenRouter). Next.js 16.4.0 was affected by GHSA-2464-fhr4-w9xw, GHSA-p3m5-59mp-jv5r and
+> GHSA-673q-mjm6-r5xr and is now 16.4.3. See
+> [`reports/production-readiness-audit.md`](../reports/production-readiness-audit.md) for the current findings.
+
 Defensive, code-first review of the repository on 2026-10-20, plus tests against a local production build
 (`node .next/standalone/server.js`). No testing was done against the live Vercel or production site beyond
 reading its public response headers.

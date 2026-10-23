@@ -1,7 +1,20 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const keyPages = ["/", "/law-firm-seo/", "/case-study/", "/about-us/", "/pricing/", "/contact-us/", "/privacy-policy/"];
+// One of each page template, plus the pages people convert on.
+const keyPages = [
+  "/",
+  "/law-firm-seo/",
+  "/immigration-lawyer-seo/",
+  "/ai-solutions/",
+  "/case-study/",
+  "/case-study/immigration-law-firm-client-growth/",
+  "/about-us/",
+  "/pricing/",
+  "/contact-us/",
+  "/privacy-policy/",
+  "/terms/",
+];
 
 test.describe("pages in the browser", () => {
   for (const path of keyPages) {
@@ -23,6 +36,23 @@ test.describe("pages in the browser", () => {
       expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(", ")}`)).toEqual([]);
     });
   }
+
+  test("no sitemap page scrolls horizontally at phone, tablet or laptop width", async ({ page, request, isMobile }) => {
+    test.skip(isMobile, "sets its own widths");
+    test.setTimeout(180_000);
+    const xml = await (await request.get("/sitemap.xml")).text();
+    const paths = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+    const wide: string[] = [];
+    for (const width of [320, 768, 1024]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const path of paths) {
+        await page.goto(path);
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        if (overflow > 1) wide.push(`${width}px ${path} +${overflow}px`);
+      }
+    }
+    expect(wide).toEqual([]);
+  });
 
   test("pages don't scroll horizontally", async ({ page }) => {
     for (const path of keyPages) {

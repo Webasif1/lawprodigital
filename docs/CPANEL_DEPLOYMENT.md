@@ -149,7 +149,14 @@ staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it befor
 - App errors: `stderr.log` in the application root, or cPanel → Errors. Contact-form failures are logged as
   `[contact] …` with the SMTP error code only — never the password or message content.
 - 503 / "Incomplete response": wrong startup file path, or `.next/standalone/server.js` (A) / `server.js` (B) missing.
-- Images return 500: the bundle was built on another OS — rebuild on Linux.
+- Images load but are huge (original JPEGs instead of AVIF/WebP): sharp couldn't load, usually because the
+  bundle was built on another OS. Next.js then serves originals without an error. `next.config.ts` ships
+  `node_modules/@img/**` with the bundle so the native libvips libraries come along. Rebuild on Linux and check
+  with the image smoke test in [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md).
+- Chat replies arrive all at once instead of word by word: the proxy in front of Passenger (Apache/LiteSpeed)
+  is buffering the response. It still works; streaming is cosmetic.
+- Passenger may start more than one Node process. The chat and contact rate limits are in memory, per process,
+  so N processes allow N× the limits. Keep the OpenRouter credit limit set on the key as the hard cap.
 - Form says "temporarily unavailable": SMTP variables missing. "Something went wrong sending": wrong credentials or
   port — check the log.
 

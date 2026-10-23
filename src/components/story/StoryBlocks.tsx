@@ -13,7 +13,7 @@ const beatRe = /^\*\*([^*]+?[.:!?])\*\*\s+(.*)$/;
 
 export function StoryBlocks({ blocks, tone = "default" }: { blocks: StoryBlock[]; tone?: "default" | "takeaways" }) {
   return (
-    <div className="grid gap-6">
+    <div className="grid grid-cols-1 gap-6">
       {blocks.map((block, i) => (
         <Block key={i} block={block} i={i} tone={tone} />
       ))}
@@ -111,11 +111,11 @@ function Block({ block, i, tone }: { block: StoryBlock; i: number; tone: "defaul
             {block.steps.map((step, k) => {
               const last = k === block.steps.length - 1;
               return (
-                <li key={k} className="flex flex-1 items-center gap-2 sm:flex-col sm:items-stretch">
-                  <div className="flex flex-1 items-center gap-3 sm:flex-row">
+                <li key={k} className="flex min-w-0 flex-1 items-center gap-2 sm:flex-col sm:items-stretch">
+                  <div className="flex min-w-0 flex-1 items-center gap-3 sm:flex-row">
                     <span
                       data-flow-step
-                      className={`flex min-h-16 flex-1 items-center rounded-field px-4 py-3 text-sm font-semibold leading-snug ${
+                      className={`flex min-h-16 min-w-0 flex-1 items-center rounded-field px-4 py-3 text-sm font-semibold leading-snug break-words hyphens-auto ${
                         last ? "bg-gold text-ink" : k === 0 ? "bg-navy text-white" : "bg-paper text-ink ring-1 ring-inset ring-line"
                       }`}
                     >
@@ -157,7 +157,8 @@ function DataTable({ head, rows, i }: { head: string[]; rows: string[][]; i: num
   const figureCol = head.map((_, k) => k > 0 && rows.every((r) => /^[$~+-]?\d|^—|^n\/a/i.test((r[k] ?? "").trim())));
 
   return (
-    <div data-reveal style={reveal(i)} className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+    // Focusable so keyboard users can scroll the table sideways on small screens.
+    <div data-reveal style={reveal(i)} tabIndex={0} role="region" aria-label={`Table: ${head.join(", ")}`} className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
       <table data-grow className="w-full min-w-[34rem] border-collapse overflow-hidden rounded-card bg-surface text-left text-sm ring-1 ring-line sm:min-w-0">
         <thead>
           <tr className="bg-navy text-white">
@@ -224,19 +225,22 @@ function BarChart({ block }: { block: Extract<StoryBlock, { type: "chart" }> }) 
           </div>
         ))}
       </div>
-      <table className="sr-only">
-        <caption>{block.title}</caption>
-        <tbody>
-          {block.points.map((p) => (
-            <tr key={p.label}>
-              <th scope="row">{p.label}</th>
-              <td>
-                {p.value.toLocaleString("en-US")} {p.note}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* sr-only goes on a wrapper: a table ignores width: 1px and would widen the page on phones. */}
+      <div className="sr-only">
+        <table>
+          <caption>{block.title}</caption>
+          <tbody>
+            {block.points.map((p) => (
+              <tr key={p.label}>
+                <th scope="row">{p.label}</th>
+                <td>
+                  {p.value.toLocaleString("en-US")} {p.note}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {block.source && <p className="mt-5 text-xs text-muted">Source: {block.source}</p>}
     </figure>
   );

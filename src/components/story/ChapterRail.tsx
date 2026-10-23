@@ -59,7 +59,7 @@ export function ChapterRail({ chapters, bodyId }: Props) {
                     on ? "border-gold font-semibold text-ink" : "border-transparent text-muted hover:text-ink"
                   }`}
                 >
-                  <span className="tabular-nums opacity-60">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="tabular-nums font-normal text-muted">{String(i + 1).padStart(2, "0")}</span>
                   {c.title}
                 </a>
               </li>

@@ -18,7 +18,8 @@
 - [ ] `npm run build:standalone` succeeds **on Linux** (server, WSL or CI).
 - [ ] `npm run test:e2e` passes against that build (needs `npx playwright install --with-deps chromium`).
 - [ ] `npm audit --omit=dev` shows 0 vulnerabilities.
-- [ ] No open P0/P1 items in [PRODUCTION_AUDIT.md](PRODUCTION_AUDIT.md).
+- [ ] No open P0/P1 items in [reports/production-readiness-audit.md](../reports/production-readiness-audit.md).
+- [ ] Privacy policy updated for the AI chat (and analytics, if any `NEXT_PUBLIC_*` analytics ID is set) — see [reports/privacy-policy-proposed-changes.md](../reports/privacy-policy-proposed-changes.md).
 - [ ] AutoSSL certificate active for `lawprodigital.com` (and `www`) **before** switching DNS — the app sends HSTS.
 - [ ] Env vars set in Setup Node.js App; app restarted.
 
@@ -38,8 +39,21 @@ curl -sI https://lawprodigital.com/ | grep -iE "^HTTP|strict-transport|content-s
 curl -sI https://lawprodigital.com/about-us | grep -iE "^HTTP|location"        # 308 → /about-us/
 curl -sI https://lawprodigital.com/booking/ | grep -iE "^HTTP|location"        # 308 → /contact-us/
 curl -s -o /dev/null -w "%{http_code}\n" https://lawprodigital.com/no-such-page/  # 404
-curl -s https://lawprodigital.com/sitemap.xml | grep -c "<loc>"                # 30
-curl -s https://lawprodigital.com/robots.txt
+curl -s https://lawprodigital.com/sitemap.xml | grep -c "<loc>"                # 32
+curl -s https://lawprodigital.com/robots.txt                                   # Allow: / (not Disallow)
+# sharp works on the server: must say image/avif or image/webp, not image/jpeg
+curl -s -o /dev/null -H "Accept: image/avif,image/webp" -w "%{content_type}\n" "https://lawprodigital.com/_next/image/?url=%2Fimages%2Fstories%2Fs16-system.jpg&w=640&q=75"
+curl -s https://lawprodigital.com/api/chat/                                    # {"enabled":true} once OPENROUTER_API_KEY is set
+```
+
+Rate-limit check for the chat (needs `OPENROUTER_API_KEY`). Each request is an off-topic question, which the
+built-in rule answers without calling the model, so it costs nothing. The 9th should return 429. Then send one
+with a made-up `X-Forwarded-For`: if it gets 200, the proxy passes the header through unchanged and the per-IP
+limit can be dodged (the site-wide caps still hold). Tell the developer either way.
+
+```bash
+for i in $(seq 1 9); do curl -s -o /dev/null -w "%{http_code} " -H "Content-Type: application/json" -d '{"messages":[{"role":"user","content":"what is the weather on mars"}]}' https://lawprodigital.com/api/chat/; done; echo
+curl -s -o /dev/null -w "%{http_code}\n" -H "X-Forwarded-For: 203.0.113.9" -H "Content-Type: application/json" -d '{"messages":[{"role":"user","content":"what is the weather on mars"}]}' https://lawprodigital.com/api/chat/
 ```
 
 Then in a browser (desktop and phone):
@@ -66,6 +80,6 @@ There's no database, so rollback never involves data migration.
 
 ## Known remaining risks
 
-- Rate limiting is in memory, per process; restarts reset it.
+- Rate limiting is in memory, per process; restarts reset it, and several Passenger processes multiply it. The per-IP part trusts the last `X-Forwarded-For` hop — check it with the rate-limit smoke test above.
 - CSP allows `'unsafe-inline'` scripts (static prerendering) — see [SECURITY_REPORT.md](SECURITY_REPORT.md).
 - Email delivery, cPanel runtime, Safari/Firefox and screen readers haven't been tested yet.

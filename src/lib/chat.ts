@@ -19,6 +19,40 @@ export function parseMessages(body: unknown): ChatMessage[] | null {
   return out.at(-1)?.role === "user" ? out : null;
 }
 
+/**
+ * Reads a request body as JSON, giving up once it passes maxBytes. The Content-Length check
+ * alone isn't enough: a chunked upload has no Content-Length and would otherwise be read whole.
+ * Returns "too_large" past the cap and null for a body that isn't JSON.
+ */
+export async function readJsonCapped(request: Request, maxBytes: number): Promise<unknown | "too_large" | null> {
+  if (Number(request.headers.get("content-length") ?? 0) > maxBytes) return "too_large";
+  if (!request.body) return null;
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > maxBytes) {
+      await reader.cancel().catch(() => {});
+      return "too_large";
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const c of chunks) {
+    bytes.set(c, offset);
+    offset += c.byteLength;
+  }
+  try {
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    return null;
+  }
+}
+
 /** Requests without an Origin header (same-origin GETs, curl) pass; cross-site ones don't. */
 export function sameOrigin(origin: string | null, host: string | null) {
   if (!origin) return true;

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { chatSystemPrompt } from "@/content/chat";
 import { site } from "@/content/site";
-import { type ChatMessage, type ChatUsage, parseMessages, sameOrigin, sseToText } from "@/lib/chat";
+import { type ChatMessage, type ChatUsage, parseMessages, readJsonCapped, sameOrigin, sseToText } from "@/lib/chat";
 import { checkTopic } from "@/lib/chat-guard";
 import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 
@@ -16,6 +16,8 @@ export const dynamic = "force-dynamic";
 // Cheap, fast and non-reasoning (no hidden thinking tokens): about $0.0001 per reply.
 const DEFAULT_MODEL = "google/gemini-2.5-flash-lite";
 const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+// 8 turns of at most 400 characters is well under this, even with multi-byte text.
+const MAX_BODY_BYTES = 32_000;
 
 /**
  * Chat limits, in visitor messages (one message = one model call). The burst window stops
@@ -42,7 +44,6 @@ export async function POST(request: Request) {
   const h = await headers();
   // Only this site's own pages may use the chat.
   if (!sameOrigin(h.get("origin"), h.get("host"))) return json({ error: "forbidden" }, 403);
-  if (Number(h.get("content-length") ?? 0) > 32_000) return json({ error: "too_large" }, 413);
   const ip = clientIp(h.get("x-forwarded-for"), h.get("x-real-ip"));
   const limit = burstLimited(ip) ? CHAT_RATE.burst : dailyLimited(ip) ? CHAT_RATE.daily : null;
   if (limit) {
@@ -52,12 +53,14 @@ export async function POST(request: Request) {
     );
   }
 
-  let messages: ChatMessage[] | null = null;
+  let body: unknown;
   try {
-    messages = parseMessages(await request.json());
+    body = await readJsonCapped(request, MAX_BODY_BYTES);
   } catch {
-    messages = null;
+    body = null;
   }
+  if (body === "too_large") return json({ error: "too_large" }, 413);
+  const messages: ChatMessage[] | null = parseMessages(body);
   if (!messages) return json({ error: "invalid" }, 400);
 
   // Rule-based topic check (no AI): off-topic questions get a fixed reply and cost nothing.
@@ -89,7 +92,8 @@ export async function POST(request: Request) {
         stream: true,
         usage: { include: true },
       }),
-      signal: AbortSignal.timeout(30_000),
+      // Stop the model call too if the visitor closes the chat mid-reply.
+      signal: AbortSignal.any([request.signal, AbortSignal.timeout(30_000)]),
     });
   } catch (err) {
     console.error(`[chat] OpenRouter request failed: ${(err as Error).name}`);

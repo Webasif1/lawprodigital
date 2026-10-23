@@ -140,11 +140,11 @@ export function StoryPage({ story }: { story: Story }) {
 
       {/* The story itself. */}
       <div className="bg-paper">
-        <div id={bodyId} className="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-12">
+        <div id={bodyId} className="container-x grid grid-cols-1 gap-12 py-20 sm:py-28 lg:grid-cols-12">
           <aside className="lg:col-span-3">
             <ChapterRail chapters={chapters} bodyId={bodyId} />
           </aside>
-          <div className="grid gap-20 sm:gap-24 lg:col-span-8 lg:col-start-5">
+          <div className="grid grid-cols-1 gap-20 sm:gap-24 lg:col-span-8 lg:col-start-5">
             {story.chapters.map((chapter, i) => {
               if (chapter.kind === "takeaways")
                 return (

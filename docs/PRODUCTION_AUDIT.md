@@ -1,5 +1,11 @@
 # Production audit
 
+> **Superseded in part (2026-10-23).** The current release audit is
+> [`reports/production-readiness-audit.md`](../reports/production-readiness-audit.md). Since this page was
+> written the app gained a live AI chat (`/api/chat/`, OpenRouter), optional analytics and a booking link;
+> the test suites grew (110 unit tests, 51 E2E passing / 13 viewport skips); the sitemap has 32 URLs; and
+> Next.js was patched to 16.4.3. The tables below are kept as the 2026-10-20 record.
+
 Baseline taken 2026-10-20 at commit `bc02259`, before changes. Fixes are in the same working tree.
 
 ## Architecture

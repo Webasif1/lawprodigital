@@ -100,7 +100,24 @@ test.describe("routes and SEO", () => {
     await page.waitForLoadState("networkidle");
     for (const url of scripts) {
       const js = await (await request.get(url)).text();
-      expect(js, url).not.toMatch(/SMTP_PASS|SMTP_USER|CONTACT_TO/);
+      expect(js, url).not.toMatch(/SMTP_PASS|SMTP_USER|CONTACT_TO|OPENROUTER_API_KEY|sk-or-v1-/);
     }
+  });
+
+  test("the image optimizer resizes and converts images (sharp loads in the bundle)", async ({ request }) => {
+    // s16 is a 559 KB JPEG; served untouched means sharp failed to load and every image ships full size.
+    const res = await request.get("/_next/image/?url=%2Fimages%2Fstories%2Fs16-system.jpg&w=640&q=75", {
+      headers: { Accept: "image/avif,image/webp,*/*" },
+    });
+    expect(res.status()).toBe(200);
+    expect(res.headers()["content-type"]).toMatch(/image\/(avif|webp)/);
+    expect((await res.body()).length).toBeLessThan(150_000);
+  });
+
+  test("the chat API is off without a key and validates its input", async ({ request }) => {
+    expect(await (await request.get("/api/chat/")).json()).toEqual({ enabled: false });
+    const res = await request.post("/api/chat/", { data: { messages: [{ role: "user", content: "hi" }] } });
+    expect(res.status()).toBe(503);
+    expect(res.headers()["cache-control"]).toContain("no-store");
   });
 });

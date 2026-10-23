@@ -50,8 +50,14 @@ const nextConfig: NextConfig = {
 
   // Self-contained server bundle for the cPanel Node.js app (see DEPLOYMENT.md).
   output: "standalone",
-  // The chat route reads the case study library at runtime for its facts; ship it with the server.
-  outputFileTracingIncludes: { "/api/chat": ["./src/content/source/case-studies.md"] },
+  outputFileTracingIncludes: {
+    // The chat route reads the case study library at runtime for its facts; ship it with the server.
+    "/api/chat": ["./src/content/source/case-studies.md"],
+    // sharp's native libvips libraries (DLLs on Windows, a separate sharp-libvips-* package on Linux)
+    // aren't picked up by tracing. Without them sharp can't load and next/image silently serves
+    // every original image, unresized. Only the current platform's packages are installed.
+    "/*": ["./node_modules/@img/**/*"],
+  },
 
   // The previous WordPress site served every page with a trailing slash; keep the exact URLs.
   trailingSlash: true,
