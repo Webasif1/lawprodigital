@@ -41,7 +41,7 @@ export const noindex = process.env.SITE_NOINDEX ? process.env.SITE_NOINDEX === "
 export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || undefined;
 
 export const contact: ContactDetails = {
-  email: "lawprodigital@gmail.com",
+  email: "hello@lawprodigital.com",
   phone: "+880 1840-830658",
   whatsapp: "8801840830658",
   offices: [],
