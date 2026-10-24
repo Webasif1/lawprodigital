@@ -1,0 +1,125 @@
+# Build, test and deploy to the cPanel Node.js app (see docs/CPANEL_DEPLOYMENT.md, Option C).
+# Every push to main ships; pull requests only build and test.
+name: CI / Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      skip_smoke:
+        description: "Skip the live smoke test (first cut-over only)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('ci-{0}', github.ref) || 'deploy-production' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  # Same major as the cPanel app (Setup Node.js App → Node.js version).
+  NODE_VERSION: "22"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Baked in at build time; set them under Settings → Secrets and variables → Actions → Variables.
+      NEXT_PUBLIC_GA4_ID: ${{ vars.NEXT_PUBLIC_GA4_ID }}
+      NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+      NEXT_PUBLIC_META_PIXEL_ID: ${{ vars.NEXT_PUBLIC_META_PIXEL_ID }}
+      NEXT_PUBLIC_CLARITY_ID: ${{ vars.NEXT_PUBLIC_CLARITY_ID }}
+      NEXT_PUBLIC_BOOKING_URL: ${{ vars.NEXT_PUBLIC_BOOKING_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run lint:copy
+      - run: npm test
+      # Built on Linux so sharp's native binaries match the server.
+      - run: npm run build:standalone
+      - name: End-to-end tests on the bundle
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - name: Package the bundle
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "${GITHUB_SHA}" > .next/standalone/BUILD_SHA
+          tar czf bundle.tar.gz -C .next/standalone .
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: bundle
+          path: bundle.tar.gz
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://lawprodigital.com
+    env:
+      SSH_HOST: ${{ vars.CPANEL_HOST }}
+      SSH_USER: ${{ vars.CPANEL_USER }}
+      SSH_PORT: ${{ vars.CPANEL_SSH_PORT }}
+      APP_ROOT: ${{ vars.CPANEL_APP_ROOT || 'lawprodigital' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: bundle
+      - name: Set up SSH
+        env:
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          KNOWN_HOSTS: ${{ vars.CPANEL_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf 'Host cpanel\n  HostName %s\n  User %s\n  Port %s\n  IdentityFile ~/.ssh/deploy_key\n  IdentitiesOnly yes\n  BatchMode yes\n' \
+            "$SSH_HOST" "$SSH_USER" "$SSH_PORT" > ~/.ssh/config
+      - name: Upload and swap release
+        run: |
+          ssh cpanel "mkdir -p ~/deploy" && scp bundle.tar.gz "cpanel:deploy/${GITHUB_SHA}.tar.gz"
+          ssh cpanel "APP=${APP_ROOT} SHA=${GITHUB_SHA} bash -s" <<'EOF'
+          set -euo pipefail
+          cd ~
+          rm -rf "$APP.next" && mkdir "$APP.next"
+          tar xzf "deploy/$SHA.tar.gz" -C "$APP.next"
+          # Keep Passenger's runtime folder and the log across releases.
+          [ -d "$APP/tmp" ] && cp -a "$APP/tmp" "$APP.next/"
+          [ -f "$APP/stderr.log" ] && cp -a "$APP/stderr.log" "$APP.next/"
+          mkdir -p backups && rm -rf "backups/$APP-previous"
+          [ -d "$APP" ] && mv "$APP" "backups/$APP-previous"
+          mv "$APP.next" "$APP"
+          rm -f "deploy/$SHA.tar.gz"
+          if ! cloudlinux-selector restart --json --interpreter nodejs --app-root "$APP" >/dev/null 2>&1; then
+            echo "Selector restart unavailable (app not created yet?); touching tmp/restart.txt"
+            mkdir -p "$APP/tmp" && touch "$APP/tmp/restart.txt"
+          fi
+          echo "Deployed $SHA to ~/$APP"
+          EOF
+      - name: Smoke test
+        if: ${{ !inputs.skip_smoke }}
+        run: |
+          for i in $(seq 1 10); do
+            if curl -fsS --max-time 20 https://lawprodigital.com/ | grep -q '/_next/static/'; then
+              echo "Live site is serving the Next.js build"; exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Smoke test failed. Roll back with: ssh into cPanel, then: mv ~/${APP_ROOT} ~/${APP_ROOT}.bad && mv ~/backups/${APP_ROOT}-previous ~/${APP_ROOT} && cloudlinux-selector restart --json --interpreter nodejs --app-root ${APP_ROOT}"
+          exit 1

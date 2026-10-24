@@ -66,6 +66,38 @@ Upload the zip to the application root and extract it so that `server.js`, `.nex
 sit directly in the root. Set **Application startup file** to `server.js` and click **Restart**. Do **not** click
 "Run NPM Install" — the bundle already contains its trimmed `node_modules`. Keep the previous zip for rollback.
 
+## Option C — GitHub Actions (CI/CD, what production uses)
+
+`.github/workflows/deploy.yml` runs on every push to `main` (and by hand from the Actions tab). The build job
+runs lint, typecheck, the copy check, unit tests, `build:standalone` and the Playwright tests on Node 22 / Linux. The
+deploy job uploads the bundle over SSH, unpacks it into `~/lawprodigital.next`, moves the running release to
+`~/backups/lawprodigital-previous`, swaps the new one in and restarts the app with `cloudlinux-selector`. A smoke test then
+checks that https://lawprodigital.com/ serves the Next.js build. Pull requests only build and test.
+
+Settings → Secrets and variables → Actions:
+
+| Kind | Name | Value |
+| --- | --- | --- |
+| Secret | `CPANEL_SSH_KEY` | Private half of the deploy key (its public half is authorized in cPanel → SSH Access) |
+| Variable | `CPANEL_HOST` | `lawprodigital.com` |
+| Variable | `CPANEL_USER` | the cPanel username |
+| Variable | `CPANEL_SSH_PORT` | the SSH port shown in cPanel → SSH Access |
+| Variable | `CPANEL_KNOWN_HOSTS` | output of `ssh-keyscan -p <port> lawprodigital.com` |
+| Variable | `CPANEL_APP_ROOT` | optional, defaults to `lawprodigital` |
+| Variables | `NEXT_PUBLIC_*` | optional analytics/booking IDs (baked in at build time) |
+
+The cPanel app uses startup file `server.js` and app root `lawprodigital`. Never click "Run NPM Install": the bundle
+carries its own trimmed `node_modules`.
+
+**Rollback:** in cPanel → Terminal:
+
+```bash
+mv ~/lawprodigital ~/lawprodigital.bad && mv ~/backups/lawprodigital-previous ~/lawprodigital
+cloudlinux-selector restart --json --interpreter nodejs --app-root lawprodigital
+```
+
+Or re-run an older green workflow run from the Actions tab.
+
 ## Environment variables
 
 Set these in **Setup Node.js App → Environment variables**, then click **Restart**. They're read at request time on
