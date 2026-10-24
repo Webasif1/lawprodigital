@@ -66,6 +66,11 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [75, 85],
     formats: ["image/avif", "image/webp"],
+    // Source images are at most 1344px wide and next/image never upscales, so the default
+    // 1920/2048/3840 widths were identical files that still cost a resize each. The cPanel
+    // plan caps memory, so keep the work down: fewer widths, and keep results for 7 days.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440],
+    minimumCacheTTL: 60 * 60 * 24 * 7,
   },
 
   async headers() {
