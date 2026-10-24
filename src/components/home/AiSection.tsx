@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ai } from "@/content/home";
+import { site } from "@/content/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -26,7 +27,7 @@ export function AiSection({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" 
             ))}
           </ul>
           <div data-reveal className="mt-10 flex flex-wrap items-center gap-5">
-            <ButtonLink href="/contact-us/">Get Your Free AI Lead Audit</ButtonLink>
+            <ButtonLink href={site.primaryCta.href}>{site.primaryCta.label}</ButtonLink>
             <Link href="/ai-solutions/" className="font-semibold text-white/85 underline decoration-gold decoration-2 underline-offset-4 hover:text-gold">
               How the AI assistant works
             </Link>

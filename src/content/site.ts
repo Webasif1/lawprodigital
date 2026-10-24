@@ -27,7 +27,7 @@ export const site = {
   description:
     "Law Pro Digital is a digital growth agency for US immigration law firms, specializing in Meta Ads, SEO, AI search (AEO/GEO) and AI-powered client intake.",
   logo: { src: "/brand/logo-mark-512.png", width: 512, height: 512, alt: "Law Pro Digital logo" },
-  primaryCta: { label: "Get Your Free AI Lead Audit", href: "/contact-us/" },
+  primaryCta: { label: "Get a Free Call", href: "/contact-us/" },
 } as const;
 
 /**
@@ -42,9 +42,9 @@ export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || undefined;
 
 export const contact: ContactDetails = {
   email: "hello@lawprodigital.com",
-  phone: "+880 1840-830658",
+  phone: "+1 (603) 842-2765",
   whatsapp: "8801840830658",
-  offices: [],
+  offices: [{ label: "New York", lines: ["New York, NY", "United States"] }],
 };
 
 /** A wa.me link that opens a WhatsApp chat with `text` already typed in. */

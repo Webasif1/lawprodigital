@@ -31,6 +31,11 @@ export function Footer() {
               <WhatsAppIcon className="size-4" />
               WhatsApp us
             </WhatsAppLink>
+            {contact.offices?.map((o) => (
+              <address key={o.label} className="mt-4 text-sm not-italic text-white/60">
+                {o.lines.join(", ")}
+              </address>
+            ))}
           </div>
 
           <nav aria-label="Services" className="lg:col-span-3">

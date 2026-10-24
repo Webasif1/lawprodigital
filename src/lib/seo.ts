@@ -64,6 +64,7 @@ export function organizationJsonLd() {
     image: absoluteUrl(site.logo.src),
     description: site.description,
     areaServed: { "@type": "Country", name: "United States" },
+    address: { "@type": "PostalAddress", addressLocality: "New York", addressRegion: "NY", addressCountry: "US" },
     knowsAbout: serviceTypes,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
