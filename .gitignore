@@ -47,4 +47,9 @@ AGENTS.md
 # test output
 /test-results/
 /playwright-report/
-AGENTS.md
+
+# internal notes and audit reports (kept locally, not published)
+/reports/
+docs/COMPETITOR_ANALYSIS.md
+docs/SECURITY_REPORT.md
+docs/PRODUCTION_AUDIT.md

@@ -1,6 +1,6 @@
 // Copies the assets that `output: "standalone"` leaves out (public/ and .next/static/)
 // into .next/standalone so that folder can be uploaded and run on its own
-// with `node server.js`. See DEPLOYMENT.md.
+// with `node server.js`. See docs/CPANEL_DEPLOYMENT.md.
 import { cpSync, existsSync, rmSync } from "node:fs";
 import path from "node:path";
 

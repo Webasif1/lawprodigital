@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV !== "production";
 // Pages are prerendered, so a per-request nonce isn't available: Next's inline
 // bootstrap/RSC scripts need 'unsafe-inline'. Everything else is locked to this origin,
 // plus the click-to-load YouTube player and whichever analytics tools have an ID set
-// (src/lib/analytics.ts). See docs/SECURITY_REPORT.md.
+// (src/lib/analytics.ts).
 const extra = analyticsCspSources();
 const more = (d: keyof typeof extra) => (extra[d].length ? ` ${extra[d].join(" ")}` : "");
 const csp = [
@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Self-contained server bundle for the cPanel Node.js app (see DEPLOYMENT.md).
+  // Self-contained server bundle for the cPanel Node.js app (see docs/CPANEL_DEPLOYMENT.md).
   output: "standalone",
   outputFileTracingIncludes: {
     // The chat route reads the case study library at runtime for its facts; ship it with the server.

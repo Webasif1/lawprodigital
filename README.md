@@ -14,7 +14,7 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-Deployment to cPanel is covered in **[docs/CPANEL_DEPLOYMENT.md](docs/CPANEL_DEPLOYMENT.md)**; audits and the launch checklist are in [`docs/`](docs/).
+Deployment to cPanel is covered in **[docs/CPANEL_DEPLOYMENT.md](docs/CPANEL_DEPLOYMENT.md)**; the launch checklist is in [docs/PRODUCTION_CHECKLIST.md](docs/PRODUCTION_CHECKLIST.md).
 
 ## Where things live
 

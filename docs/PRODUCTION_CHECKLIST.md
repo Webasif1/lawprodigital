@@ -7,8 +7,7 @@
       name/address and governing-law state if your lawyer wants them. Update the policy if analytics, chat or a CRM
       are added later.
 - [ ] **Phone, address, social profiles** → `contact` and `socials` in `src/content/site.ts` (empty values stay hidden).
-- [ ] **Founder name, photo and LinkedIn** for the founder note (biggest trust gap vs competitors — see
-      [COMPETITOR_ANALYSIS.md](COMPETITOR_ANALYSIS.md)).
+- [ ] **Founder name, photo and LinkedIn** for the founder note (biggest trust gap vs competitors).
 - [ ] Optional: permission to name case study clients, more consented testimonials, a real review profile link.
 - [ ] Confirm the cPanel plan has **Setup Node.js App** with Node ≥ 20.9, and enough memory to build (else Option B).
 
@@ -18,8 +17,8 @@
 - [ ] `npm run build:standalone` succeeds **on Linux** (server, WSL or CI).
 - [ ] `npm run test:e2e` passes against that build (needs `npx playwright install --with-deps chromium`).
 - [ ] `npm audit --omit=dev` shows 0 vulnerabilities.
-- [ ] No open P0/P1 items in [reports/production-readiness-audit.md](../reports/production-readiness-audit.md).
-- [ ] Privacy policy updated for the AI chat (and analytics, if any `NEXT_PUBLIC_*` analytics ID is set) — see [reports/privacy-policy-proposed-changes.md](../reports/privacy-policy-proposed-changes.md).
+- [ ] No open P0/P1 items in the latest production-readiness audit (kept privately).
+- [ ] Privacy policy updated for the AI chat (and analytics, if any `NEXT_PUBLIC_*` analytics ID is set).
 - [ ] AutoSSL certificate active for `lawprodigital.com` (and `www`) **before** switching DNS — the app sends HSTS.
 - [ ] Env vars set in Setup Node.js App; app restarted.
 
@@ -66,7 +65,7 @@ Then in a browser (desktop and phone):
       with a working Reply-To. Do not submit invented customer data.
 - [ ] `stderr.log` has no new errors.
 - [ ] Google Search Console: resubmit `https://lawprodigital.com/sitemap.xml`; spot-check URL inspection on `/`.
-- [ ] Re-run Lighthouse on production and record the numbers in PRODUCTION_AUDIT.md.
+- [ ] Re-run Lighthouse on production and record the numbers with the audit reports.
 
 ## Rollback
 
@@ -81,5 +80,5 @@ There's no database, so rollback never involves data migration.
 ## Known remaining risks
 
 - Rate limiting is in memory, per process; restarts reset it, and several Passenger processes multiply it. The per-IP part trusts the last `X-Forwarded-For` hop — check it with the rate-limit smoke test above.
-- CSP allows `'unsafe-inline'` scripts (static prerendering) — see [SECURITY_REPORT.md](SECURITY_REPORT.md).
+- CSP allows `'unsafe-inline'` scripts (static prerendering); see the comment in `next.config.ts`.
 - Email delivery, cPanel runtime, Safari/Firefox and screen readers haven't been tested yet.
