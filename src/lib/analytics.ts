@@ -5,7 +5,7 @@
  */
 export const analyticsIds = {
   ga4: process.env.NEXT_PUBLIC_GA4_ID || undefined,
-  gtm: process.env.NEXT_PUBLIC_GTM_ID || undefined,
+  gtm: process.env.NEXT_PUBLIC_GTM_ID || "GTM-MFVFZLF6",
   metaPixel: process.env.NEXT_PUBLIC_META_PIXEL_ID || undefined,
   clarity: process.env.NEXT_PUBLIC_CLARITY_ID || undefined,
 };

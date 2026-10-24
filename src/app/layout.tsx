@@ -7,7 +7,7 @@ import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ChatMount } from "@/components/chat/ChatMount";
 import { WhatsAppButton } from "@/components/whatsapp/WhatsAppLink";
 import { serviceLabels } from "@/content/services";
-import { Analytics } from "@/components/seo/Analytics";
+import { Analytics, GtmNoscript } from "@/components/seo/Analytics";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { noindex, site } from "@/content/site";
 import { founderJsonLd, ogImage, organizationJsonLd } from "@/lib/seo";
@@ -52,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${inter.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">
+        <GtmNoscript />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={founderJsonLd()} />

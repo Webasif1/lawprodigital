@@ -4,6 +4,22 @@ import { analyticsIds } from "@/lib/analytics";
 /** Only the IDs here may reach the inline snippets, so reject anything that isn't a plain token. */
 const safe = (id: string | undefined) => (id && /^[A-Za-z0-9_-]+$/.test(id) ? id : undefined);
 
+/** GTM's fallback for visitors without JavaScript; Google wants it right after the opening <body>. */
+export function GtmNoscript() {
+  const gtm = safe(analyticsIds.gtm);
+  if (!gtm) return null;
+  return (
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${gtm}`}
+        height="0"
+        width="0"
+        style={{ display: "none", visibility: "hidden" }}
+      />
+    </noscript>
+  );
+}
+
 /** GA4, Google Tag Manager, Meta Pixel and Microsoft Clarity, each loaded only when its ID is set. */
 export function Analytics() {
   const ga4 = safe(analyticsIds.ga4);
