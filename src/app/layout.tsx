@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   openGraph: { siteName: site.name, type: "website", locale: "en_US", images: [ogImage] },
   twitter: { card: "summary_large_image", images: [ogImage.url] },
   formatDetection: { telephone: false },
+  // Search Console ownership (property https://lawprodigital.com/). Keep it, or verification is lost.
+  verification: { google: "cJuGdHm8uP5yiHG6PMSV7nRRoU20faMH9tvTwfoj7hw" },
   ...(noindex ? { robots: { index: false, follow: false } } : {}),
 };
 
