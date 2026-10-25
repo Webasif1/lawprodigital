@@ -28,7 +28,8 @@ export function analyticsCspSources(): Record<Directive, string[]> {
     add("connect-src", "https://www.facebook.com", "https://connect.facebook.net");
     add("img-src", "https://www.facebook.com");
   }
-  if (clarity) {
+  // Clarity may also be loaded as a tag inside GTM, so open its hosts whenever GTM is on.
+  if (clarity || gtm) {
     add("script-src", "https://*.clarity.ms");
     add("connect-src", "https://*.clarity.ms");
     add("img-src", "https://*.clarity.ms", "https://c.bing.com");

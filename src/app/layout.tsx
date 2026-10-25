@@ -7,7 +7,7 @@ import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ChatMount } from "@/components/chat/ChatMount";
 import { WhatsAppButton } from "@/components/whatsapp/WhatsAppLink";
 import { serviceLabels } from "@/content/services";
-import { Analytics, GtmNoscript } from "@/components/seo/Analytics";
+import { Analytics, GtmHead, GtmNoscript } from "@/components/seo/Analytics";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { noindex, site } from "@/content/site";
 import { founderJsonLd, ogImage, organizationJsonLd } from "@/lib/seo";
@@ -51,6 +51,9 @@ const bootScript = `document.documentElement.classList.add('js')`;
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${inter.variable} antialiased`}>
+      <head>
+        <GtmHead />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <GtmNoscript />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />

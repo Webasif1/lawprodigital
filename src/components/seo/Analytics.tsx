@@ -20,10 +20,28 @@ export function GtmNoscript() {
   );
 }
 
-/** GA4, Google Tag Manager, Meta Pixel and Microsoft Clarity, each loaded only when its ID is set. */
+/**
+ * GTM loader as a plain inline script, rendered first inside <head>. Search Console's
+ * "Google Tag Manager" verification only passes when the snippet sits in <head>, so it
+ * must not go through next/script (which injects it late, at the end of <body>).
+ */
+export function GtmHead() {
+  const gtm = safe(analyticsIds.gtm);
+  if (!gtm) return null;
+  return (
+    // A plain <script> on purpose: Search Console's GTM verification needs it in <head>.
+    // eslint-disable-next-line @next/next/next-script-for-ga
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm}');`,
+      }}
+    />
+  );
+}
+
+/** GA4, Meta Pixel and Microsoft Clarity, each loaded only when its ID is set (GTM loads from GtmHead). */
 export function Analytics() {
   const ga4 = safe(analyticsIds.ga4);
-  const gtm = safe(analyticsIds.gtm);
   const pixel = safe(analyticsIds.metaPixel);
   const clarity = safe(analyticsIds.clarity);
 
@@ -36,11 +54,6 @@ export function Analytics() {
             {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${ga4}');`}
           </Script>
         </>
-      )}
-      {gtm && (
-        <Script id="gtm" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm}');`}
-        </Script>
       )}
       {pixel && (
         <Script id="meta-pixel" strategy="afterInteractive">
