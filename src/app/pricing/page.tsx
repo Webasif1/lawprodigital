@@ -4,7 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
-import { plans, pricing } from "@/content/pricing";
+import { customPlan, plans, pricing } from "@/content/pricing";
 import { site } from "@/content/site";
 import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -82,6 +82,29 @@ export default function PricingPage() {
               );
             })}
           </ul>
+          <div data-reveal className="mt-5 grid gap-8 rounded-card bg-surface p-7 ring-1 ring-line sm:p-9 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <div className="lg:col-span-5">
+              <p className="eyebrow tabular-nums text-brass">{String(plans.length + 1).padStart(2, "0")}</p>
+              <h2 className="mt-4 font-display text-h3 font-bold">{customPlan.name}</h2>
+              <p className="mt-3 leading-relaxed text-muted">{customPlan.fit}</p>
+              <p className="mt-6 border-t border-line pt-6">
+                <span className="figure text-figure text-navy">{customPlan.price}</span>
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <ul className="grid gap-3 sm:grid-cols-2 sm:gap-x-8">
+                {customPlan.features.map((f) => (
+                  <li key={f} className="flex gap-3 leading-snug">
+                    <CheckIcon className="mt-0.5 size-4 shrink-0 text-brass" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <ButtonLink href={site.primaryCta.href} variant="ink" className="mt-8 w-full sm:w-auto">
+                {site.primaryCta.label}
+              </ButtonLink>
+            </div>
+          </div>
           <p data-reveal className="mt-10 max-w-2xl text-muted">
             {pricing.note}
           </p>

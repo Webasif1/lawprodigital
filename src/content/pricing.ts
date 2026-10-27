@@ -67,3 +67,16 @@ export const plans: Plan[] = [
     ],
   },
 ];
+
+/** Shown as a band under the plans. No fixed price, so it stays out of the OfferCatalog. */
+export const customPlan = {
+  name: "Custom Plan",
+  price: "Custom quote",
+  fit: "Built around your offices, practice areas and caseload goals.",
+  features: [
+    "Mix any services from the plans above",
+    "Ads, SEO, AI intake and voice agent scoped per office",
+    "Budget set around the cases you can take on",
+    "Monthly scorecard from first click to signed client",
+  ],
+};
