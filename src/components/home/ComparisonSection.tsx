@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { comparison } from "@/content/home";
+import { getStories } from "@/lib/stories";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArrowUpRightIcon, CheckIcon } from "@/components/ui/icons";
 
@@ -66,7 +67,7 @@ export function ComparisonSection() {
 
         <p className="mt-10">
           <Link href="/case-study/" className="inline-flex items-center gap-2 font-semibold text-navy-2 hover:text-brass">
-            See all 16 case studies <ArrowUpRightIcon aria-hidden className="size-4" />
+            See all {getStories().length} case studies <ArrowUpRightIcon aria-hidden className="size-4" />
           </Link>
         </p>
       </div>

@@ -203,6 +203,6 @@ export const comparison = {
     { topic: "Where budget goes", us: "To the offices and services with the lowest cost per signed client", them: "Wherever leads look cheapest" },
     { topic: "After-hours leads", us: "An AI assistant replies in under 60 seconds, day or night", them: "A form or voicemail until the next morning" },
     { topic: "Who we work with", us: "Law firms only, immigration first", them: "Any industry that pays" },
-    { topic: "Proof", us: "16 case studies with real numbers, including the tests that failed", them: "Logos and percentages without context" },
+    { topic: "Proof", us: "17 case studies with real numbers, including the tests that failed", them: "Logos and percentages without context" },
   ],
 };

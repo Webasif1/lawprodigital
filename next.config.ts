@@ -80,7 +80,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     const caseStudies = "/case-study/";
     return [
-      // The previous case studies were replaced by the 16-story library; each old URL
+      // The previous case studies were replaced by the story library; each old URL
       // points to the story that answers the same question (or the library itself).
       ...Object.entries(legacyCaseStudyRedirects).map(([slug, story]) => ({
         source: `/${slug}/`,
@@ -90,7 +90,7 @@ const nextConfig: NextConfig = {
       // Duplicate / dated permalinks of the old bankruptcy case study.
       {
         source: "/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/",
-        destination: caseStudies,
+        destination: `${caseStudies}bankruptcy-lawyer-marketing-from-scratch/`,
         permanent: true,
       },
       {

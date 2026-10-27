@@ -1,6 +1,6 @@
 # Law Pro Digital — Case Study Library (Long-form)
 
-Sixteen long-form, story-driven case studies from one anonymized multi-office US immigration law firm, written for the people who decide: managing partners and firm owners. Each page tells the story, explains the strategy and why it works for law firms, and follows the numbers all the way to signed clients.
+Seventeen long-form, story-driven case studies: sixteen from one anonymized multi-office US immigration law firm and one from a named Maryland bankruptcy firm (Story 17), written for the people who decide: managing partners and firm owners. Each page tells the story, explains the strategy and why it works for law firms, and follows the numbers all the way to signed clients.
 
 ## How to build each page
 
@@ -1514,3 +1514,120 @@ In September, 370 of 478 calls still had no recorded source. The next step is an
   
 
 **CTA:** *Want this system running in your firm? Book your onboarding call and we'll walk you through the live dashboards.*
+
+## Story 17 · Bankruptcy: from a messy website to 14 Google LSA leads
+
+**URL:** /case-study/bankruptcy-lawyer-marketing-from-scratch/ **Primary keyword:** bankruptcy lawyer marketing **SEO title:** Bankruptcy Lawyer Marketing: 14 Google LSA Leads at $132 Each | Law Pro Digital **Meta description:** How we rebuilt a Maryland bankruptcy firm's website, social media and Google Local Services Ads in 6 months, and turned $1,855 into 14 qualified leads. **Schema:** Article, FAQPage, Organization
+
+### How a bankruptcy firm went from a messy website to 14 Google LSA leads in one month
+
+*Subhead:* A 6-month rebuild: new website, social media and Google Local Services Ads, from scratch.
+
+**Image (hero):** The new Chambers Law Firm homepage. *Alt text: The new Chambers Law Firm homepage.*
+
+**The short answer:** In 6 months we rebuilt Chambers Law Firm's marketing from the ground up: keyword research for Maryland, a new 14+ page website, active social channels and Google Local Services Ads. In its first month, LSA turned $1,855.38 into 14 charged leads, about $132 each, for a service that earns $1,750 to $4,500 per Chapter 7 client.
+
+|  |  |  |  |
+| :-: | :-: | :-: | :-: |
+| **14** | **$132** | **100%** | **15,615** |
+| Google LSA leads in the first month | Cost per lead, on cases worth $1,750–$4,500 | Top impression rate on Google search | Organic Facebook views (Apr–Jun 2025), up 593% |
+
+#### Why bankruptcy firms need a full system, not one channel
+
+People facing bankruptcy search late at night, compare several lawyers, and call the one that looks local and trustworthy. A firm needs to be found on Google, look credible on social media, and show up first when someone is ready to call. One channel alone leaves gaps.
+
+#### What we found
+
+Chambers Law Firm, P.C. is a bankruptcy firm based in Annapolis, Maryland. When we started:
+
+  - The website existed, but had little useful content and no clear structure.
+  - There was no keyword plan for bankruptcy services or Maryland cities.
+  - Social media was not active, so there was no proof of trust online.
+  - There was no steady, measurable source of new leads.
+
+#### The strategy
+
+**Step 1: Research keywords and local areas first.** We researched every bankruptcy service keyword and the Maryland cities around the office, like Annapolis, Bowie, Laurel, Columbia and Towson, with search volume and difficulty for each.
+
+**Image (screenshot):** chambers/keyword-research.jpg 1398x748 *Alt text: Keyword and local-area research for Maryland bankruptcy searches.*
+
+**Step 2: Plan the site structure, then build a new website.** Before writing, we mapped every page in Miro and a tracking sheet: home, Chapter 7, Chapter 13, wage garnishment, foreclosure, student loans, repossession, location pages and blog. Then we built an SEO-friendly, easy-to-use website with 14+ bankruptcy pages plus about, contact, appointment and disclaimer pages.
+
+**Image (screenshot):** chambers/site-structure-plan.jpg 1537x734 *Alt text: Website structure and content plan by service page.*
+
+**Image (screenshot):** chambers/new-website-homepage.jpg 1600x731 *Alt text: The new Chambers Law Firm homepage.*
+
+**Step 3: Launch, index and optimize.** Within 3 months, every page was live and indexed on Google, with on-page SEO, technical SEO and basic backlinks in place.
+
+**Step 4: Build trust on social media.** We set up a professional Facebook page, YouTube channel, LinkedIn page and other profiles, and posted an image or video almost every day.
+
+**Image (screenshot):** chambers/facebook-page.jpg 1448x740 *Alt text: Chambers Law Firm's professional Facebook page.*
+
+**Image (screenshot):** chambers/facebook-profile-posts.jpg 1427x817 *Alt text: Facebook profile details and attorney video posts.*
+
+**Step 5: Choose Google Local Services Ads over regular Google Ads.** The client first asked for Google Ads. Because bankruptcy is a local service, we recommended Local Services Ads instead: verified "Google Screened" badge, top-of-page placement, and pay per lead, not per click. We verified the business profile, set the service area and budget, and turned on Chapter 7 and Chapter 13 job types.
+
+**Image (screenshot):** chambers/lsa-profile-budget.jpg 1124x778 *Alt text: Google Screened LSA profile, budget and job types.*
+
+**Why it works for law firms:** search brings people who are already looking, social media shows them a real attorney they can trust, and LSA puts a verified profile at the very top when they're ready to call.
+
+#### The results
+
+**Google Local Services Ads: the lead engine (first month, June 2025)**
+
+|  |  |
+| :-: | :-: |
+| **Metric** | **Result** |
+| Charged leads | 14 (13 phone calls, 1 message) |
+| Total lead spend | $1,855.38 |
+| Cost per lead | about $132 |
+| Value of one Chapter 7 client | $1,750–$4,500 in fees |
+| Ad impressions | 692 |
+| Top impression rate | 100% |
+| Absolute top (first ad) | 75.04% |
+
+Leads came from Annapolis, Bowie, Glenarden, Cape Saint Claire and Upper Marlboro, mostly for Chapter 7 and personal bankruptcy. The firm reports that nearly all of them became clients. One signed Chapter 7 case pays for the whole month of ads.
+
+**Image (screenshot):** chambers/lsa-sponsored-top-result.jpg 1458x674 *Alt text: Chambers Law Firm as the sponsored top result for "Bankruptcy Law" in Annapolis.*
+
+**Image (screenshot):** chambers/lsa-lead-list.jpg 1024x808 *Alt text: LSA lead list by job type and location (client details hidden).*
+
+**Image (screenshot):** chambers/lsa-spend.jpg 1319x658 *Alt text: LSA spend: $1,855.38 for 14 charged leads.*
+
+**Facebook: organic trust (April to June 2025)**
+
+|  |  |
+| :-: | :-: |
+| **Metric** | **Result** |
+| Views | 15,615 (up 593%) |
+| Reach | 2,912 (up 756.5%) |
+| Content interactions | 763 |
+| Page following | 361 followers, 300+ likes |
+
+**Image (screenshot):** chambers/facebook-insights.jpg 1600x739 *Alt text: Facebook Insights, April to June 2025.*
+
+**Website SEO: early signal (first 3 months after launch)**
+
+In its first 3 months, the new site earned 154 Google clicks from 22,000 impressions, at an average position of 37.8. That's an early start: the pages are indexed and showing, and rankings usually climb over the next 6–12 months.
+
+**Image (screenshot):** chambers/search-console.jpg 1600x617 *Alt text: Google Search Console, first 3 months.*
+
+#### What your firm can take from this
+
+  - **For local practices, try LSA before regular Google Ads.** The verified badge and top placement bring calls from people ready to hire.
+  - **Judge leads by case value, not cost.** A $132 lead is cheap when one case is worth $1,750 or more.
+  - **Build the foundation once.** A structured website and active social pages make every ad dollar work harder.
+
+#### Client testimonial
+
+After 6 months, Timothy Chambers shared his experience working with us.
+
+#### FAQ
+
+**Are Google Local Services Ads good for bankruptcy lawyers?** Yes, for local practices. You pay per lead, not per click, your firm shows with a "Google Screened" badge above regular ads, and you can dispute leads that don't fit.
+
+**How long does a new law firm website take to bring organic leads?** Indexing and first impressions come within weeks. Steady organic leads usually take 6–12 months of content and SEO work, which is why we pair SEO with LSA for leads from month one.
+
+**Data note:** Figures come from Chambers Law Firm's Google Local Services Ads dashboard (June 2025), Facebook Insights (Apr 1–Jun 30, 2025) and Google Search Console (first 3 months after launch). Client contact details in screenshots are hidden for privacy.
+
+**CTA:** *Want more bankruptcy clients from Google? Get a free recorded audit of your website, Google profile and ads.*

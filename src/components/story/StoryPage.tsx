@@ -5,6 +5,7 @@ import { type Story, getStoryByNumber, privacyLine, STORIES_UPDATED } from "@/li
 import { storyImage } from "@/lib/assets";
 import { absoluteUrl, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { VideoTestimonial } from "@/components/sections/VideoTestimonial";
 import { ButtonLink } from "@/components/ui/Button";
 import { ArrowUpRightIcon, PlusIcon } from "@/components/ui/icons";
 import { ChapterRail } from "./ChapterRail";
@@ -107,7 +108,7 @@ export function StoryPage({ story }: { story: Story }) {
             <p className="hero-fade mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/65" style={{ ["--i" as string]: 2 }}>
               <span>{readingMinutes(story)} min read</span>
               <span>Updated {updated}</span>
-              <span>Multi-office US immigration firm</span>
+              <span>{story.firm}</span>
             </p>
           </div>
         </div>
@@ -160,6 +161,16 @@ export function StoryPage({ story }: { story: Story }) {
                       How we do this: {story.service.label}
                       <ArrowUpRightIcon className="size-4" />
                     </Link>
+                  </section>
+                );
+              if (chapter.kind === "testimonial")
+                return (
+                  <section key={chapter.id} id={chapter.id} aria-labelledby={`${chapter.id}-h`} className="scroll-mt-28">
+                    <ChapterHeading index={i} id={`${chapter.id}-h`} title={chapter.title} />
+                    <div className="mt-8 grid items-center gap-8 sm:grid-cols-2">
+                      <StoryBlocks blocks={chapter.blocks} />
+                      {story.video && <VideoTestimonial youtubeId={story.video.youtubeId} cover={story.video.cover} title={story.video.title} />}
+                    </div>
                   </section>
                 );
               if (chapter.kind === "setback")
@@ -228,7 +239,7 @@ export function StoryPage({ story }: { story: Story }) {
                 <ButtonLink href={site.primaryCta.href}>{site.primaryCta.label}</ButtonLink>
               </div>
             </div>
-            <p className="relative mt-10 max-w-3xl border-t border-white/10 pt-6 text-xs leading-relaxed text-mist">{privacyLine}</p>
+            <p className="relative mt-10 max-w-3xl border-t border-white/10 pt-6 text-xs leading-relaxed text-mist">{story.dataNote || privacyLine}</p>
           </div>
         </div>
       </section>

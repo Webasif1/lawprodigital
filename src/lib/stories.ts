@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { type Channel, storyMeta } from "@/content/stories";
+import { type Channel, type StoryVideo, storyMeta } from "@/content/stories";
 
 /**
  * Parses `src/content/source/case-studies.md` (the long-form case study
@@ -26,9 +26,10 @@ export type StoryBlock =
   | { type: "list"; items: string[]; ordered: boolean }
   | { type: "table"; head: string[]; rows: string[][] }
   | { type: "chart"; title: string; points: { label: string; value: number; note?: string; highlight: boolean }[]; source?: string }
-  | { type: "flow"; steps: string[]; alt: string };
+  | { type: "flow"; steps: string[]; alt: string }
+  | { type: "shot"; src: string; width: number; height: number; alt: string };
 
-export type ChapterKind = "default" | "results" | "setback" | "takeaways";
+export type ChapterKind = "default" | "results" | "setback" | "takeaways" | "testimonial";
 
 export type Chapter = { id: string; title: string; kind: ChapterKind; blocks: StoryBlock[] };
 
@@ -48,14 +49,18 @@ export type Story = {
   chapters: Chapter[];
   faqs: { q: string; a: string }[];
   cta: string;
+  /** Where the figures come from, when the story has its own (`**Data note:**`); otherwise `privacyLine`. */
+  dataNote: string;
   related: number[];
   image: string;
   service: { label: string; href: string };
   channel: Channel;
+  firm: string;
+  video?: StoryVideo;
 };
 
 /** Date of the case study library this content was taken from. */
-export const STORIES_UPDATED = "2026-10-15";
+export const STORIES_UPDATED = "2026-10-27";
 
 export const privacyLine =
   "Client name withheld for confidentiality. Figures come from the firm's Meta Ads Manager, Google Analytics, Search Console, Google Business Profile, call-tracking and client-intake records. Qualified firms can see the live dashboards on their onboarding call.";
@@ -85,6 +90,7 @@ function parseRow(line: string) {
 function chapterKind(title: string): ChapterKind {
   if (/didn.t|did not|failed|not to plan|honest|as well/i.test(title)) return "setback";
   if (/take from this/i.test(title)) return "takeaways";
+  if (/testimonial/i.test(title)) return "testimonial";
   if (/result|numbers showed/i.test(title)) return "results";
   return "default";
 }
@@ -127,9 +133,12 @@ function parseStory(n: number, label: string, lines: string[]): Omit<Story, "rel
     chapters: [],
     faqs: [],
     cta: "",
+    dataNote: "",
     image: meta?.image ?? "",
     service: meta?.service ?? { label: "Our services", href: "/" },
     channel: meta?.channel ?? "Strategy",
+    firm: meta?.firm ?? "Multi-office US immigration firm",
+    video: meta?.video,
   };
 
   let chapter: Chapter | null = null;
@@ -220,6 +229,10 @@ function parseStory(n: number, label: string, lines: string[]): Omit<Story, "rel
       story.cta = text.replace("**CTA:**", "").trim().replace(/^\*|\*$/g, "");
       continue;
     }
+    if (line.startsWith("**Data note:**")) {
+      story.dataNote = text.replace("**Data note:**", "").trim();
+      continue;
+    }
     if (line.startsWith("**Chart:**")) {
       push(parseChart(text.replace("**Chart:**", "").trim()));
       continue;
@@ -227,7 +240,10 @@ function parseStory(n: number, label: string, lines: string[]): Omit<Story, "rel
     const image = text.match(/^\*\*Image \(([^)]+)\):\*\*\s*(.*)$/);
     if (image) {
       const alt = image[2].match(altRe)?.[1] ?? "";
+      // Screenshots: "**Image (screenshot):** folder/file.jpg 1600x731 *Alt text: …*" (file in /public/images/case-studies/).
+      const shot = image[2].match(/^(\S+\.(?:jpg|png|webp))\s+(\d+)x(\d+)/);
       if (image[1] === "hero") story.heroAlt = alt;
+      else if (shot) push({ type: "shot", src: `/images/case-studies/${shot[1]}`, width: Number(shot[2]), height: Number(shot[3]), alt });
       else {
         const flow = image[2].match(/\*([^*]*→[^*]*)\*/);
         if (flow) push({ type: "flow", steps: flow[1].split("→").map((s) => s.trim().replace(/\.$/, "")), alt });

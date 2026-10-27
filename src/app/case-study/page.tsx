@@ -9,9 +9,9 @@ import { getStories, privacyLine } from "@/lib/stories";
 import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Immigration Law Firm Marketing Case Studies: 16 Real Stories",
+  title: "Law Firm Marketing Case Studies: 17 Real Stories",
   description:
-    "Sixteen long-form case studies from one multi-office US immigration law firm: Meta Ads, SEO, AI search, Google Maps, webinars and video, followed all the way to signed clients.",
+    "Seventeen long-form case studies: sixteen from one multi-office US immigration law firm and one from a Maryland bankruptcy firm. Meta Ads, SEO, AI search, Google Maps, Local Services Ads and video, followed all the way to signed clients.",
   path: "/case-study/",
 });
 
@@ -42,10 +42,10 @@ export default function CaseStudiesPage() {
         crumbs={[{ name: "Case Studies", path: "/case-study/" }]}
         title={
           <>
-            Sixteen stories. <em className="text-gold">One immigration firm.</em> Every number traced to a signed client.
+            Seventeen stories. <em className="text-gold">Real law firms.</em> Every number traced to its source.
           </>
         }
-        intro="How a multi-office US immigration law firm went from 79 to an average of 115 signed clients a month, told chapter by chapter: what we tried, what worked, what didn't, and what your firm can take from it."
+        intro="How a multi-office US immigration law firm went from 79 to an average of 115 signed clients a month, and how a Maryland bankruptcy firm got 14 Google leads in one month, told chapter by chapter: what we tried, what worked, what didn't, and what your firm can take from it."
         aside={
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-card bg-white/10 ring-1 ring-white/10">
             {[
@@ -86,7 +86,9 @@ export default function CaseStudiesPage() {
             ))}
           </div>
 
-          <p className="mt-14 max-w-3xl text-sm leading-relaxed text-muted">{privacyLine}</p>
+          <p className="mt-14 max-w-3xl text-sm leading-relaxed text-muted">
+            Stories 1–16: {privacyLine.charAt(0).toLowerCase() + privacyLine.slice(1)} Story 17 names Chambers Law Firm, P.C., with figures from its own Local Services Ads, Facebook and Search Console dashboards.
+          </p>
         </div>
       </section>
       <CtaBand />

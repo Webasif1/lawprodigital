@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { StoryBlock } from "@/lib/stories";
 import { CheckIcon } from "@/components/ui/icons";
 import { Rich } from "./Rich";
@@ -139,6 +140,16 @@ function Block({ block, i, tone }: { block: StoryBlock; i: number; tone: "defaul
           {block.alt && <figcaption className="mt-4 text-xs text-muted">{block.alt}</figcaption>}
         </figure>
       );
+
+    case "shot":
+      return (
+        <figure data-reveal style={reveal(i)}>
+          <div className="overflow-hidden rounded-card bg-surface ring-1 ring-line shadow-[0_24px_50px_-30px_rgba(9,20,40,0.35)]">
+            <Image src={block.src} alt={block.alt} width={block.width} height={block.height} sizes="(min-width: 1024px) 52rem, 100vw" className="h-auto w-full" />
+          </div>
+          {block.alt && <figcaption className="mt-3 text-sm text-muted">{block.alt}</figcaption>}
+        </figure>
+      );
   }
 }
 
@@ -148,7 +159,8 @@ function Block({ block, i, tone }: { block: StoryBlock; i: number; tone: "defaul
  * inline bars, which grow in as the reader reaches them.
  */
 function DataTable({ head, rows, i }: { head: string[]; rows: string[][]; i: number }) {
-  const numeric = head.length === 2 && rows.every((r) => !Number.isNaN(toNumber(r[1] ?? "")));
+  // A "Result" column mixes units (counts, dollars, percentages), so bars would compare unlike things.
+  const numeric = head.length === 2 && !/^results?$/i.test(head[1]) && rows.every((r) => !Number.isNaN(toNumber(r[1] ?? "")));
   const max = numeric ? Math.max(...rows.map((r) => toNumber(r[1]))) : 0;
   const min = numeric ? Math.min(...rows.map((r) => toNumber(r[1]))) : 0;
   // For costs, the cheapest row is the story; for volumes, the largest.

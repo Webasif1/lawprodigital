@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { caseStudies } from "@/content/home";
-import { getStoryByNumber, type Story } from "@/lib/stories";
+import { getStories, getStoryByNumber, type Story } from "@/lib/stories";
 import { StoryCard } from "@/components/story/StoryCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArrowUpRightIcon } from "@/components/ui/icons";
@@ -15,7 +15,7 @@ export function StoriesSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="Case studies" title={<span id="stories-heading">{caseStudies.heading}</span>} />
           <Link href="/case-study/" className="inline-flex items-center gap-2 font-semibold text-navy-2 hover:text-brass">
-            See all 16 case studies <ArrowUpRightIcon className="size-4" />
+            See all {getStories().length} case studies <ArrowUpRightIcon className="size-4" />
           </Link>
         </div>
         {featured && (

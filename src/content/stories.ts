@@ -7,15 +7,23 @@
  * build time by `src/lib/stories.ts`. Edit that file to change the copy.
  */
 
-export type Channel = "Strategy" | "Meta Ads" | "International" | "Search & AI" | "Video";
+import { videoTestimonial } from "./testimonials";
+
+export type Channel ="Strategy" | "Meta Ads" | "International" | "Search & AI" | "Video";
 
 export const channels: Channel[] = ["Strategy", "Meta Ads", "International", "Search & AI", "Video"];
 
+export type StoryVideo = { youtubeId: string; cover: string; title: string };
+
 type StoryMeta = {
-  /** File in /public/images/stories/. Illustrative image, not a photo of the client. */
+  /** File in /public/images/stories/. Illustrative image, not a photo of the client, unless the client is named. */
   image: string;
   service: { label: string; href: string };
   channel: Channel;
+  /** Who the story is about, shown under the headline. Defaults to the anonymized immigration firm. */
+  firm?: string;
+  /** Client video shown in the story's "Client testimonial" chapter. */
+  video?: StoryVideo;
 };
 
 const ppc = { label: "Meta & Google Ads for law firms", href: "/law-firm-ppc-agency/" };
@@ -40,11 +48,18 @@ export const storyMeta: Record<number, StoryMeta> = {
   14: { image: "s14-organic-leads.jpg", service: immSeo, channel: "Search & AI" },
   15: { image: "s15-video.jpg", service: { label: "Video marketing for law firms", href: "/video-marketing-for-law-firms/" }, channel: "Video" },
   16: { image: "s16-system.jpg", service: seo, channel: "Strategy" },
+  17: {
+    image: "s17-bankruptcy-website.jpg",
+    service: ppc,
+    channel: "Search & AI",
+    firm: "Bankruptcy law firm, Annapolis, Maryland · 6-month engagement",
+    video: { youtubeId: videoTestimonial.youtubeId, cover: videoTestimonial.cover, title: "Timothy Chambers of Chambers Law Firm on working with Law Pro Digital" },
+  },
 };
 
 /** Old case study URLs and the story that now answers the same question (used for 301s). */
 export const legacyCaseStudyRedirects: Record<string, string> = {
-  "bankruptcy-law-firm-99-percent-lead-conversion": "",
+  "bankruptcy-law-firm-99-percent-lead-conversion": "bankruptcy-lawyer-marketing-from-scratch",
   "how-i-generated-240000-in-projected-revenue-from-a-932-ad-spend-for-an-immigration-law-firm": "international-clients-us-immigration-lawyer",
   "us-immigration-leads-dubai-meta-ads-case-study": "us-immigration-lawyer-dubai-marketing",
   "e2-visa-lead-generation-for-us-immigration-lawyers-dubai": "us-immigration-lawyer-dubai-marketing",

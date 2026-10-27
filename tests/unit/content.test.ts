@@ -7,15 +7,30 @@ import { getStories } from "@/lib/stories";
 describe("case study library", () => {
   const stories = getStories();
 
-  it("parses all 16 stories with unique slugs and SEO fields", () => {
-    expect(stories).toHaveLength(16);
-    expect(new Set(stories.map((s) => s.slug)).size).toBe(16);
+  it("parses all 17 stories with unique slugs and SEO fields", () => {
+    expect(stories).toHaveLength(17);
+    expect(new Set(stories.map((s) => s.slug)).size).toBe(17);
     for (const s of stories) {
       expect(s.href).toBe(`/case-study/${s.slug}/`);
       expect(s.seoTitle.length).toBeGreaterThan(10);
       expect(s.metaDescription.length).toBeGreaterThan(50);
       expect(s.chapters.length).toBeGreaterThan(0);
     }
+  });
+
+  it("parses the named bankruptcy story's screenshots, data note and video", () => {
+    const s = stories.find((x) => x.n === 17)!;
+    expect(s.slug).toBe("bankruptcy-lawyer-marketing-from-scratch");
+    expect(s.stats.map((x) => x.value)).toEqual(["14", "$132", "100%", "15,615"]);
+    const shots = s.chapters.flatMap((c) => c.blocks).filter((b) => b.type === "shot");
+    expect(shots).toHaveLength(11);
+    for (const b of shots) expect(b.alt.length).toBeGreaterThan(10);
+    expect(s.dataNote).toMatch(/^Figures come from Chambers Law Firm/);
+    expect(s.video?.youtubeId).toBeTruthy();
+    expect(s.chapters.some((c) => c.kind === "testimonial")).toBe(true);
+    expect(s.faqs).toHaveLength(2);
+    // The anonymized stories keep the shared privacy line.
+    expect(stories.find((x) => x.n === 1)!.dataNote).toBe("");
   });
 
   it("points every legacy case study redirect at an existing story (or the library)", () => {
