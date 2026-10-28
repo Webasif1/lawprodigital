@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -67,9 +68,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="results-heading" className="bg-wash">
+      <TeamSection />
+
+      <section aria-labelledby="results-heading" className="bg-paper">
         <div className="container-x section-y">
-          <SectionHeading eyebrow="Team" align="split" title={<span id="results-heading">Expert marketing that delivers real results for legal practices</span>} />
+          <SectionHeading eyebrow="Results"align="split" title={<span id="results-heading">Expert marketing that delivers real results for legal practices</span>} />
           <ul className="mt-14 grid border-t border-ink sm:grid-cols-2">
             {outcomes.map((o, i) => (
               <li key={o} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex gap-5 border-b border-line py-6 font-display text-xl leading-snug sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
@@ -81,7 +84,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="practice-heading" className="bg-paper">
+      <section aria-labelledby="practice-heading" className="bg-wash">
         <div className="container-x section-y grid gap-16 lg:grid-cols-2">
           <div>
             <SectionHeading eyebrow="Practice areas" title={<span id="practice-heading">Lawyers we work with</span>} />

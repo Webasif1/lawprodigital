@@ -8,7 +8,7 @@ import { getStories, STORIES_UPDATED } from "@/lib/stories";
  * When the main pages last changed (the custom-site relaunch). Bump it when you edit page
  * content, so Google and Bing know to re-crawl; a date that changes on every deploy gets ignored.
  */
-const PAGES_UPDATED = "2026-10-27";
+const PAGES_UPDATED = "2026-10-28";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => new URL(path, site.url).toString();
