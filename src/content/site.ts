@@ -59,6 +59,7 @@ export const mainNav: NavLink[] = [
   { label: "Results", href: "/#results" },
   { label: "AI Solutions", href: "/ai-solutions/" },
   { label: "Case Studies", href: "/case-study/" },
+  { label: "Locations", href: "/immigration-law-firm-marketing/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "About", href: "/about-us/" },
 ];
@@ -68,6 +69,7 @@ export const quickLinks: NavLink[] = [
   { label: "About Us", href: "/about-us/" },
   { label: "AI Solutions", href: "/ai-solutions/" },
   { label: "Case Studies", href: "/case-study/" },
+  { label: "Immigration Firms by City", href: "/immigration-law-firm-marketing/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Contact Us", href: "/contact-us/" },
 ];
