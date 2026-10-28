@@ -95,7 +95,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/",
-        destination: caseStudies,
+        destination: `${caseStudies}bankruptcy-lawyer-marketing-from-scratch/`,
         permanent: true,
       },
       // The live site's "Get A Free Call" buttons pointed here.

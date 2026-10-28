@@ -65,7 +65,7 @@ test.describe("routes and SEO", () => {
       ["/booking/", /\/contact-us\/$/],
       ["/video-marketing/", /\/video-marketing-for-law-firms\/$/],
       ["/category/immigration/", /\/case-study\/$/],
-      ["/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/", /\/case-study\/$/],
+      ["/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/", /\/case-study\/bankruptcy-lawyer-marketing-from-scratch\/$/],
     ];
     for (const [from, to] of cases) {
       const res = await request.get(from, { maxRedirects: 0 });
