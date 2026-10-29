@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Immigration Law Firm Marketing by City: Find Yours",
   description:
-    "Local SEO, AI search (AEO/GEO), Meta and Google ads and AI intake for immigration law firms in Texas, Florida, Georgia and Virginia. Custom packages.",
+    "Local SEO, AI search, Meta and Google ads and AI intake for immigration law firms in Texas, Florida, Georgia, Virginia, Maryland and New Jersey.",
   path: "/immigration-law-firm-marketing/",
 });
 
