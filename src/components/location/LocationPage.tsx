@@ -2,6 +2,7 @@ import Link from "next/link";
 import { videoTestimonial } from "@/content/testimonials";
 import { entitySentence, getLocation, injuryProof, type Location, locationHref, locationProof, practiceHubs } from "@/content/locations";
 import { contact, site } from "@/content/site";
+import { founder } from "@/content/home";
 import { ContactForm } from "@/app/contact-us/ContactForm";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { FaqList } from "@/components/sections/FaqList";
@@ -46,6 +47,20 @@ export function LocationPage({ location: l }: { location: Location }) {
       { name: place, path },
     ]),
     faqJsonLd(l.faq),
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${absoluteUrl(path)}#webpage`,
+      url: absoluteUrl(path),
+      name: l.metaTitle,
+      description: l.metaDescription,
+      inLanguage: "en-US",
+      isPartOf: { "@type": "WebSite", url: site.url, name: site.name },
+      about: { "@id": `${site.url}/#organization` },
+      reviewedBy: { "@id": `${site.url}/#founder` },
+      dateModified: l.updated,
+      speakable: { "@type": "SpeakableSpecification", cssSelector: ["#location-answer"] },
+    },
   ];
 
   return (
@@ -64,7 +79,7 @@ export function LocationPage({ location: l }: { location: Location }) {
             {l.h1.lead} <em className="text-gold">{l.h1.emphasis}</em>
           </>
         }
-        intro={l.answer}
+        intro={<span id="location-answer">{l.answer}</span>}
         actions={
           <>
             <ButtonLink href="#contact">{site.primaryCta.label}</ButtonLink>
@@ -89,6 +104,14 @@ export function LocationPage({ location: l }: { location: Location }) {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-ink/80">{entitySentence}</p>
+          <p className="mt-3 text-sm text-muted">
+            Reviewed by{" "}
+            <Link href="/about-us/" className="font-semibold text-navy underline decoration-gold underline-offset-4">
+              {founder.name}
+            </Link>
+            , {founder.role} · Updated{" "}
+            <time dateTime={l.updated}>{new Date(l.updated + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
+          </p>
         </div>
       </section>
 
