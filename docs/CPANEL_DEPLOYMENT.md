@@ -176,6 +176,45 @@ staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it befor
 - If the old WordPress site lived in the same `public_html`, remove its `.htaccess` rewrite rules so Passenger
   serves the Node app.
 
+## Bots and crawlers
+
+A crawler can fetch every page in the sitemap in under a minute. It shows up as hundreds of 0-second visits, often
+to `/contact-us`, which is linked from every page. Block bots as early as possible. Each layer below is cheaper than
+the one after it:
+
+1. **Cloudflare (recommended, free plan).** Proxy the domain through Cloudflare. Under Security → Security rules,
+   add a custom rule `(cf.client.bot)` → **Skip** all remaining custom rules, placed **first**, so Googlebot and
+   Bingbot are never challenged. Then add the free plan's rate limiting rule (for example 60 requests per 10 seconds
+   per IP → Block). Bot Fight Mode also helps, but on the free plan it can't be bypassed and may challenge uptime
+   monitors. The app reads the visitor's IP from `CF-Connecting-IP`.
+2. **`.htaccess` in `public_html`.** Apache answers before Passenger starts Node. Put this above the Passenger
+   lines:
+
+   ```apache
+   RewriteEngine On
+   RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+   RewriteCond %{HTTP_USER_AGENT} (python-requests|python-urllib|aiohttp|go-http-client|libwww-perl|scrapy|headlesschrome|phantomjs|bytespider) [NC]
+   RewriteRule ^ - [F,L]
+   ```
+
+   Ask the host whether Imunify360 or ModSecurity is on for the account. Both block known bad bots before the app.
+3. **The app (`src/proxy.ts`).** Page loads are limited to 60 per IP per minute (429 with `Retry-After`). The same
+   user agents as above get 403. Search engines and AI crawlers (Googlebot, Bingbot, GPTBot, ClaudeBot) are only
+   rate limited, never blocked; Google treats 429 as "slow down". Link prefetches, `/_next` assets, `/api` and files
+   with an extension aren't counted. Change the numbers in `PAGE_RATE` in `src/lib/bot-guard.ts`.
+
+`robots.txt` asks SEO-tool crawlers (Ahrefs, Semrush, MJ12, DotBot…) for a 10-second crawl delay. Polite bots honour
+it; others hit the limit above.
+
+**Watching it.** Blocks are logged to `stderr.log`, at most one line per IP per minute:
+`[proxy] 429 ip=… path=… ua="…"`. A bot that posted the contact form and was stopped logs
+`[contact] blocked reason=honeypot|too-fast|rate-limit ip=… ua="…"`. No `[contact]` line means it only looked at the
+page. Requests with no real client IP (`unknown` or `127.0.0.1`) are never page-rate-limited, because they would
+all share one bucket. If the `[contact]` lines show those addresses, the server in front of Passenger isn't sending
+`X-Forwarded-For`, so the per-IP limit is off. Ask the host, or use Cloudflare. For the full picture of a spike, download cPanel → Metrics →
+**Raw Access** for that day and group requests by IP and user agent. In GA4, Admin → Data filters can exclude bot
+and internal traffic.
+
 ## Logs and troubleshooting
 
 - App errors: `stderr.log` in the application root, or cPanel → Errors. Contact-form failures are logged as
@@ -187,7 +226,7 @@ staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it befor
   with the image smoke test in [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md).
 - Chat replies arrive all at once instead of word by word: the proxy in front of Passenger (Apache/LiteSpeed)
   is buffering the response. It still works; streaming is cosmetic.
-- Passenger may start more than one Node process. The chat and contact rate limits are in memory, per process,
+- Passenger may start more than one Node process. The page, chat and contact rate limits are in memory, per process,
   so N processes allow N× the limits. Keep the OpenRouter credit limit set on the key as the hard cap.
 - Form says "temporarily unavailable": SMTP variables missing. "Something went wrong sending": wrong credentials or
   port — check the log.
