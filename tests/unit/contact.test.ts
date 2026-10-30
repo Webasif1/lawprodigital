@@ -89,14 +89,14 @@ describe("readValues", () => {
 describe("looksAutomated", () => {
   const now = 1_000_000;
   it("flags a filled honeypot", () => {
-    expect(looksAutomated(form({ website: "http://spam.test" }), now)).toBe(true);
+    expect(looksAutomated(form({ website: "http://spam.test" }), now)).toBe("honeypot");
   });
   it("flags submissions faster than the minimum fill time", () => {
-    expect(looksAutomated(form({ startedAt: String(now - 500) }), now)).toBe(true);
+    expect(looksAutomated(form({ startedAt: String(now - 500) }), now)).toBe("too-fast");
   });
   it("passes a normal submission and a no-JS submission", () => {
-    expect(looksAutomated(form({ startedAt: String(now - 10_000) }), now)).toBe(false);
-    expect(looksAutomated(form({}), now)).toBe(false);
+    expect(looksAutomated(form({ startedAt: String(now - 10_000) }), now)).toBeNull();
+    expect(looksAutomated(form({}), now)).toBeNull();
   });
 });
 

@@ -22,9 +22,16 @@ function smtpConfig() {
 
 export async function submitContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   const values = readValues(formData);
+  const h = await headers();
+  const ip = clientIp(h.get("x-forwarded-for"), h.get("x-real-ip"));
+  // One line per blocked post in stderr.log, so bot attempts can be told apart from bots that only looked.
+  const logBlocked = (reason: string) =>
+    console.warn(`[contact] blocked reason=${reason} ip=${ip} ua=${JSON.stringify((h.get("user-agent") ?? "").slice(0, 160))}`);
 
   // Spam traps: a hidden field humans never fill, and a minimum time on the form.
-  if (looksAutomated(formData)) {
+  const automated = looksAutomated(formData);
+  if (automated) {
+    logBlocked(automated);
     return { status: "error", message: "Your message could not be sent. Please try again.", values };
   }
 
@@ -33,8 +40,8 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     return { status: "error", message: "Please check the highlighted fields.", errors, values };
   }
 
-  const h = await headers();
-  if (rateLimited(clientIp(h.get("x-forwarded-for"), h.get("x-real-ip")))) {
+  if (rateLimited(ip)) {
+    logBlocked("rate-limit");
     return { status: "error", message: "Too many messages in a short time. Please wait a few minutes and try again.", values };
   }
 
