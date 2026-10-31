@@ -10,23 +10,27 @@ export type TeamMember = {
   links: { label: string; href: string }[];
 };
 
+/** Brand-coloured silhouettes in public/images/team/demo/, used until real portraits arrive. */
+const demoPhoto = (n: number) => ({ src: `/images/team/demo/demo-${n}.svg`, width: 400, height: 400 });
+
 // Real people only. Add each new member here with their portrait in public/images/team/.
 export const team: TeamMember[] = [
   {
     name: founder.name,
     role: "Founder",
     bio: "Built the system inside a multi-office US immigration firm: the ads, the content, the Google profiles and the monthly reports.",
-    photo: founder.photo,
+    // TODO(owner): replace with the real portrait (also set founder.photo in home.ts).
+    photo: founder.photo ?? demoPhoto(6),
     links: founder.links,
   },
   {
     name: "Md Arafat Hossain Asif",
     role: "Co-Founder",
+    // TODO(owner): replace with the real portrait.
+    photo: demoPhoto(7),
     links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mdarafathossain-asif/" }],
   },
 ];
-
-const demoPhoto = (n: number) => ({ src: `/images/team/demo/demo-${n}.svg`, width: 400, height: 400 });
 
 /**
  * Fictional placeholders to preview a fuller grid. Shown only by `next dev`, never in a
