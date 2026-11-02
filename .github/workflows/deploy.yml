@@ -115,8 +115,9 @@ jobs:
       - name: Smoke test
         if: ${{ !inputs.skip_smoke }}
         run: |
+          # The app's bot guard (src/lib/bot-guard.ts) answers 403 to curl's default user agent.
           for i in $(seq 1 10); do
-            if curl -fsS --max-time 20 https://lawprodigital.com/ | grep -q '/_next/static/'; then
+            if curl -fsS --max-time 20 -A "LawProDigital-DeployCheck/1.0" https://lawprodigital.com/ | grep -q '/_next/static/'; then
               echo "Live site is serving the Next.js build"; exit 0
             fi
             sleep 10

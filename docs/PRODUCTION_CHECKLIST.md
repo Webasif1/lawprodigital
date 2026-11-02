@@ -31,13 +31,14 @@
 
 ## Post-deployment smoke tests
 
-Run from your own machine against production:
+Run from your own machine against production. Page URLs need `-A`: the bot guard
+(`src/lib/bot-guard.ts`) answers 403 to curl's default user agent.
 
 ```bash
-curl -sI https://lawprodigital.com/ | grep -iE "^HTTP|strict-transport|content-security|x-frame"
-curl -sI https://lawprodigital.com/about-us | grep -iE "^HTTP|location"        # 308 → /about-us/
-curl -sI https://lawprodigital.com/booking/ | grep -iE "^HTTP|location"        # 308 → /contact-us/
-curl -s -o /dev/null -w "%{http_code}\n" https://lawprodigital.com/no-such-page/  # 404
+curl -sI -A "LawProDigital-DeployCheck/1.0" https://lawprodigital.com/ | grep -iE "^HTTP|strict-transport|content-security|x-frame"
+curl -sI -A "LawProDigital-DeployCheck/1.0" https://lawprodigital.com/about-us | grep -iE "^HTTP|location"        # 308 → /about-us/
+curl -sI -A "LawProDigital-DeployCheck/1.0" https://lawprodigital.com/booking/ | grep -iE "^HTTP|location"        # 308 → /contact-us/
+curl -s -o /dev/null -w "%{http_code}\n" -A "LawProDigital-DeployCheck/1.0" https://lawprodigital.com/no-such-page/  # 404
 curl -s https://lawprodigital.com/sitemap.xml | grep -c "<loc>"                # 32
 curl -s https://lawprodigital.com/robots.txt                                   # Allow: / (not Disallow)
 # sharp works on the server: must say image/avif or image/webp, not image/jpeg
