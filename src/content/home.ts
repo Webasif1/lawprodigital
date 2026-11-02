@@ -152,8 +152,7 @@ export const founder: Founder = {
     "I've spent years running marketing inside a multi-office immigration firm: the ads, the content, the Google profiles and the monthly reports. Law Pro Digital brings that same system to firms like yours.",
   name: "Bellal Hosen",
   role: "Founder, Law Pro Digital",
-  // TODO(owner): drop the portrait at public/images/founder/bellal-hosen.jpg, then uncomment.
-  // photo: { src: "/images/founder/bellal-hosen.jpg", width: 800, height: 800 },
+  photo: { src: "/images/founder/bellal-hosen.jpg", width: 600, height: 600 },
   // TODO(owner): add the YouTube ID of the 60-second founder video.
   // videoId: "",
   // TODO(owner): add the founder's LinkedIn and Upwork profile URLs.

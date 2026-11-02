@@ -10,8 +10,7 @@ export type TeamMember = {
   links: { label: string; href: string }[];
 };
 
-/** Brand-coloured silhouettes in public/images/team/demo/, used until real portraits arrive. */
-const demoPhoto = (n: number) => ({ src: `/images/team/demo/demo-${n}.svg`, width: 400, height: 400 });
+const teamPhoto = (file: string, size = 600) => ({ src: `/images/team/${file}`, width: size, height: size });
 
 // Real people only. Add each new member here with their portrait in public/images/team/.
 export const team: TeamMember[] = [
@@ -19,27 +18,24 @@ export const team: TeamMember[] = [
     name: founder.name,
     role: "Founder",
     bio: "Built the system inside a multi-office US immigration firm: the ads, the content, the Google profiles and the monthly reports.",
-    // TODO(owner): replace with the real portrait (also set founder.photo in home.ts).
-    photo: founder.photo ?? demoPhoto(6),
+    photo: founder.photo,
     links: founder.links,
   },
   {
     name: "Md Arafat Hossain Asif",
-    role: "Co-Founder",
-    // TODO(owner): replace with the real portrait.
-    photo: demoPhoto(7),
+    role: "Co-Founder · Developer & Designer",
+    photo: teamPhoto("arafat-hossain-asif.jpg", 400),
     links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mdarafathossain-asif/" }],
   },
 ];
 
 /**
- * Fictional placeholders to preview a fuller grid. Shown only by `next dev`, never in a
- * production build: replace them with real members in `team` above.
+ * Team members whose names are not confirmed yet. Shown only by `next dev`, never in a
+ * production build.
+ * TODO(owner): add each person's real name, then move their entry into `team` above.
  */
 export const demoTeam: TeamMember[] = [
-  { name: "Demo Member", role: "Meta Ads Specialist", bio: "Placeholder card: dev preview only.", photo: demoPhoto(1), links: [] },
-  { name: "Demo Member", role: "SEO & AI Search Lead", bio: "Placeholder card: dev preview only.", photo: demoPhoto(2), links: [] },
-  { name: "Demo Member", role: "Content Writer", bio: "Placeholder card: dev preview only.", photo: demoPhoto(3), links: [] },
-  { name: "Demo Member", role: "Client Success Manager", bio: "Placeholder card: dev preview only.", photo: demoPhoto(4), links: [] },
-  { name: "Demo Member", role: "Video Editor", bio: "Placeholder card: dev preview only.", photo: demoPhoto(5), links: [] },
+  { name: "Team Member", role: "SEO & AI Search Specialist", photo: teamPhoto("member-1.jpg"), links: [] },
+  { name: "Team Member", role: "Meta Ads Specialist", photo: teamPhoto("member-2.jpg"), links: [] },
+  { name: "Team Member", role: "Client Success Manager", photo: teamPhoto("member-3.jpg"), links: [] },
 ];
