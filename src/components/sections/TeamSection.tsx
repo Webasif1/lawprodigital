@@ -1,11 +1,9 @@
-import { demoTeam, team, type TeamMember } from "@/content/team";
+import { team } from "@/content/team";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { TeamCarousel } from "./TeamCarousel";
 
-/** The people behind the work. Members without confirmed names appear in `next dev` only. */
+/** The people behind the work. */
 export function TeamSection() {
-  const members: TeamMember[] = process.env.NODE_ENV === "production" ? team : [...team, ...demoTeam];
-
   return (
     <section aria-labelledby="team-heading" className="overflow-hidden bg-wash">
       <div className="container-x section-y">
@@ -20,7 +18,7 @@ export function TeamSection() {
             A small, senior team. You talk directly to the people running your campaigns.
           </p>
         </div>
-        <TeamCarousel members={members} />
+        <TeamCarousel members={team} />
       </div>
     </section>
   );

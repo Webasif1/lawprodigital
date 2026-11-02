@@ -18,6 +18,14 @@ export function ArrowUpRightIcon(props: IconProps) {
   );
 }
 
+export function LinkedInIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
+      <path d="M3.6 5.6h-2.4V14h2.4V5.6ZM2.4 1.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8ZM14.8 9.3c0-2.3-1.2-3.9-3.4-3.9-1.1 0-1.9.6-2.2 1.2V5.6H6.9V14h2.4V9.7c0-1.1.4-1.9 1.4-1.9s1.4.8 1.4 1.9V14h2.7V9.3Z" />
+    </svg>
+  );
+}
+
 export function ChevronDownIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" {...props}>
