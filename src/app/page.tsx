@@ -6,6 +6,7 @@ import { FounderSection } from "@/components/home/FounderSection";
 import { InternationalSection } from "@/components/home/InternationalSection";
 import { ProblemSection } from "@/components/home/ProblemSection";
 import { ProofStrip } from "@/components/home/ProofStrip";
+import { ReviewsSection } from "@/components/home/ReviewsSection";
 import { ServicesGrid } from "@/components/home/ServicesGrid";
 import { StoriesSection } from "@/components/home/StoriesSection";
 import { SystemSection } from "@/components/home/SystemSection";
@@ -27,7 +28,7 @@ export const metadata: Metadata = pageMetadata({
 /**
  * Narrative: promise → proof → the problem → the system → how that differs
  * from a typical agency → what we do →
- * AI intake → the stories → markets abroad → the first 90 days → who it's
+ * AI intake → the stories → client reviews (once published) → markets abroad → the first 90 days → who it's
  * for and what it costs → why we do it → questions → the audit.
  */
 export default function HomePage() {
@@ -42,6 +43,7 @@ export default function HomePage() {
       <ServicesGrid />
       <AiSection />
       <StoriesSection />
+      <ReviewsSection />
       <InternationalSection />
       <ProcessSection eyebrow="First 90 days" heading={process.heading} intro={process.intro} steps={process.steps} tone="light" />
       <FirmFitSection />
