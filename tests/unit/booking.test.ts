@@ -67,6 +67,15 @@ describe("generateSlots", () => {
     expect(r.hours[6]).toEqual([["00:00", "24:00"]]);
   });
 
+  it("lists booked times separately so the picker can grey them out", async () => {
+    const { slotStates } = await import("@/lib/booking/slots");
+    const busy = [{ start: "2026-11-10T16:00:00.000Z", end: "2026-11-10T16:30:00.000Z" }]; // 11:00–11:30 NY
+    const { open, booked } = slotStates(rules, busy, NOW);
+    expect(booked).toEqual(["2026-11-10T15:30:00.000Z", "2026-11-10T16:00:00.000Z", "2026-11-10T16:30:00.000Z"]);
+    expect(open.some((s) => booked.includes(s))).toBe(false);
+    expect(open.length + booked.length).toBe(generateSlots(rules, [], NOW).length);
+  });
+
   it("removes slots overlapping busy time, including the buffer", () => {
     const busy = [{ start: "2026-11-10T16:00:00.000Z", end: "2026-11-10T17:00:00.000Z" }]; // 11:00–12:00 NY
     const free = generateSlots(rules, busy, NOW);
@@ -140,8 +149,21 @@ describe("availability with Google", () => {
     vi.doUnmock("@/lib/mail");
   });
 
+  it("hides a just-booked slot from the other bundle's copy of the module at once", async () => {
+    const action = await import("@/lib/booking/availability");
+    action.resetLocalBookings();
+    await action.availableSlots({ now: NOW }); // the picker's cache, warm
+    vi.resetModules(); // the API route gets its own copy of the module, as in Next's build
+    const route = await import("@/lib/booking/availability");
+    expect(route).not.toBe(action);
+    expect((await route.availableSlots({ now: NOW }))[30]).toContain("2026-11-10T16:00:00.000Z");
+    action.rememberBooking("2026-11-10T16:00:00.000Z", 30, NOW);
+    expect((await route.availableSlots({ now: NOW + 1000 }))[30]).not.toContain("2026-11-10T16:00:00.000Z");
+  });
+
   it("frees a slot cancelled on the calendar once the short grace period ends", async () => {
     const a = await import("@/lib/booking/availability");
+    a.resetLocalBookings();
     a.rememberBooking("2026-11-10T16:00:00.000Z", 30, NOW);
     expect((await a.availableSlots({ fresh: true, now: NOW + 60_000 }))[30]).not.toContain("2026-11-10T16:00:00.000Z");
     // Ten minutes later the calendar (which no longer has the event) is the only source.
@@ -162,6 +184,7 @@ describe("availability without Google (email mode)", () => {
 
   it("offers working hours and blocks a booked call plus its buffer", async () => {
     const a = await import("@/lib/booking/availability");
+    a.resetLocalBookings();
     expect(a.bookingMode()).toBe("email");
     const before = await a.availableSlots({ fresh: true, now: NOW });
     expect(before[30]).toContain("2026-11-10T16:00:00.000Z");

@@ -1,5 +1,5 @@
 import { bookingEvent, bookingTimeZone } from "@/content/booking";
-import { availableSlots, bookingMode } from "@/lib/booking/availability";
+import { bookingMode, slotAvailability } from "@/lib/booking/availability";
 
 /**
  * Bookable start times per call length for the booking calendar. With neither Google nor
@@ -14,7 +14,10 @@ export async function GET() {
   const mode = bookingMode();
   if (mode === "off") return json({ enabled: false });
   try {
-    return json({ enabled: true, mode, timeZone: bookingTimeZone(), durations: bookingEvent.durations, slots: await availableSlots() });
+    // `taken`: times that clash with an existing booking or event. Only their start times are
+    // sent (never what or whose), so the picker can show them greyed out as "Booked".
+    const { slots, taken } = await slotAvailability();
+    return json({ enabled: true, mode, timeZone: bookingTimeZone(), durations: bookingEvent.durations, slots, taken });
   } catch (err) {
     console.error(err instanceof Error ? err.message : "[booking] slots failed");
     return json({ enabled: true, error: "unavailable", slots: {} }, 502);

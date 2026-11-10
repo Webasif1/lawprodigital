@@ -90,11 +90,21 @@ export function slotRange(rules: SlotRules, now: number) {
 
 /** Start times (UTC ISO strings, ascending) that are inside opening hours, far enough ahead and clear of busy time. */
 export function generateSlots(rules: SlotRules, busy: Interval[], now: number): string[] {
+  return slotStates(rules, busy, now).open;
+}
+
+/**
+ * Every start time inside opening hours and the booking window, split into `open` (bookable)
+ * and `booked` (clashes with busy time, buffer included). The picker shows booked times
+ * greyed out rather than leaving gaps. Times inside the minimum notice are in neither.
+ */
+export function slotStates(rules: SlotRules, busy: Interval[], now: number) {
   const earliest = now + rules.minNoticeMin * MIN;
   const latest = now + rules.windowDays * DAY;
   const blocked = busy.map((b) => [Date.parse(b.start) - rules.bufferMin * MIN, Date.parse(b.end) + rules.bufferMin * MIN]);
   const today = zonedParts(now, rules.timeZone);
-  const out: string[] = [];
+  const open: string[] = [];
+  const booked: string[] = [];
 
   for (let i = 0; i <= rules.windowDays; i++) {
     const day = new Date(Date.UTC(today.y, today.m0, today.d + i));
@@ -106,10 +116,9 @@ export function generateSlots(rules: SlotRules, busy: Interval[], now: number): 
         const start = zonedTimeToUtc(y, m0, d, m, rules.timeZone);
         const end = start + rules.durationMin * MIN;
         if (start < earliest || start > latest) continue;
-        if (blocked.some(([bs, be]) => bs < end && be > start)) continue;
-        out.push(new Date(start).toISOString());
+        (blocked.some(([bs, be]) => bs < end && be > start) ? booked : open).push(new Date(start).toISOString());
       }
     }
   }
-  return out;
+  return { open, booked };
 }

@@ -14,7 +14,16 @@ import type { BookingField, BookingState } from "./form-config";
 
 type SlotsResponse =
   | { enabled: false }
-  | { enabled: true; mode?: "google" | "email"; timeZone?: string; durations?: number[]; slots: Record<string, string[]>; error?: string };
+  | {
+      enabled: true;
+      mode?: "google" | "email";
+      timeZone?: string;
+      durations?: number[];
+      slots: Record<string, string[]>;
+      /** Already-booked start times, shown greyed out so the day's grid has no gaps. */
+      taken?: Record<string, string[]>;
+      error?: string;
+    };
 
 const initial: BookingState = { status: "idle" };
 const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
@@ -104,6 +113,19 @@ export function BookingCalendar({
     };
   }, [reload]);
 
+  // Someone else may book while this page sits open: refresh the times every two minutes
+  // and when the visitor comes back to the tab, but not while they fill in the form.
+  useEffect(() => {
+    if (step !== "pick") return;
+    const refresh = () => document.visibilityState === "visible" && setReload((n) => n + 1);
+    const timer = window.setInterval(refresh, 2 * 60_000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [step]);
+
   useEffect(() => {
     if (state.status === "success") trackLead();
     if (state.status !== "idle") formTop.current?.focus();
@@ -124,16 +146,21 @@ export function BookingCalendar({
   if (data.error) return unavailable(<Unavailable title="We couldn’t load available times" retry={() => setReload((n) => n + 1)} />);
 
   const durations = data.durations?.length ? data.durations : [...bookingEvent.durations];
-  // Day → length → start times, all in the visitor's zone.
-  const byDay = new Map<string, Map<number, string[]>>();
-  for (const d of durations) {
-    for (const s of data.slots[String(d)] ?? []) {
-      const k = dateKey(s, tz);
-      const lengths = byDay.get(k) ?? new Map<number, string[]>();
-      lengths.set(d, [...(lengths.get(d) ?? []), s]);
-      byDay.set(k, lengths);
+  // Day → length → start times, all in the visitor's zone: bookable ones, and booked ones.
+  const group = (source: Record<string, string[]> | undefined) => {
+    const out = new Map<string, Map<number, string[]>>();
+    for (const d of durations) {
+      for (const s of source?.[String(d)] ?? []) {
+        const k = dateKey(s, tz);
+        const lengths = out.get(k) ?? new Map<number, string[]>();
+        lengths.set(d, [...(lengths.get(d) ?? []), s]);
+        out.set(k, lengths);
+      }
     }
-  }
+    return out;
+  };
+  const byDay = group(data.slots);
+  const takenByDay = group(data.taken);
   const days = [...byDay.keys()].sort();
   if (!days.length) return unavailable(<Unavailable title="No times are open in the next few weeks" />);
 
@@ -150,7 +177,10 @@ export function BookingCalendar({
   };
   const today = `${minMonth}-${String(today0.d).padStart(2, "0")}`;
   const selectedDay = day && byDay.has(day) ? day : null;
-  const times = selectedDay && duration ? (byDay.get(selectedDay)!.get(duration) ?? []) : [];
+  const taken = new Set(selectedDay && duration ? (takenByDay.get(selectedDay)?.get(duration) ?? []) : []);
+  // ISO strings sort chronologically, so the merged list stays in time order.
+  const times = selectedDay && duration ? [...(byDay.get(selectedDay)!.get(duration) ?? []), ...taken].sort() : [];
+  const openCount = times.length - taken.size;
   const fmt = timeFormat(tz, hour12);
 
   const pickDay = (k: string) => {
@@ -321,10 +351,32 @@ export function BookingCalendar({
                     ))}
                   </div>
                 </div>
-                {times.length ? (
+                {openCount === 0 && (
+                  <p className="mt-3 rounded-field bg-wash px-4 py-3 text-sm text-muted">
+                    No {duration}-minute times left this day. Try a shorter call or another day.
+                  </p>
+                )}
+                {times.length > 0 && (
                   <ul className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:-mr-2 lg:grid-cols-2 lg:overflow-y-auto lg:pr-2 lg:pb-1">
                     {times.map((s) => {
                       const label = fmt.format(new Date(s)).toLowerCase().replace(" ", "");
+                      if (taken.has(s)) {
+                        return (
+                          <li key={s}>
+                            <button
+                              type="button"
+                              disabled
+                              aria-label={`${label}, already booked`}
+                              className="flex min-h-11 w-full cursor-not-allowed flex-col items-center justify-center rounded-tag bg-wash text-sm font-semibold text-muted/60 tabular-nums"
+                            >
+                              <span className="leading-tight line-through decoration-muted/50">{label}</span>
+                              <span aria-hidden className="text-[0.6rem] leading-tight font-bold tracking-[0.08em] uppercase">
+                                Booked
+                              </span>
+                            </button>
+                          </li>
+                        );
+                      }
                       return slot === s ? (
                         <li key={s} className="col-span-full grid grid-cols-2 gap-2">
                           <span className="grid min-h-11 place-items-center rounded-tag bg-ink text-sm font-semibold text-paper tabular-nums">{label}</span>
@@ -345,10 +397,6 @@ export function BookingCalendar({
                       );
                     })}
                   </ul>
-                ) : (
-                  <p className="mt-3 rounded-field bg-wash px-4 py-3 text-sm text-muted">
-                    No {duration}-minute times this day. Try a shorter call or another day.
-                  </p>
                 )}
               </>
             ) : (
