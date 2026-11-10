@@ -51,6 +51,22 @@ describe("generateSlots", () => {
     expect(quarter).toContain("2026-11-10T21:45:00.000Z"); // 16:45–17:00
   });
 
+  it("supports round-the-clock hours, including weekends and the last slot before midnight", () => {
+    const allDay = { ...rules, hours: Object.fromEntries([0, 1, 2, 3, 4, 5, 6].map((d) => [d, [["00:00", "24:00"]]])) } as SlotRules;
+    const s = generateSlots(allDay, [], NOW);
+    expect(s).toContain("2026-11-14T15:00:00.000Z"); // Saturday 10:00 NY
+    expect(s).toContain("2026-11-11T04:30:00.000Z"); // Tuesday 23:30 NY, ends at midnight
+    expect(s).toContain("2026-11-11T05:00:00.000Z"); // Wednesday 00:00 NY
+    expect(new Set(s).size).toBe(s.length);
+  });
+
+  it("uses round-the-clock hours for the live call", async () => {
+    const { bookingRules } = await import("@/content/booking");
+    const r = bookingRules(30);
+    expect(Object.keys(r.hours)).toHaveLength(7);
+    expect(r.hours[6]).toEqual([["00:00", "24:00"]]);
+  });
+
   it("removes slots overlapping busy time, including the buffer", () => {
     const busy = [{ start: "2026-11-10T16:00:00.000Z", end: "2026-11-10T17:00:00.000Z" }]; // 11:00–12:00 NY
     const free = generateSlots(rules, busy, NOW);

@@ -1,11 +1,9 @@
 import type { SlotRules } from "@/lib/booking/slots";
 
 /**
- * The bookable strategy call. Hours are in the business time zone; visitors see every
- * slot converted to their own zone. Busy time on the Google Calendar removes slots
- * automatically, so block holidays and days off there rather than here.
- *
- * TODO(owner): confirm hours, lengths, buffer and notice.
+ * The bookable strategy call. Visitors can book any time, day or night, that is free on
+ * the Google Calendar: busy time there removes slots automatically, so block sleep, days
+ * off and holidays in the calendar rather than here. Visitors see slots in their own zone.
  */
 export const bookingEvent = {
   title: "Free Strategy Call",
@@ -32,15 +30,12 @@ export function bookingRules(durationMin: Duration): SlotRules {
     bufferMin: 15,
     minNoticeMin: 12 * 60,
     windowDays: 30,
-    hours: {
-      1: [["09:00", "17:00"]],
-      2: [["09:00", "17:00"]],
-      3: [["09:00", "17:00"]],
-      4: [["09:00", "17:00"]],
-      5: [["09:00", "17:00"]],
-    },
+    // Open around the clock, every day; the calendar's busy time does the narrowing.
+    hours: Object.fromEntries([0, 1, 2, 3, 4, 5, 6].map((d) => [d, ALL_DAY])),
   };
 }
+
+const ALL_DAY: [string, string][] = [["00:00", "24:00"]];
 
 export const bookingTimeZone = () => process.env.BOOKING_TIMEZONE || "America/New_York";
 
