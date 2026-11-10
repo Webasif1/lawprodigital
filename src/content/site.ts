@@ -37,8 +37,9 @@ export const site = {
  */
 export const noindex = process.env.SITE_NOINDEX ? process.env.SITE_NOINDEX === "true" : Boolean(process.env.VERCEL);
 
-/** Calendly / Cal.com link for booking a call. Hidden site-wide until set. */
-export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || undefined;
+/** Where "Book a call" links go: the built-in calendar, unless NEXT_PUBLIC_BOOKING_URL points elsewhere. */
+export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "/book-a-call/";
+export const bookingIsExternal = /^https?:\/\//.test(bookingUrl);
 
 export const contact: ContactDetails = {
   email: "hello@lawprodigital.com",

@@ -158,7 +158,50 @@ where you build). Change one, rebuild. Any that are empty simply aren't loaded.
 | `NEXT_PUBLIC_GTM_ID` | `GTM-XXXXXXX` | Google Tag Manager (pushes `generate_lead` to the dataLayer) |
 | `NEXT_PUBLIC_META_PIXEL_ID` | `1234567890` | Meta Pixel (`PageView`, `Lead` on a sent form) |
 | `NEXT_PUBLIC_CLARITY_ID` | `abcdefghij` | Microsoft Clarity |
-| `NEXT_PUBLIC_BOOKING_URL` | `https://calendly.com/…` | "Book a call" on the contact page and after the form is sent |
+| `NEXT_PUBLIC_BOOKING_URL` | `https://calendly.com/…` | Optional. Sends "Book a call" links to an external scheduler instead of the built-in `/book-a-call/` |
+
+### Booking calendar and leads sheet (server-only, read at request time)
+
+`/book-a-call/` is the site's own scheduler: the client picks a day, a call length (15 min, 30 min or 1 hr) and a
+time, then fills in a short form. Free times are your working hours (hours and lengths are in
+`src/content/booking.ts`; hours are in `BOOKING_TIMEZONE`) minus anything busy on your Google Calendar, so blocking time or cancelling an event there
+changes what visitors see within a minute. A booking creates a Calendar event with a Google Meet link and Google
+emails the invitation to the client. Every booking is added to the sheet's `Bookings` tab, and every contact-form
+enquiry to its `Leads` tab. A Sheets error is logged and never fails the booking or enquiry.
+
+| Variable | Required | Example | Notes |
+| --- | --- | --- | --- |
+| `GOOGLE_CLIENT_ID` | For booking | `123….apps.googleusercontent.com` | OAuth client of type **Desktop app** |
+| `GOOGLE_CLIENT_SECRET` | For booking | `GOCSPX-…` | |
+| `GOOGLE_REFRESH_TOKEN` | For booking | `1//0…` | From `node scripts/google-auth.mjs` |
+| `GOOGLE_CALENDAR_ID` | No | `primary` | Calendar that receives bookings and blocks slots |
+| `GOOGLE_SHEET_ID` | For the sheet | `1AbC…` | From the sheet URL; needs tabs `Bookings` and `Leads` |
+| `BOOKING_TIMEZONE` | No | `America/New_York` | Time zone of your working hours |
+
+**Before the Google keys are set (email mode).** If the three `GOOGLE_*` credentials are missing but SMTP is set
+up, the calendar still shows on `/contact-us/` and `/book-a-call/`. Free times are your working hours only (your
+own Google Calendar isn't checked), and each booking is emailed to `CONTACT_TO` as a "call request". Reply to
+confirm and send the meeting link yourself. Requested times are blocked in memory, so they are free again after the
+app restarts. Add the Google keys to switch to automatic Meet invites and calendar checks. With neither Google nor
+SMTP configured, the calendar is hidden.
+
+**One-time setup**
+
+1. In [Google Cloud console](https://console.cloud.google.com/) create a project and enable the **Google Calendar
+   API** and **Google Sheets API**.
+2. OAuth consent screen: type External, add your Google account as a test user, then **Publish app** (status "In
+   production"). Apps left in Testing get refresh tokens that expire after 7 days. Google's "unverified app" warning
+   only appears to you during step 4.
+3. Credentials → Create credentials → OAuth client ID → **Desktop app**. Copy the client ID and secret. (A "Web
+   application" client also works if you add `http://127.0.0.1:53682/callback` to its Authorized redirect URIs.)
+4. On your computer, in the project folder, run (sign in with the Google account whose calendar should take
+   bookings):
+   `GOOGLE_CLIENT_ID=… GOOGLE_CLIENT_SECRET=… node scripts/google-auth.mjs`
+   It prints `GOOGLE_REFRESH_TOKEN`.
+5. Create a Google Sheet in the same account with two tabs named exactly `Bookings` and `Leads`. Optional header rows:
+   - Bookings: `Booked at | Call (your time) | Call (UTC) | Client time zone | Duration (min) | Name | Email | Phone | Website | Notes | Meet link | Event ID | Status`
+   - Leads: `Received at | First name | Last name | Email | Phone | Website | City | Service | Message`
+6. Add the variables above in Setup Node.js App → Environment variables and restart the app.
 
 ### Indexing
 

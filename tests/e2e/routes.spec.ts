@@ -62,7 +62,7 @@ test.describe("routes and SEO", () => {
   test("legacy WordPress URLs redirect permanently", async ({ request }) => {
     const cases: [string, RegExp][] = [
       ["/about-us", /\/about-us\/$/],
-      ["/booking/", /\/contact-us\/$/],
+      ["/booking/", /\/book-a-call\/$/],
       ["/video-marketing/", /\/video-marketing-for-law-firms\/$/],
       ["/category/immigration/", /\/case-study\/$/],
       ["/how-we-helped-a-bankruptcy-law-firm-achieve-99-lead-conversion-in-6-months/", /\/case-study\/bankruptcy-lawyer-marketing-from-scratch\/$/],
@@ -100,7 +100,7 @@ test.describe("routes and SEO", () => {
     await page.waitForLoadState("networkidle");
     for (const url of scripts) {
       const js = await (await request.get(url)).text();
-      expect(js, url).not.toMatch(/SMTP_PASS|SMTP_USER|CONTACT_TO|OPENROUTER_API_KEY|sk-or-v1-/);
+      expect(js, url).not.toMatch(/SMTP_PASS|SMTP_USER|CONTACT_TO|OPENROUTER_API_KEY|sk-or-v1-|GOOGLE_CLIENT_SECRET|GOOGLE_REFRESH_TOKEN/);
     }
   });
 

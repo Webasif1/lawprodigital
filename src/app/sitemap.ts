@@ -9,7 +9,7 @@ import { locationHref, locations, practiceHubs } from "@/content/locations";
  * When the main pages last changed (the custom-site relaunch). Bump it when you edit page
  * content, so Google and Bing know to re-crawl; a date that changes on every deploy gets ignored.
  */
-const PAGES_UPDATED = "2026-11-09";
+const PAGES_UPDATED = "2026-11-10";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => new URL(path, site.url).toString();
@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/pricing/"), lastModified: PAGES_UPDATED, changeFrequency: "monthly", priority: 0.7 },
     { url: url("/about-us/"), lastModified: PAGES_UPDATED, changeFrequency: "yearly", priority: 0.6 },
     { url: url("/contact-us/"), lastModified: PAGES_UPDATED, changeFrequency: "yearly", priority: 0.6 },
+    { url: url("/book-a-call/"), lastModified: PAGES_UPDATED, changeFrequency: "yearly", priority: 0.6 },
     { url: url("/privacy-policy/"), lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
     { url: url("/terms/"), lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
   ];

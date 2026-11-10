@@ -8,8 +8,8 @@ import { serviceOptions, type ContactField } from "./form-config";
 export const MAX = { name: 80, email: 200, website: 200, phone: 40, city: 80, message: 5000 } as const;
 export const MIN_FILL_MS = 2500;
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+\d\s().-]{6,}$/;
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const PHONE_RE = /^[+\d\s().-]{6,}$/;
 
 export type ContactValues = Record<ContactField, string>;
 
