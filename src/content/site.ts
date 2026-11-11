@@ -44,7 +44,7 @@ export const bookingIsExternal = /^https?:\/\//.test(bookingUrl);
 export const contact: ContactDetails = {
   email: "hello@lawprodigital.com",
   phone: "+1 (603) 842-2765",
-  whatsapp: "8801840830658",
+  whatsapp: "8801707873234",
   offices: [{ label: "New York", lines: ["New York, NY", "United States"] }],
 };
 
