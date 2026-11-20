@@ -74,9 +74,9 @@ export const ai = {
 };
 
 export const caseStudies = {
-  heading: "Real results from a real immigration firm",
+  heading: "Real results from real law firms",
   /** Story numbers in the case study library: one featured, three supporting. */
-  featured: 1,
+  featured: 17,
   supporting: [3, 5, 13],
 };
 
