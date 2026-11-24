@@ -1631,3 +1631,117 @@ After 6 months, Timothy Chambers shared his experience working with us.
 **Data note:** Figures come from Chambers Law Firm's Google Local Services Ads dashboard (June 2025), Facebook Insights (Apr 1–Jun 30, 2025) and Google Search Console (first 3 months after launch). Client contact details in screenshots are hidden for privacy.
 
 **CTA:** *Want more bankruptcy clients from Google? Get a free recorded audit of your website, Google profile and ads.*
+
+## Story 18 · The full growth system: five channels and one fast intake
+
+**URL:** /case-study/immigration-law-firm-marketing-strategy/ **Primary keyword:** immigration law firm marketing strategy **SEO title:** Immigration Law Firm Marketing Strategy: The 5-Channel System | Law Pro Digital **Meta description:** The full marketing system behind a US immigration firm's 45% growth in signed clients: attorney videos, Meta ads, Google Ads, Local Services Ads, Google Maps and 5-minute intake. **Schema:** Article, FAQPage, Organization
+
+### The immigration law firm marketing strategy behind 45% more signed clients
+
+*Subhead:* Five channels working as one system, and one rule for every new lead: a real person replies within 5 minutes.
+
+**Image (hero):** The five-channel growth system for an immigration law firm. *Alt text: Immigration law firm marketing system: attorney videos, Meta ads, Google Ads, Local Services Ads and Google Maps feeding fast intake.*
+
+**The short answer:** A multi-office US immigration law firm grew from 79 to an average of 115 signed clients a month (+45%) by running five channels as one system: attorney videos, messaging-first Meta ads, Google Search Ads, Google Local Services Ads and Google Business Profiles. The rule that made it work: every new lead hears from a real person, a case manager or receptionist, within 5 minutes.
+
+|  |  |  |  |
+| :-: | :-: | :-: | :-: |
+| **+45%** | **2.18M** | **15,738** | **99.47%** |
+| Signed clients per month (79 → 115) | Facebook Reels views (Jan–Aug 2026) | Meta ad conversations and leads at $4.36 each | Local Services Ads shown at the top of Google |
+
+#### The firm
+
+A multi-office US immigration law firm with offices in New York, Los Angeles and other US cities. It handles family petitions, green cards, asylum, deportation defense and employment-based cases, and it already ran ads and got calls.
+
+#### The problem we found
+
+Plenty of leads came in. Too few became signed clients.
+
+  - Ads were judged by clicks and cost per click, not by signed cases.
+  - New leads often waited hours for a reply, and many had already called another firm.
+  - After-hours messages sat until the next morning.
+  - There was no clear way to see which campaign produced which client.
+
+#### The strategy, and why it works for law firms
+
+**Why it works for law firms:** immigration clients don't hire on the first click. Some are searching for a lawyer today; most are still deciding. A firm needs to reach both groups, earn trust before the first call, and answer fast when the person is ready.
+
+So we built one system instead of five separate campaigns. Every channel brings people in, fast intake turns them into clients, and happy clients leave reviews that bring in the next ones.
+
+**Image (screenshot):** growth-system/growth-system.jpg 1600x1060 *Alt text: The growth system: five channels feed one fast intake, and happy clients bring the next calls.*
+
+#### How we did it
+
+**Step 1: Put the attorneys on camera.** People don't hire a logo. They hire a person they already trust. We moved away from polished graphic ads and filmed the attorneys answering the questions clients ask every day, posted as Facebook Reels. From January to August 2026 the Reels reached 2,182,493 views and 305 days of total watch time.
+
+**Image (screenshot):** growth-system/facebook-reels.jpg 1600x730 *Alt text: Facebook Reels insights: 2,182,493 views and 305 days of watch time, January to August 2026.*
+
+**Step 2: Run messaging-first Meta ads, by office and service.** Each campaign covers one service and one office, and opens a Messenger or WhatsApp chat instead of a long form. Across 117 campaigns, Meta produced 15,738 conversations and leads between February and October 2026, at $4.36 each. A set of 16 chat campaigns alone started 6,184 client conversations at $5.72 each, with the best service (I-360 petitions) at $3.41.
+
+**Image (screenshot):** growth-system/meta-ads.jpg 1600x1640 *Alt text: Meta Ads results for an immigration law firm: 6,184 client conversations at $5.72 each across 16 service campaigns.*
+
+**Step 3: Make Google Search Ads specific.** One campaign per service, a landing page per service with one clear action, a growing negative keyword list (jobs, free forms, DIY), and every campaign judged by cost per signed client. One search ad brought 15,788 clicks at $0.22 each, the best call ad reached a 12.2% click-through rate, and the lowest cost per lead was $17 (Atlanta).
+
+**Image (screenshot):** growth-system/google-ads.jpg 1600x1340 *Alt text: Google Ads results for an immigration law firm: 15,788 clicks at $0.22 from one search ad.*
+
+**Step 4: Add Google Local Services Ads.** The "Google Screened" listings sit above regular ads, and the firm pays per lead, not per click. We set them up for green card, asylum and deportation cases. They produced 24 charged leads for $699 (about $29 each), and showed at the top of Google 99.47% of the time.
+
+**Image (screenshot):** growth-system/local-services-ads.jpg 1600x843 *Alt text: Google Local Services Ads results: $699 spend, 24 charged leads, 99.47% top impression rate.*
+
+**Step 5: Turn Google Maps into a phone line.** Every office's Google Business Profile was completed (services, photos, hours, weekly posts), asking happy clients for reviews became a daily habit, and the firm's name, address and phone matched everywhere online. Google Business Profiles brought 1,053 calls from March to September 2026, and 1,738 profile interactions (calls, chats, bookings, directions and website clicks) from June to November 2026.
+
+**Image (screenshot):** growth-system/google-business-profile.jpg 1600x774 *Alt text: Google Business Profile performance: 1,738 interactions from June to November 2026.*
+
+**Step 6: Answer every lead within 5 minutes.** No chatbot. Every first conversation starts with a real person: a case manager or receptionist from the team that handles client communication. The goal of every first conversation is simple: end it with a booked consultation.
+
+#### What we tested, and what happened
+
+**Image (screenshot):** growth-system/tests.jpg 1600x1080 *Alt text: Five tests that shaped the immigration law firm marketing strategy.*
+
+|  |  |
+| :-: | :-: |
+| **Test** | **Result** |
+| Attorney videos vs. polished graphic ads | 2,182,493 Reels views and 305 days of watch time (Jan–Aug 2026) |
+| Messaging-first Meta ads by office and service vs. one generic ad | 15,738 contacts at $4.36; cost per contact fell from $7.59 (Feb) to $2.00 in the best month |
+| Free webinars and attorney visits vs. asking for a paid consultation | Leads from $0.06 to $1.55; 2,122 NIW webinar registrations in 2025 |
+| Local Services Ads (pay per lead) vs. search ads (pay per click) | About $29 per LSA lead vs. $17 to $164 on search |
+| First reply within 5 minutes from a real person vs. the same day | More leads booked a consultation instead of calling another firm |
+
+#### The results, from lead to signed client
+
+**Image (screenshot):** growth-system/results-by-channel.jpg 1600x960 *Alt text: Immigration law firm marketing results by channel.*
+
+|  |  |
+| :-: | :-: |
+| **Channel or measure** | **Result** |
+| Signed clients per month | 79 → average of 115 (+45%), Dec 2025 → Q3 2026 |
+| Cost per lead | Down 38%, with 3x more qualified leads |
+| Facebook Reels (Jan–Aug 2026) | 2,182,493 views, 305 days of watch time |
+| Meta ads (Feb–Oct 2026) | 15,738 conversations and leads at $4.36 each |
+| Google Search Ads | 15,788 clicks at $0.22 from one ad; lowest cost per lead $17 |
+| Google Local Services Ads | 24 leads at about $29 each; top of Google 99.47% of the time |
+| Google Business Profiles | 1,053 calls (Mar–Sep 2026); 1,738 interactions (Jun–Nov 2026) |
+
+None of this came from a bigger budget alone. It came from spending the same money on what actually signs clients, and measuring every channel against signed clients each month.
+
+#### What didn't go to plan
+
+The first Meta months were the most expensive: $7.59 per contact in February and $7.77 in March, while we tested offices and services. Costs only came down once budget moved to the campaigns that produced signed clients, not the ones with the cheapest clicks.
+
+#### What your firm can take from this
+
+  - **Run channels as one system.** Search and Local Services Ads catch people searching today; attorney videos and Meta ads reach people who are still deciding.
+  - **Answer within 5 minutes, with a real person.** Fast, human intake protects every dollar you spend on ads.
+  - **Judge every channel by signed clients.** A cheap click is worthless if it never becomes a case.
+
+#### FAQ
+
+**What is the best marketing strategy for an immigration law firm?** A system that covers both groups of clients: Google Search Ads and Local Services Ads for people searching now, attorney videos and Meta chat ads for people still deciding, Google Business Profile reviews for calls, and fast intake to turn leads into signed clients.
+
+**How much does a lead cost for an immigration law firm?** In this firm's accounts: $4.36 per Meta conversation or lead on average, about $29 per Google Local Services Ads lead, and $17 to $164 per Google Search Ads lead, depending on city and service.
+
+**Are Google Local Services Ads worth it for immigration attorneys?** For this firm, yes. It paid about $29 per lead, and its ads showed at the top of Google 99.47% of the time.
+
+**How fast should an immigration law firm reply to a new lead?** Within 5 minutes, and from a real person. At this firm, a case manager or receptionist starts every first conversation.
+
+**CTA:** *Want this five-channel system for your immigration firm? Get your free AI lead audit.*
