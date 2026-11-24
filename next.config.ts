@@ -99,7 +99,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // The live site's "Get A Free Call" buttons pointed here.
-      { source: "/booking/", destination: "/contact-us/", permanent: true },
+      { source: "/booking/", destination: "/book-a-call/", permanent: true },
       // Alternate URL of the video marketing service page.
       { source: "/video-marketing/", destination: "/video-marketing-for-law-firms/", permanent: true },
       // WordPress archive pages that only listed the case studies.

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
+import { ButtonArrow, ButtonLink, buttonClasses } from "@/components/ui/Button";
 import { CheckIcon } from "@/components/ui/icons";
-import { bookingUrl } from "@/content/site";
+import { bookingIsExternal, bookingUrl } from "@/content/site";
 import { trackLead } from "@/lib/analytics";
 import { submitContact } from "./actions";
 import { serviceOptions, type ContactField, type ContactState } from "./form-config";
@@ -37,16 +37,20 @@ export function ContactForm() {
         </span>
         <h2 className="mt-6 font-display text-4xl tracking-[-0.02em]">Message sent</h2>
         <p className="mt-3 text-lg text-mist">{state.message}</p>
-        {bookingUrl && (
-          <div className="mt-8 border-t border-white/15 pt-8">
-            <p className="text-mist">Want to skip the back-and-forth? Pick a time for your audit walkthrough now.</p>
+        <div className="mt-8 border-t border-white/15 pt-8">
+          <p className="text-mist">Want to skip the back-and-forth? Pick a time for your audit walkthrough now.</p>
+          {bookingIsExternal ? (
             <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("gold", "mt-5")}>
               <span>Book a call</span>
               <ButtonArrow />
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
-          </div>
-        )}
+          ) : (
+            <ButtonLink href={bookingUrl} className="mt-5">
+              Book a call
+            </ButtonLink>
+          )}
+        </div>
       </div>
     );
   }

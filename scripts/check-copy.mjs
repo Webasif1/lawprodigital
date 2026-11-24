@@ -17,8 +17,9 @@ const files = roots.flatMap(function walk(p) {
   return statSync(p).isDirectory() ? readdirSync(p).flatMap((f) => walk(join(p, f))) : /\.(ts|tsx)$/.test(p) ? [p] : [];
 });
 
-// Search-result titles and descriptions are kept verbatim from the old site to preserve SEO.
-const seoField = /^(metaTitle|metaDescription):/;
+// Search-result titles and descriptions are kept verbatim from the old site to preserve SEO,
+// and client quotes are kept verbatim because they are the client's own words.
+const seoField = /^(metaTitle|metaDescription|quote):/;
 
 let hits = 0;
 for (const file of files) {

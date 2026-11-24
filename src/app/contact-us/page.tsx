@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonArrow, buttonClasses } from "@/components/ui/Button";
+import { BookingCalendar } from "@/app/book-a-call/BookingCalendar";
 import { WhatsAppIcon, WhatsAppLink } from "@/components/whatsapp/WhatsAppLink";
 import { serviceLabels } from "@/content/services";
-import { bookingUrl, contact, socials } from "@/content/site";
+import { bookingIsExternal, bookingUrl, contact, socials } from "@/content/site";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { ContactForm } from "./ContactForm";
 
@@ -21,9 +22,112 @@ const nextSteps = [
   "You get a 5-minute video audit, then we walk you through it on a call.",
 ];
 
-export default function ContactPage() {
-  const hasDetails = Boolean(contact.email || contact.phone || contact.offices?.length || socials.length);
+function ContactDetails() {
+  if (!(contact.email || contact.phone || contact.offices?.length || socials.length)) return null;
+  return (
+    <div className="grid gap-6">
+      {contact.phone && (
+        <p>
+          <span className="block text-sm text-muted">Phone</span>
+          <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="font-display text-2xl tracking-tight hover:text-navy">
+            {contact.phone}
+          </a>
+        </p>
+      )}
+      {contact.whatsapp && (
+        <p>
+          <span className="block text-sm text-muted">WhatsApp</span>
+          <WhatsAppLink services={serviceLabels} className="inline-flex items-center gap-2 font-display text-2xl tracking-tight hover:text-navy">
+            <WhatsAppIcon className="size-6 text-[#1ea952]" />
+            Message us
+          </WhatsAppLink>
+        </p>
+      )}
+      {contact.email && (
+        <p>
+          <span className="block text-sm text-muted">Email</span>
+          <a href={`mailto:${contact.email}`} className="font-display text-2xl tracking-tight break-all hover:text-navy">
+            {contact.email}
+          </a>
+        </p>
+      )}
+      {contact.offices?.map((o) => (
+        <div key={o.label}>
+          <h3 className="text-sm text-muted">{o.label}</h3>
+          <address className="mt-1 not-italic leading-relaxed">
+            {o.lines.map((l) => (
+              <span key={l} className="block">
+                {l}
+              </span>
+            ))}
+          </address>
+        </div>
+      ))}
+      {socials.length > 0 && (
+        <ul className="flex flex-wrap gap-4">
+          {socials.map((s) => (
+            <li key={s.href}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="font-semibold underline-offset-4 hover:underline">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
+function NextSteps() {
+  return (
+    <>
+      <p className="text-lg leading-relaxed text-ink/80">
+        Have questions? Want to learn how our services can bring more clients through your door? Whether you’re looking for more signed clients, better reviews or a stronger presence in AI search, our team is here to help.
+      </p>
+      <h2 className="eyebrow mt-12 text-brass">What happens next</h2>
+      <ol className="mt-5 grid border-t border-line">
+        {nextSteps.map((s, i) => (
+          <li key={s} className="flex gap-4 border-b border-line py-4 leading-snug">
+            <span className="figure w-7 shrink-0 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ol>
+    </>
+  );
+}
+
+/** The enquiry form layout: used with an external scheduler, and as the fallback while online booking is off. */
+function FormSection({ withBookingLink = false }: { withBookingLink?: boolean }) {
+  return (
+    <section aria-label="Contact form" className="bg-paper">
+      <div className="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <NextSteps />
+          {withBookingLink && (
+            <div className="mt-12 rounded-card bg-surface p-6 ring-1 ring-line">
+              <h2 className="font-display text-xl font-bold tracking-tight">Prefer to pick a time?</h2>
+              <p className="mt-2 text-muted">Book a strategy call directly in our calendar.</p>
+              <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("ink", "mt-5")}>
+                <span>Book a call</span>
+                <ButtonArrow />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          )}
+          <div className="mt-12 border-t border-line pt-8">
+            <ContactDetails />
+          </div>
+        </div>
+        <div className="lg:col-span-7">
+          <ContactForm />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function ContactPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Contact Us", path: "/contact-us/" }])} />
@@ -37,92 +141,37 @@ export default function ContactPage() {
         }
         intro="In 5 minutes of video, we’ll show you how your firm appears on Google, Maps and ChatGPT, and what happens when a prospect contacts you after hours."
       />
-      <section aria-label="Contact form" className="bg-paper">
-        <div className="container-x grid gap-14 py-20 sm:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <p className="text-lg leading-relaxed text-ink/80">
-              Have questions? Want to learn how our services can bring more clients through your door? Whether you’re looking for more signed clients, better reviews or a stronger presence in AI search, our team is here to help.
-            </p>
-            <h2 className="eyebrow mt-12 text-brass">What happens next</h2>
-            <ol className="mt-5 grid border-t border-line">
-              {nextSteps.map((s, i) => (
-                <li key={s} className="flex gap-4 border-b border-line py-4 leading-snug">
-                  <span className="figure w-7 shrink-0 text-lg tabular-nums text-brass">{String(i + 1).padStart(2, "0")}</span>
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ol>
-
-            {bookingUrl && (
-              <div className="mt-12 rounded-card bg-surface p-6 ring-1 ring-line">
-                <h2 className="font-display text-xl font-bold tracking-tight">Prefer to pick a time?</h2>
-                <p className="mt-2 text-muted">Book a strategy call directly in our calendar.</p>
-                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("ink", "mt-5")}>
-                  <span>Book a call</span>
-                  <ButtonArrow />
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
+      {bookingIsExternal ? (
+        <FormSection withBookingLink />
+      ) : (
+        // The calendar is the way to get in touch. If booking is switched off (no Google or
+        // SMTP settings), the enquiry form shows instead, so the page always has a way in.
+        <div id="book" className="scroll-mt-24 bg-paper">
+          <BookingCalendar
+            fallback={<FormSection />}
+            header={
+              <div className="container-x pt-16 sm:pt-24">
+                <p className="eyebrow text-brass">Book a call</p>
+                <h2 className="mt-3 mb-8 font-display text-3xl font-bold tracking-tight sm:text-4xl">Pick a time that suits you</h2>
               </div>
-            )}
-
-            {hasDetails && (
-              <div className="mt-12 grid gap-6 border-t border-line pt-8">
-                {contact.phone && (
-                  <p>
-                    <span className="block text-sm text-muted">Phone</span>
-                    <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="font-display text-2xl tracking-tight hover:text-navy">
-                      {contact.phone}
-                    </a>
-                  </p>
-                )}
-                {contact.whatsapp && (
-                  <p>
-                    <span className="block text-sm text-muted">WhatsApp</span>
-                    <WhatsAppLink services={serviceLabels} className="inline-flex items-center gap-2 font-display text-2xl tracking-tight hover:text-navy">
-                      <WhatsAppIcon className="size-6 text-[#1ea952]" />
-                      Message us
-                    </WhatsAppLink>
-                  </p>
-                )}
-                {contact.email && (
-                  <p>
-                    <span className="block text-sm text-muted">Email</span>
-                    <a href={`mailto:${contact.email}`} className="font-display text-2xl tracking-tight break-all hover:text-navy">
-                      {contact.email}
-                    </a>
-                  </p>
-                )}
-                {contact.offices?.map((o) => (
-                  <div key={o.label}>
-                    <h3 className="text-sm text-muted">{o.label}</h3>
-                    <address className="mt-1 not-italic leading-relaxed">
-                      {o.lines.map((l) => (
-                        <span key={l} className="block">
-                          {l}
-                        </span>
-                      ))}
-                    </address>
+            }
+            bodyClassName="container-x"
+            footer={
+              <div className="container-x grid gap-14 py-20 sm:py-24 lg:grid-cols-12">
+                <div className="lg:col-span-7">
+                  <NextSteps />
+                </div>
+                <div className="lg:col-span-4 lg:col-start-9">
+                  <h2 className="eyebrow text-brass">Other ways to reach us</h2>
+                  <div className="mt-5 border-t border-line pt-6">
+                    <ContactDetails />
                   </div>
-                ))}
-                {socials.length > 0 && (
-                  <ul className="flex flex-wrap gap-4">
-                    {socials.map((s) => (
-                      <li key={s.href}>
-                        <a href={s.href} target="_blank" rel="noopener noreferrer" className="font-semibold underline-offset-4 hover:underline">
-                          {s.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                </div>
               </div>
-            )}
-          </div>
-          <div className="lg:col-span-7">
-            <ContactForm />
-          </div>
+            }
+          />
         </div>
-      </section>
+      )}
     </>
   );
 }

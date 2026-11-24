@@ -8,8 +8,8 @@ import { serviceOptions, type ContactField } from "./form-config";
 export const MAX = { name: 80, email: 200, website: 200, phone: 40, city: 80, message: 5000 } as const;
 export const MIN_FILL_MS = 2500;
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+\d\s().-]{6,}$/;
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const PHONE_RE = /^[+\d\s().-]{6,}$/;
 
 export type ContactValues = Record<ContactField, string>;
 
@@ -43,12 +43,12 @@ export function normalizeWebsite(input: string): string | null {
   }
 }
 
-/** Honeypot filled, or the form was submitted faster than a person could fill it. */
+/** Why the post looks automated (honeypot filled, or sent faster than a person could fill it), or null. */
 export function looksAutomated(formData: FormData, now = Date.now()) {
-  const honeypot = String(formData.get("website") ?? "").trim();
+  if (String(formData.get("website") ?? "").trim()) return "honeypot";
   // The timestamp is set by JS, so it is only enforced when present (no-JS posts still work).
   const startedAt = Number(formData.get("startedAt") ?? 0);
-  return Boolean(honeypot) || (startedAt > 0 && now - startedAt < MIN_FILL_MS);
+  return startedAt > 0 && now - startedAt < MIN_FILL_MS ? "too-fast" : null;
 }
 
 /** Required: first name, email and the firm's website (the audit needs it). Everything else is optional. */
