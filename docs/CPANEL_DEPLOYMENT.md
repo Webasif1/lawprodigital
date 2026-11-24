@@ -158,7 +158,50 @@ where you build). Change one, rebuild. Any that are empty simply aren't loaded.
 | `NEXT_PUBLIC_GTM_ID` | `GTM-XXXXXXX` | Google Tag Manager (pushes `generate_lead` to the dataLayer) |
 | `NEXT_PUBLIC_META_PIXEL_ID` | `1234567890` | Meta Pixel (`PageView`, `Lead` on a sent form) |
 | `NEXT_PUBLIC_CLARITY_ID` | `abcdefghij` | Microsoft Clarity |
-| `NEXT_PUBLIC_BOOKING_URL` | `https://calendly.com/…` | "Book a call" on the contact page and after the form is sent |
+| `NEXT_PUBLIC_BOOKING_URL` | `https://calendly.com/…` | Optional. Sends "Book a call" links to an external scheduler instead of the built-in `/book-a-call/` |
+
+### Booking calendar and leads sheet (server-only, read at request time)
+
+`/book-a-call/` is the site's own scheduler: the client picks a day, a call length (15 min, 30 min or 1 hr) and a
+time, then fills in a short form. Free times are your working hours (hours and lengths are in
+`src/content/booking.ts`; hours are in `BOOKING_TIMEZONE`) minus anything busy on your Google Calendar, so blocking time or cancelling an event there
+changes what visitors see within a minute. A booking creates a Calendar event with a Google Meet link and Google
+emails the invitation to the client. Every booking is added to the sheet's `Bookings` tab, and every contact-form
+enquiry to its `Leads` tab. A Sheets error is logged and never fails the booking or enquiry.
+
+| Variable | Required | Example | Notes |
+| --- | --- | --- | --- |
+| `GOOGLE_CLIENT_ID` | For booking | `123….apps.googleusercontent.com` | OAuth client of type **Desktop app** |
+| `GOOGLE_CLIENT_SECRET` | For booking | `GOCSPX-…` | |
+| `GOOGLE_REFRESH_TOKEN` | For booking | `1//0…` | From `node scripts/google-auth.mjs` |
+| `GOOGLE_CALENDAR_ID` | No | `primary` | Calendar that receives bookings and blocks slots |
+| `GOOGLE_SHEET_ID` | For the sheet | `1AbC…` | From the sheet URL; needs tabs `Bookings` and `Leads` |
+| `BOOKING_TIMEZONE` | No | `America/New_York` | Time zone of your working hours |
+
+**Before the Google keys are set (email mode).** If the three `GOOGLE_*` credentials are missing but SMTP is set
+up, the calendar still shows on `/contact-us/` and `/book-a-call/`. Free times are your working hours only (your
+own Google Calendar isn't checked), and each booking is emailed to `CONTACT_TO` as a "call request". Reply to
+confirm and send the meeting link yourself. Requested times are blocked in memory, so they are free again after the
+app restarts. Add the Google keys to switch to automatic Meet invites and calendar checks. With neither Google nor
+SMTP configured, the calendar is hidden.
+
+**One-time setup**
+
+1. In [Google Cloud console](https://console.cloud.google.com/) create a project and enable the **Google Calendar
+   API** and **Google Sheets API**.
+2. OAuth consent screen: type External, add your Google account as a test user, then **Publish app** (status "In
+   production"). Apps left in Testing get refresh tokens that expire after 7 days. Google's "unverified app" warning
+   only appears to you during step 4.
+3. Credentials → Create credentials → OAuth client ID → **Desktop app**. Copy the client ID and secret. (A "Web
+   application" client also works if you add `http://127.0.0.1:53682/callback` to its Authorized redirect URIs.)
+4. On your computer, in the project folder, run (sign in with the Google account whose calendar should take
+   bookings):
+   `GOOGLE_CLIENT_ID=… GOOGLE_CLIENT_SECRET=… node scripts/google-auth.mjs`
+   It prints `GOOGLE_REFRESH_TOKEN`.
+5. Create a Google Sheet in the same account with two tabs named exactly `Bookings` and `Leads`. Optional header rows:
+   - Bookings: `Booked at | Call (your time) | Call (UTC) | Client time zone | Duration (min) | Name | Email | Phone | Website | Notes | Meet link | Event ID | Status`
+   - Leads: `Received at | First name | Last name | Email | Phone | Website | City | Service | Message`
+6. Add the variables above in Setup Node.js App → Environment variables and restart the app.
 
 ### Indexing
 
@@ -176,6 +219,45 @@ staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it befor
 - If the old WordPress site lived in the same `public_html`, remove its `.htaccess` rewrite rules so Passenger
   serves the Node app.
 
+## Bots and crawlers
+
+A crawler can fetch every page in the sitemap in under a minute. It shows up as hundreds of 0-second visits, often
+to `/contact-us`, which is linked from every page. Block bots as early as possible. Each layer below is cheaper than
+the one after it:
+
+1. **Cloudflare (recommended, free plan).** Proxy the domain through Cloudflare. Under Security → Security rules,
+   add a custom rule `(cf.client.bot)` → **Skip** all remaining custom rules, placed **first**, so Googlebot and
+   Bingbot are never challenged. Then add the free plan's rate limiting rule (for example 60 requests per 10 seconds
+   per IP → Block). Bot Fight Mode also helps, but on the free plan it can't be bypassed and may challenge uptime
+   monitors. The app reads the visitor's IP from `CF-Connecting-IP`.
+2. **`.htaccess` in `public_html`.** Apache answers before Passenger starts Node. Put this above the Passenger
+   lines:
+
+   ```apache
+   RewriteEngine On
+   RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+   RewriteCond %{HTTP_USER_AGENT} (python-requests|python-urllib|aiohttp|go-http-client|libwww-perl|scrapy|headlesschrome|phantomjs|bytespider) [NC]
+   RewriteRule ^ - [F,L]
+   ```
+
+   Ask the host whether Imunify360 or ModSecurity is on for the account. Both block known bad bots before the app.
+3. **The app (`src/proxy.ts`).** Page loads are limited to 60 per IP per minute (429 with `Retry-After`). The same
+   user agents as above get 403. Search engines and AI crawlers (Googlebot, Bingbot, GPTBot, ClaudeBot) are only
+   rate limited, never blocked; Google treats 429 as "slow down". Link prefetches, `/_next` assets, `/api` and files
+   with an extension aren't counted. Change the numbers in `PAGE_RATE` in `src/lib/bot-guard.ts`.
+
+`robots.txt` asks SEO-tool crawlers (Ahrefs, Semrush, MJ12, DotBot…) for a 10-second crawl delay. Polite bots honour
+it; others hit the limit above.
+
+**Watching it.** Blocks are logged to `stderr.log`, at most one line per IP per minute:
+`[proxy] 429 ip=… path=… ua="…"`. A bot that posted the contact form and was stopped logs
+`[contact] blocked reason=honeypot|too-fast|rate-limit ip=… ua="…"`. No `[contact]` line means it only looked at the
+page. Requests with no real client IP (`unknown` or `127.0.0.1`) are never page-rate-limited, because they would
+all share one bucket. If the `[contact]` lines show those addresses, the server in front of Passenger isn't sending
+`X-Forwarded-For`, so the per-IP limit is off. Ask the host, or use Cloudflare. For the full picture of a spike, download cPanel → Metrics →
+**Raw Access** for that day and group requests by IP and user agent. In GA4, Admin → Data filters can exclude bot
+and internal traffic.
+
 ## Logs and troubleshooting
 
 - App errors: `stderr.log` in the application root, or cPanel → Errors. Contact-form failures are logged as
@@ -187,7 +269,7 @@ staging subdomain); `SITE_NOINDEX=false` allows indexing on Vercel. Set it befor
   with the image smoke test in [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md).
 - Chat replies arrive all at once instead of word by word: the proxy in front of Passenger (Apache/LiteSpeed)
   is buffering the response. It still works; streaming is cosmetic.
-- Passenger may start more than one Node process. The chat and contact rate limits are in memory, per process,
+- Passenger may start more than one Node process. The page, chat and contact rate limits are in memory, per process,
   so N processes allow N× the limits. Keep the OpenRouter credit limit set on the key as the hard cap.
 - Form says "temporarily unavailable": SMTP variables missing. "Something went wrong sending": wrong credentials or
   port — check the log.

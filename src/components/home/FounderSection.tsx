@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { founder } from "@/content/home";
 import { videoTestimonial } from "@/content/testimonials";
 import { VideoTestimonial } from "@/components/sections/VideoTestimonial";
@@ -36,18 +35,7 @@ export function FounderSection() {
               {founder.quote}
             </blockquote>
             <figcaption className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
-              {founder.photo ? (
-                <Image
-                  src={founder.photo.src}
-                  width={founder.photo.width}
-                  height={founder.photo.height}
-                  alt={`${founder.name}, ${founder.role}`}
-                  sizes="4rem"
-                  className="size-16 rounded-full object-cover ring-2 ring-gold/60"
-                />
-              ) : (
-                <span aria-hidden className="h-px w-10 bg-gold" />
-              )}
+              <span aria-hidden className="h-px w-10 bg-gold" />
               <span>
                 <span className="block font-display text-lg font-bold text-white">{founder.name}</span>
                 <span className="block text-sm text-mist">{founder.role}</span>

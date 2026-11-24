@@ -1,5 +1,3 @@
-import { founder } from "@/content/home";
-
 export type TeamMember = {
   name: string;
   role: string;
@@ -10,32 +8,22 @@ export type TeamMember = {
   links: { label: string; href: string }[];
 };
 
-// Real people only. Add each new member here with their portrait in public/images/team/.
-export const team: TeamMember[] = [
-  {
-    name: founder.name,
-    role: "Founder",
-    bio: "Built the system inside a multi-office US immigration firm: the ads, the content, the Google profiles and the monthly reports.",
-    photo: founder.photo,
-    links: founder.links,
-  },
-  {
-    name: "Md Arafat Hossain Asif",
-    role: "Co-Founder",
-    links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mdarafathossain-asif/" }],
-  },
-];
-
-const demoPhoto = (n: number) => ({ src: `/images/team/demo/demo-${n}.svg`, width: 400, height: 400 });
+const teamPhoto = (file: string, size = 600) => ({ src: `/images/team/${file}`, width: size, height: size });
 
 /**
- * Fictional placeholders to preview a fuller grid. Shown only by `next dev`, never in a
- * production build: replace them with real members in `team` above.
+ * Shown in this order; the carousel opens on the middle card.
+ * Add each new member here with their portrait in public/images/team/.
  */
-export const demoTeam: TeamMember[] = [
-  { name: "Demo Member", role: "Meta Ads Specialist", bio: "Placeholder card: dev preview only.", photo: demoPhoto(1), links: [] },
-  { name: "Demo Member", role: "SEO & AI Search Lead", bio: "Placeholder card: dev preview only.", photo: demoPhoto(2), links: [] },
-  { name: "Demo Member", role: "Content Writer", bio: "Placeholder card: dev preview only.", photo: demoPhoto(3), links: [] },
-  { name: "Demo Member", role: "Client Success Manager", bio: "Placeholder card: dev preview only.", photo: demoPhoto(4), links: [] },
-  { name: "Demo Member", role: "Video Editor", bio: "Placeholder card: dev preview only.", photo: demoPhoto(5), links: [] },
+export const team: TeamMember[] = [
+  // TODO(owner): placeholder name: replace with the team member's real name.
+  { name: "Daniel Carter", role: "SEO & AI Search Specialist", photo: teamPhoto("member-1.jpg"), links: [] },
+  {
+    name: "Md Arafat Hossain Asif",
+    role: "Co-Founder · Developer & Designer",
+    photo: teamPhoto("arafat-hossain-asif.jpg", 400),
+    links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mdarafathossain-asif/" }],
+  },
+  // TODO(owner): placeholder names: replace with the team members' real names.
+  { name: "Sofia Martinez", role: "Meta Ads Specialist", photo: teamPhoto("member-2.jpg"), links: [] },
+  { name: "Priya Sharma", role: "Client Success Manager", photo: teamPhoto("member-3.jpg"), links: [] },
 ];
