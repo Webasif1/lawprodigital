@@ -55,6 +55,7 @@ export const storyMeta: Record<number, StoryMeta> = {
     firm: "Bankruptcy law firm, Annapolis, Maryland · 6-month engagement",
     video: { youtubeId: videoTestimonial.youtubeId, cover: videoTestimonial.cover, title: "Timothy Chambers of Chambers Law Firm on working with Law Pro Digital" },
   },
+  18: { image: "s18-growth-system.jpg", service: ppc, channel: "Strategy" },
 };
 
 /** Old case study URLs and the story that now answers the same question (used for 301s). */
