@@ -7,9 +7,9 @@ import { getStories } from "@/lib/stories";
 describe("case study library", () => {
   const stories = getStories();
 
-  it("parses all 17 stories with unique slugs and SEO fields", () => {
-    expect(stories).toHaveLength(17);
-    expect(new Set(stories.map((s) => s.slug)).size).toBe(17);
+  it("parses all 18 stories with unique slugs and SEO fields", () => {
+    expect(stories).toHaveLength(18);
+    expect(new Set(stories.map((s) => s.slug)).size).toBe(18);
     for (const s of stories) {
       expect(s.href).toBe(`/case-study/${s.slug}/`);
       expect(s.seoTitle.length).toBeGreaterThan(10);
