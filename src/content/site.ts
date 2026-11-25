@@ -16,7 +16,7 @@ export type ContactDetails = {
   offices?: { label: string; lines: string[] }[];
 };
 
-export type SocialLink = { label: "Facebook" | "Twitter" | "YouTube" | "LinkedIn" | "Instagram" | "Upwork"; href: string };
+export type SocialLink = { label: "Facebook" | "Twitter" | "YouTube" | "LinkedIn" | "Instagram" | "TikTok" | "Upwork"; href: string };
 
 export const site = {
   name: "Law Pro Digital",
@@ -55,6 +55,9 @@ export const whatsappUrl = (text: string) =>
 export const socials: SocialLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/lawprodigital/" },
   { label: "YouTube", href: "https://www.youtube.com/@LawProDigital" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61579339467322" },
+  { label: "Instagram", href: "https://www.instagram.com/lawprodigital/" },
+  { label: "TikTok", href: "https://www.tiktok.com/@lawprodigital" },
 ];
 
 /** Shown after the Services menu in the header. */
