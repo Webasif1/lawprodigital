@@ -17,7 +17,7 @@ export const hero = {
   headline: ["More Signed Clients for", "US Immigration Law Firms,"],
   emphasis: "Powered by AI",
   sub: "Meta Ads, SEO, AI search and AI intake, built around one number: signed retainers. One immigration firm we work with went from 79 to 115 new clients a month.",
-  secondaryCta: { label: "Read the 9-month story", href: "/case-study/immigration-law-firm-marketing-strategy/" },
+  secondaryCta: { label: "Read the 9-month story", href: "/case-study/immigration-law-firm-client-growth/" },
   trust: ["No long contracts", "Monthly scorecard to signed clients", "Live dashboards on your onboarding call"],
 };
 

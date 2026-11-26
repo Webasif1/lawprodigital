@@ -43,19 +43,17 @@ export const bookingIsExternal = /^https?:\/\//.test(bookingUrl);
 
 export const contact: ContactDetails = {
   email: "hello@lawprodigital.com",
+  phone: "+1 (603) 842-2765",
   whatsapp: "8801707873234",
-  offices: [{ label: "New York", lines: ["60 Bay Street", "Staten Island, NY 10301", "United States"] }],
+  offices: [{ label: "New York", lines: ["New York, NY", "United States"] }],
 };
 
 /** A wa.me link that opens a WhatsApp chat with `text` already typed in. */
 export const whatsappUrl = (text: string) =>
   contact.whatsapp ? `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text)}` : undefined;
 
-/** Official profiles. Also used as the Organization schema's sameAs. */
-export const socials: SocialLink[] = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/lawprodigital/" },
-  { label: "YouTube", href: "https://www.youtube.com/@LawProDigital" },
-];
+// TODO(owner): add real LinkedIn, Facebook and YouTube URLs. Empty list renders nothing.
+export const socials: SocialLink[] = [];
 
 /** Shown after the Services menu in the header. */
 export const mainNav: NavLink[] = [

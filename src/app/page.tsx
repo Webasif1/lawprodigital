@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AiSection } from "@/components/home/AiSection";
-import { CitiesSection } from "@/components/home/CitiesSection";
 import { ComparisonSection } from "@/components/home/ComparisonSection";
 import { FirmFitSection } from "@/components/home/FirmFitSection";
 import { FounderSection } from "@/components/home/FounderSection";
@@ -48,7 +47,6 @@ export default function HomePage() {
       <InternationalSection />
       <ProcessSection eyebrow="First 90 days" heading={process.heading} intro={process.intro} steps={process.steps} tone="light" />
       <FirmFitSection />
-      <CitiesSection />
       <FounderSection />
       <FaqList items={faqs} />
       <CtaBand />

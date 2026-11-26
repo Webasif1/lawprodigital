@@ -142,7 +142,7 @@ export const locations: Location[] = [
   {
     slug: "sugar-land-tx", practice: "immigration", city: "Sugar Land", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Missouri City", "Stafford", "Richmond", "Rosenberg", "Fulshear", "Meadows Place", "Fort Bend County"],
-    related: ["houston-tx", "katy-tx", "pasadena-tx"],
+    related: ["katy-tx", "pasadena-tx"],
     metaTitle: "Immigration Lawyer SEO Sugar Land: More Signed Cases",
     metaDescription: "Sugar Land immigration firms: rank on Google, Maps and ChatGPT, run multilingual ads and sign more cases with AI intake. Custom packages. Free call.",
     primaryKeyword: "immigration lawyer seo sugar land",
@@ -182,7 +182,7 @@ export const locations: Location[] = [
   {
     slug: "katy-tx", practice: "immigration", city: "Katy", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Cinco Ranch", "Fulshear", "Brookshire", "Cypress", "Richmond", "Sealy", "West Houston"],
-    related: ["houston-tx", "sugar-land-tx", "pasadena-tx"],
+    related: ["sugar-land-tx", "pasadena-tx"],
     metaTitle: "Katy Immigration Law Firm Marketing That Signs Cases",
     metaDescription: "Katy immigration firms: rank on Google and ChatGPT, run Meta and Google ads that sign cases and convert leads with AI intake. Custom packages. Free call.",
     primaryKeyword: "immigration law firm marketing katy",
@@ -222,7 +222,7 @@ export const locations: Location[] = [
   {
     slug: "pasadena-tx", practice: "immigration", city: "Pasadena", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Deer Park", "South Houston", "La Porte", "Baytown", "Pearland", "Channelview", "East Houston"],
-    related: ["houston-tx", "sugar-land-tx", "katy-tx"],
+    related: ["sugar-land-tx", "katy-tx"],
     metaTitle: "Pasadena TX Immigration Lawyers: Fill Your Calendar",
     metaDescription: "Spanish and English marketing for Pasadena, TX immigration lawyers: local SEO, Google Maps, Meta ads and AI intake. Custom packages. Free 30-minute call.",
     primaryKeyword: "immigration lawyer marketing pasadena tx",
@@ -262,7 +262,7 @@ export const locations: Location[] = [
   {
     slug: "mcallen-tx", practice: "immigration", city: "McAllen", state: "Texas", stateCode: "TX", metro: "Rio Grande Valley",
     neighbors: ["Edinburg", "Mission", "Pharr", "Weslaco", "Hidalgo", "Harlingen", "Hidalgo County"],
-    related: ["brownsville-tx", "laredo-tx", "san-antonio-tx"],
+    related: ["pasadena-tx", "garland-tx"],
     metaTitle: "McAllen Immigration Lawyer SEO: More Signed Clients",
     metaDescription: "McAllen and Rio Grande Valley immigration firms: own Google, Maps and AI answers, run bilingual ads and sign more cases with AI intake. Custom packages.",
     primaryKeyword: "immigration lawyer seo mcallen",
@@ -302,7 +302,7 @@ export const locations: Location[] = [
   {
     slug: "irving-tx", practice: "immigration", city: "Irving", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Las Colinas", "Grand Prairie", "Coppell", "Euless", "Carrollton", "Farmers Branch", "Dallas"],
-    related: ["dallas-tx", "garland-tx", "arlington-tx"],
+    related: ["garland-tx", "sugar-land-tx"],
     metaTitle: "Irving Immigration Law Firm SEO: Rank on Google & AI",
     metaDescription: "Irving immigration firms: SEO, AI search optimization, Google and Meta ads, content and AI intake from a law-firm-only team. Custom packages. Free call.",
     primaryKeyword: "immigration law firm seo irving",
@@ -342,7 +342,7 @@ export const locations: Location[] = [
   {
     slug: "garland-tx", practice: "immigration", city: "Garland", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Rowlett", "Mesquite", "Richardson", "Sachse", "Rockwall", "Wylie", "Dallas"],
-    related: ["dallas-tx", "irving-tx", "arlington-tx"],
+    related: ["irving-tx", "mcallen-tx"],
     metaTitle: "Garland Immigration Lawyers: Win the Spanish Searches",
     metaDescription: "Grow your Garland immigration practice with local SEO, AI search, bilingual Meta ads and AI intake that turns leads into retained clients. Custom packages.",
     primaryKeyword: "immigration lawyer marketing garland",
@@ -382,7 +382,7 @@ export const locations: Location[] = [
   {
     slug: "doral-fl", practice: "immigration", city: "Doral", state: "Florida", stateCode: "FL", metro: "Miami",
     neighbors: ["Miami", "Hialeah", "Miami Springs", "Sweetwater", "Medley", "Fontainebleau", "Kendall"],
-    related: ["miami-fl", "hialeah-fl", "fort-lauderdale-fl"],
+    related: ["hialeah-fl", "kissimmee-fl"],
     metaTitle: "Doral Immigration Lawyer SEO: Own Google & ChatGPT",
     metaDescription: "Doral immigration attorneys: rank in Google, Maps and ChatGPT, run Spanish-language ads and convert more consultations with AI intake. Custom packages.",
     primaryKeyword: "immigration lawyer seo doral",
@@ -422,7 +422,7 @@ export const locations: Location[] = [
   {
     slug: "hialeah-fl", practice: "immigration", city: "Hialeah", state: "Florida", stateCode: "FL", metro: "Miami",
     neighbors: ["Miami Lakes", "Hialeah Gardens", "Miami Springs", "Doral", "Opa-locka", "Medley", "Miami"],
-    related: ["miami-fl", "doral-fl", "hollywood-fl"],
+    related: ["doral-fl", "kissimmee-fl"],
     metaTitle: "Hialeah Immigration Lawyers: More Cases, Less Ad Waste",
     metaDescription: "Hialeah immigration firms: bilingual SEO, Google Business Profile, Meta and Google ads, video and AI intake that signs more cases. Custom packages.",
     primaryKeyword: "immigration lawyer marketing hialeah",
@@ -462,7 +462,7 @@ export const locations: Location[] = [
   {
     slug: "kissimmee-fl", practice: "immigration", city: "Kissimmee", state: "Florida", stateCode: "FL", metro: "Orlando",
     neighbors: ["Orlando", "St. Cloud", "Celebration", "Poinciana", "Buenaventura Lakes", "Hunters Creek", "Osceola County"],
-    related: ["orlando-fl", "tampa-fl", "miami-fl"],
+    related: ["doral-fl", "hialeah-fl"],
     metaTitle: "Kissimmee Immigration & Injury Firms: Sign More Cases",
     metaDescription: "Kissimmee immigration and injury lawyers: SEO, AI search, bilingual paid ads and AI intake from a team that only works with law firms. Custom packages.",
     primaryKeyword: "immigration law firm marketing kissimmee",
@@ -502,7 +502,7 @@ export const locations: Location[] = [
   {
     slug: "brandon-fl", practice: "personal-injury", city: "Brandon", state: "Florida", stateCode: "FL", metro: "Tampa Bay",
     neighbors: ["Tampa", "Riverview", "Valrico", "Seffner", "Plant City", "Lithia", "Hillsborough County"],
-    related: ["tampa-fl", "st-petersburg-fl", "clearwater-fl"],
+    related: [],
     metaTitle: "Brandon FL Injury Lawyer Marketing: Beat the TV Firms",
     metaDescription: "Brandon injury and bankruptcy firms: Google LSA, local SEO, AI search and intake that signs more cases, backed by real law firm results. Custom packages.",
     primaryKeyword: "personal injury lawyer marketing brandon fl",
@@ -542,7 +542,7 @@ export const locations: Location[] = [
   {
     slug: "duluth-ga", practice: "immigration", city: "Duluth", state: "Georgia", stateCode: "GA", metro: "Atlanta",
     neighbors: ["Suwanee", "Lawrenceville", "Norcross", "Johns Creek", "Peachtree Corners", "Buford", "Gwinnett County"],
-    related: ["atlanta-ga", "norcross-ga"],
+    related: ["fairfax-va", "irving-tx"],
     metaTitle: "Duluth GA Immigration Lawyer SEO: Lead Gwinnett Search",
     metaDescription: "Duluth and Gwinnett immigration firms: multilingual SEO, AI search (AEO/GEO), Meta and Google ads and AI intake that books consultations. Custom packages.",
     primaryKeyword: "immigration lawyer seo duluth ga",
@@ -582,7 +582,7 @@ export const locations: Location[] = [
   {
     slug: "fairfax-va", practice: "immigration", city: "Fairfax", state: "Virginia", stateCode: "VA", metro: "Washington DC",
     neighbors: ["Fairfax City", "Annandale", "Falls Church", "Springfield", "Centreville", "Herndon", "Reston"],
-    related: ["silver-spring-md", "elizabeth-nj", "atlanta-ga"],
+    related: ["duluth-ga", "irving-tx"],
     metaTitle: "Fairfax Immigration Law Firm SEO: Rank on Google & AI",
     metaDescription: "Fairfax and Northern Virginia immigration firms: SEO, AI search, paid ads, content and AI intake to sign more family, asylum and work-visa cases.",
     primaryKeyword: "immigration law firm seo fairfax va",
@@ -623,7 +623,7 @@ export const locations: Location[] = [
   {
     slug: "houston-tx", practice: "immigration", city: "Houston", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Sugar Land", "Katy", "Pasadena", "Spring", "Pearland", "Cypress", "Harris County"],
-    related: ["sugar-land-tx", "katy-tx", "pasadena-tx", "san-antonio-tx"],
+    related: ["sugar-land-tx", "katy-tx", "pasadena-tx"],
     metaTitle: "Houston Immigration Lawyer Marketing That Signs Cases",
     metaDescription: "Houston immigration firms: SEO, AI search, Google and Meta ads, lead generation and AI intake measured by cost per signed client. Custom packages.",
     primaryKeyword: "immigration lawyer seo houston",
@@ -663,7 +663,7 @@ export const locations: Location[] = [
   {
     slug: "houston-tx", practice: "personal-injury", city: "Houston", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["The Woodlands", "Sugar Land", "Katy", "Pasadena", "Pearland", "Spring", "Harris County"],
-    related: ["the-woodlands-tx", "pearland-tx", "spring-tx", "dallas-tx"],
+    related: ["the-woodlands-tx", "brandon-fl"],
     metaTitle: "Houston Personal Injury & Bankruptcy Lawyer Marketing",
     metaDescription: "Houston injury and bankruptcy firms: local SEO, Google LSA, AI search, video and AI intake that signs more cases than ads alone. Custom packages.",
     primaryKeyword: "personal injury lawyer seo houston",
@@ -703,7 +703,7 @@ export const locations: Location[] = [
   {
     slug: "miami-fl", practice: "immigration", city: "Miami", state: "Florida", stateCode: "FL", metro: "Miami",
     neighbors: ["Doral", "Hialeah", "Coral Gables", "Little Havana", "Kendall", "Miami Beach", "Miami-Dade County"],
-    related: ["doral-fl", "hialeah-fl", "fort-lauderdale-fl", "hollywood-fl"],
+    related: ["doral-fl", "hialeah-fl", "fort-lauderdale-fl"],
     metaTitle: "Miami Immigration Lawyer SEO: Win Spanish & AI Search",
     metaDescription: "Miami immigration firms: Spanish-first SEO, AI search, Google and Meta ads, video and AI intake that books consultations day or night. Custom packages.",
     primaryKeyword: "immigration lawyer seo miami",
@@ -743,7 +743,7 @@ export const locations: Location[] = [
   {
     slug: "tampa-fl", practice: "immigration", city: "Tampa", state: "Florida", stateCode: "FL", metro: "Tampa Bay",
     neighbors: ["Brandon", "St. Petersburg", "Clearwater", "Riverview", "Town 'n' Country", "Carrollwood", "Hillsborough County"],
-    related: ["orlando-fl", "kissimmee-fl", "miami-fl"],
+    related: ["orlando-fl", "miami-fl"],
     metaTitle: "Tampa Immigration Lawyer SEO: Beat the Directories",
     metaDescription: "Tampa immigration firms: SEO, AI search, Google and Meta ads, content and AI intake that turns Tampa Bay searches into signed cases. Custom packages.",
     primaryKeyword: "immigration lawyer seo tampa",
@@ -823,7 +823,7 @@ export const locations: Location[] = [
   {
     slug: "dallas-tx", practice: "immigration", city: "Dallas", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Irving", "Garland", "Plano", "Richardson", "Mesquite", "Grand Prairie", "Dallas County"],
-    related: ["irving-tx", "garland-tx", "arlington-tx", "houston-tx"],
+    related: ["irving-tx", "garland-tx", "houston-tx"],
     metaTitle: "Dallas Immigration Lawyer Marketing: Leads That Sign",
     metaDescription: "Dallas immigration firms: SEO, AI search, Google and Meta ads, lead generation and AI intake measured by cost per signed client. Custom packages.",
     primaryKeyword: "immigration lawyer seo dallas",
@@ -863,7 +863,7 @@ export const locations: Location[] = [
   {
     slug: "dallas-tx", practice: "personal-injury", city: "Dallas", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Irving", "Garland", "Plano", "Fort Worth", "Mesquite", "Grand Prairie", "Dallas County"],
-    related: ["fort-worth-tx", "plano-tx", "houston-tx", "austin-tx"],
+    related: ["houston-tx", "fort-worth-tx"],
     metaTitle: "Dallas Personal Injury Lawyer Leads & SEO That Sign",
     metaDescription: "Dallas personal injury and bankruptcy firms: your own leads from SEO, Google LSA, Meta ads and AI intake, measured by cost per signed case. Custom plans.",
     primaryKeyword: "personal injury leads dallas",
@@ -903,7 +903,7 @@ export const locations: Location[] = [
   {
     slug: "fort-lauderdale-fl", practice: "immigration", city: "Fort Lauderdale", state: "Florida", stateCode: "FL", metro: "Miami",
     neighbors: ["Hollywood", "Plantation", "Sunrise", "Pompano Beach", "Lauderhill", "Davie", "Broward County"],
-    related: ["miami-fl", "hollywood-fl", "doral-fl"],
+    related: ["miami-fl", "doral-fl"],
     metaTitle: "Fort Lauderdale Immigration Lawyers: Facebook Ads & SEO",
     metaDescription: "Fort Lauderdale immigration firms: Facebook and Instagram ads, SEO, AI search and AI intake that turn Broward searches into signed cases. Custom packages.",
     primaryKeyword: "facebook ads for immigration lawyers fort lauderdale",
@@ -943,7 +943,7 @@ export const locations: Location[] = [
   {
     slug: "orlando-fl", practice: "immigration", city: "Orlando", state: "Florida", stateCode: "FL", metro: "Orlando",
     neighbors: ["Kissimmee", "Winter Park", "Pine Hills", "Kirkman", "Apopka", "Sanford", "Orange County"],
-    related: ["kissimmee-fl", "tampa-fl", "miami-fl"],
+    related: ["kissimmee-fl", "tampa-fl"],
     metaTitle: "Orlando Immigration Lawyer Google Ads That Sign Cases",
     metaDescription: "Orlando immigration firms: Google Ads, SEO, AI search, Meta ads and AI intake, tracked from first click to signed retainer. Custom packages. Free call.",
     primaryKeyword: "immigration lawyer google ads orlando",
@@ -983,7 +983,7 @@ export const locations: Location[] = [
   {
     slug: "san-antonio-tx", practice: "immigration", city: "San Antonio", state: "Texas", stateCode: "TX", metro: "San Antonio",
     neighbors: ["New Braunfels", "Schertz", "Converse", "Leon Valley", "Universal City", "Helotes", "Bexar County"],
-    related: ["houston-tx", "laredo-tx", "mcallen-tx", "el-paso-tx"],
+    related: ["mcallen-tx", "houston-tx"],
     metaTitle: "San Antonio Immigration Lawyer Video Marketing & SEO",
     metaDescription: "San Antonio immigration firms: attorney video, YouTube, SEO, AI search, Meta ads and AI intake that build trust and sign more cases. Custom packages.",
     primaryKeyword: "immigration lawyer video marketing san antonio",
@@ -1023,7 +1023,7 @@ export const locations: Location[] = [
   {
     slug: "atlanta-ga", practice: "immigration", city: "Atlanta", state: "Georgia", stateCode: "GA", metro: "Atlanta",
     neighbors: ["Duluth", "Norcross", "Decatur", "Doraville", "Chamblee", "Marietta", "Fulton County"],
-    related: ["duluth-ga", "norcross-ga", "dallas-tx"],
+    related: ["duluth-ga", "fairfax-va"],
     metaTitle: "Atlanta Immigration Lawyer Leads & AI-Based Marketing",
     metaDescription: "Atlanta immigration firms: AI-based marketing, SEO, AI search, Meta and Google ads and AI intake that turn leads into signed cases. Custom packages.",
     primaryKeyword: "immigration lawyer leads atlanta",
@@ -1063,7 +1063,7 @@ export const locations: Location[] = [
   {
     slug: "fort-worth-tx", practice: "personal-injury", city: "Fort Worth", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Arlington", "North Richland Hills", "Haltom City", "Benbrook", "Keller", "Burleson", "Tarrant County"],
-    related: ["dallas-tx", "plano-tx", "austin-tx"],
+    related: ["dallas-tx", "austin-tx"],
     metaTitle: "Fort Worth Bankruptcy & Injury Lawyer Leads That Sign",
     metaDescription: "Fort Worth bankruptcy and personal injury firms: your own leads from Google LSA, local SEO, AI search and AI intake, measured by signed cases.",
     primaryKeyword: "bankruptcy leads fort worth",
@@ -1143,7 +1143,7 @@ export const locations: Location[] = [
   {
     slug: "st-petersburg-fl", practice: "personal-injury", city: "St. Petersburg", state: "Florida", stateCode: "FL", metro: "Tampa Bay",
     neighbors: ["Clearwater", "Largo", "Pinellas Park", "Seminole", "Gulfport", "St. Pete Beach", "Pinellas County"],
-    related: ["tampa-fl", "clearwater-fl", "brandon-fl"],
+    related: ["clearwater-fl", "tampa-fl", "brandon-fl"],
     metaTitle: "St. Petersburg Personal Injury Lawyer SEO That Ranks",
     metaDescription: "St. Petersburg personal injury firms: local SEO, Google Maps, AI search, LSA and AI intake to win Pinellas County cases. Custom packages. Free call.",
     primaryKeyword: "personal injury lawyer seo st petersburg",
@@ -1223,7 +1223,7 @@ export const locations: Location[] = [
   {
     slug: "the-woodlands-tx", practice: "personal-injury", city: "The Woodlands", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Spring", "Conroe", "Shenandoah", "Oak Ridge North", "Magnolia", "Tomball", "Montgomery County"],
-    related: ["spring-tx", "houston-tx", "pearland-tx"],
+    related: ["houston-tx", "plano-tx"],
     metaTitle: "The Woodlands Injury Law Firm Website Design & SEO",
     metaDescription: "The Woodlands personal injury firms: fast website design, local SEO, Google Maps, AI search and AI intake that turn visitors into cases. Custom packages.",
     primaryKeyword: "personal injury law firm website design the woodlands",
@@ -1263,7 +1263,7 @@ export const locations: Location[] = [
   {
     slug: "austin-tx", practice: "personal-injury", city: "Austin", state: "Texas", stateCode: "TX", metro: "Austin",
     neighbors: ["Round Rock", "Pflugerville", "Cedar Park", "Georgetown", "San Marcos", "Kyle", "Travis County"],
-    related: ["dallas-tx", "fort-worth-tx", "houston-tx"],
+    related: ["fort-worth-tx", "plano-tx"],
     metaTitle: "Austin Bankruptcy Law Firm Website Design & Local SEO",
     metaDescription: "Austin bankruptcy and injury firms: conversion-focused website design, local SEO, AI search, Google LSA and AI intake. Custom packages. Free call.",
     primaryKeyword: "bankruptcy law firm website design austin",
@@ -1304,7 +1304,7 @@ export const locations: Location[] = [
   {
     slug: "arlington-tx", practice: "immigration", city: "Arlington", state: "Texas", stateCode: "TX", metro: "Dallas–Fort Worth",
     neighbors: ["Grand Prairie", "Mansfield", "Euless", "Bedford", "Pantego", "Kennedale", "Tarrant County"],
-    related: ["dallas-tx", "irving-tx", "garland-tx"],
+    related: ["irving-tx", "garland-tx", "dallas-tx"],
     metaTitle: "Arlington TX Immigration Lawyer SEO: Rank Above Directories",
     metaDescription: "Arlington immigration firms: SEO, Google Maps, AI search, Meta and Google ads and AI intake that turn Tarrant County searches into signed cases.",
     primaryKeyword: "immigration lawyer seo arlington tx",
@@ -1344,7 +1344,7 @@ export const locations: Location[] = [
   {
     slug: "brownsville-tx", practice: "immigration", city: "Brownsville", state: "Texas", stateCode: "TX", metro: "Rio Grande Valley",
     neighbors: ["Harlingen", "San Benito", "Los Fresnos", "Port Isabel", "South Padre Island", "Olmito", "Cameron County"],
-    related: ["mcallen-tx", "laredo-tx", "san-antonio-tx"],
+    related: ["mcallen-tx", "laredo-tx"],
     metaTitle: "Brownsville Immigration Lawyer SEO & Bilingual Marketing",
     metaDescription: "Brownsville immigration firms: bilingual SEO, Google Maps, AI search, Spanish Meta ads and AI intake that turn border searches into signed cases.",
     primaryKeyword: "immigration lawyer seo brownsville",
@@ -1384,7 +1384,7 @@ export const locations: Location[] = [
   {
     slug: "laredo-tx", practice: "immigration", city: "Laredo", state: "Texas", stateCode: "TX", metro: "Laredo",
     neighbors: ["Rio Bravo", "El Cenizo", "Zapata", "Hebbronville", "Encinal", "Webb County", "Zapata County"],
-    related: ["san-antonio-tx", "mcallen-tx", "brownsville-tx", "el-paso-tx"],
+    related: ["brownsville-tx", "mcallen-tx", "el-paso-tx"],
     metaTitle: "Laredo Immigration Lawyer SEO & Leads in Spanish & English",
     metaDescription: "Laredo immigration firms: bilingual SEO, Google Maps, AI search, Meta ads and AI intake that sign more family and work-visa cases. Custom packages.",
     primaryKeyword: "immigration lawyer seo laredo",
@@ -1424,7 +1424,7 @@ export const locations: Location[] = [
   {
     slug: "el-paso-tx", practice: "immigration", city: "El Paso", state: "Texas", stateCode: "TX", metro: "El Paso",
     neighbors: ["Socorro", "Horizon City", "Canutillo", "Anthony", "Fabens", "Las Cruces, NM", "El Paso County"],
-    related: ["san-antonio-tx", "laredo-tx", "dallas-tx"],
+    related: ["laredo-tx", "san-antonio-tx"],
     metaTitle: "El Paso Immigration Lawyer SEO: Win Google & AI Answers",
     metaDescription: "El Paso immigration firms: SEO, Google Maps, AI search, Spanish Meta ads and AI intake that turn searches into signed cases. Custom packages. Free call.",
     primaryKeyword: "immigration lawyer seo el paso",
@@ -1464,7 +1464,7 @@ export const locations: Location[] = [
   {
     slug: "hollywood-fl", practice: "immigration", city: "Hollywood", state: "Florida", stateCode: "FL", metro: "Miami",
     neighbors: ["Fort Lauderdale", "Pembroke Pines", "Miramar", "Hallandale Beach", "Dania Beach", "Davie", "Broward County"],
-    related: ["fort-lauderdale-fl", "miami-fl", "hialeah-fl"],
+    related: ["fort-lauderdale-fl", "miami-fl"],
     metaTitle: "Hollywood FL Immigration Lawyer Marketing That Signs Cases",
     metaDescription: "Hollywood, FL immigration firms: SEO, Google Maps, AI search, Meta ads and AI intake that turn Broward searches into signed cases. Custom packages.",
     primaryKeyword: "immigration lawyer marketing hollywood fl",
@@ -1504,7 +1504,7 @@ export const locations: Location[] = [
   {
     slug: "norcross-ga", practice: "immigration", city: "Norcross", state: "Georgia", stateCode: "GA", metro: "Atlanta",
     neighbors: ["Peachtree Corners", "Duluth", "Lilburn", "Doraville", "Tucker", "Lawrenceville", "Gwinnett County"],
-    related: ["atlanta-ga", "duluth-ga"],
+    related: ["duluth-ga", "atlanta-ga"],
     metaTitle: "Norcross GA Immigration Lawyer SEO: Lead Gwinnett Searches",
     metaDescription: "Norcross immigration firms: multilingual SEO, Google Maps, AI search, Meta and Google ads and AI intake for Gwinnett County. Custom packages.",
     primaryKeyword: "immigration lawyer seo norcross ga",
@@ -1544,7 +1544,7 @@ export const locations: Location[] = [
   {
     slug: "elizabeth-nj", practice: "immigration", city: "Elizabeth", state: "New Jersey", stateCode: "NJ", metro: "New Jersey",
     neighbors: ["Newark", "Linden", "Union", "Hillside", "Roselle", "Kearny", "Union County"],
-    related: ["silver-spring-md", "fairfax-va"],
+    related: [],
     metaTitle: "Elizabeth NJ Immigration Lawyer SEO & AI Marketing",
     metaDescription: "Elizabeth, NJ immigration firms: SEO, Google Maps, AI search, Spanish and Portuguese ads and AI intake that sign more cases. Custom packages.",
     primaryKeyword: "immigration lawyer seo elizabeth nj",
@@ -1584,7 +1584,7 @@ export const locations: Location[] = [
   {
     slug: "silver-spring-md", practice: "immigration", city: "Silver Spring", state: "Maryland", stateCode: "MD", metro: "Washington DC",
     neighbors: ["Takoma Park", "Wheaton", "Bethesda", "Rockville", "Gaithersburg", "Washington, DC", "Montgomery County"],
-    related: ["fairfax-va", "elizabeth-nj"],
+    related: ["fairfax-va"],
     metaTitle: "Silver Spring Immigration Lawyer SEO & AI Search Marketing",
     metaDescription: "Silver Spring immigration firms: SEO, Google Maps, AI search, Meta and Google ads and AI intake for Montgomery County and DC. Custom packages.",
     primaryKeyword: "immigration lawyer seo silver spring md",
@@ -1624,7 +1624,7 @@ export const locations: Location[] = [
   {
     slug: "pearland-tx", practice: "personal-injury", city: "Pearland", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["Friendswood", "Manvel", "Alvin", "League City", "South Houston", "Pasadena", "Brazoria County"],
-    related: ["houston-tx", "the-woodlands-tx", "spring-tx"],
+    related: ["houston-tx", "the-woodlands-tx"],
     metaTitle: "Pearland Personal Injury Lawyer SEO: Beat Houston Firms",
     metaDescription: "Pearland personal injury firms: local SEO, Google Maps, Local Services Ads, AI search and AI intake that win cases from big Houston firms.",
     primaryKeyword: "personal injury lawyer seo pearland",
@@ -1664,7 +1664,7 @@ export const locations: Location[] = [
   {
     slug: "spring-tx", practice: "personal-injury", city: "Spring", state: "Texas", stateCode: "TX", metro: "Houston",
     neighbors: ["The Woodlands", "Klein", "Tomball", "Humble", "Kingwood", "Cypress", "Harris County"],
-    related: ["the-woodlands-tx", "houston-tx", "pearland-tx"],
+    related: ["the-woodlands-tx", "houston-tx"],
     metaTitle: "Spring TX Personal Injury Lawyer Marketing That Signs",
     metaDescription: "Spring, TX personal injury firms: local SEO, Google Maps, LSA, AI search, video and AI intake that win cases from Houston's biggest firms.",
     primaryKeyword: "personal injury lawyer marketing spring tx",
