@@ -171,6 +171,30 @@ describe("availability with Google", () => {
   });
 });
 
+describe("availability while Google is failing", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.doMock("@/lib/google", () => ({ isCalendarConfigured: () => true, freeBusy: vi.fn(async () => { throw new Error("invalid_grant"); }) }));
+    vi.doMock("@/lib/mail", () => ({ smtpConfig: () => ({ to: "owner@test.invalid" }) }));
+  });
+  afterEach(() => {
+    vi.doUnmock("@/lib/google");
+    vi.doUnmock("@/lib/mail");
+  });
+
+  it("falls back to email mode with working-hours slots instead of failing", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const a = await import("@/lib/booking/availability");
+    a.resetLocalBookings();
+    const res = await a.slotAvailability({ fresh: true, now: NOW });
+    expect(res.mode).toBe("email");
+    expect(res.slots[30]).toContain("2026-11-10T16:00:00.000Z");
+    expect(a.liveBookingMode(NOW + 1000)).toBe("email");
+    expect(a.liveBookingMode(NOW + 10 * 60_000)).toBe("google"); // retries Google later
+    spy.mockRestore();
+  });
+});
+
 describe("availability without Google (email mode)", () => {
   beforeEach(() => {
     vi.resetModules();
@@ -218,6 +242,8 @@ describe("bookCall (server action)", () => {
     vi.doMock("@/lib/mail", () => ({ smtpConfig: () => (mode === "off" ? null : { to: "owner@test.invalid" }), sendOwnerMail, smtpErrorSummary: () => "x" }));
     vi.doMock("@/lib/booking/availability", () => ({
       bookingMode: () => mode,
+      liveBookingMode: () => mode,
+      markGoogleDown: () => mode !== "off",
       rememberBooking,
       availableSlots: async () => ({ 15: open, 30: open, 60: open.slice(1) }),
     }));

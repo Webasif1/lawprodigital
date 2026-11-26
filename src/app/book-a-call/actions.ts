@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 import { headers } from "next/headers";
 import { looksAutomated } from "@/app/contact-us/validate";
 import { bookingEvent, bookingTimeZone, durationLabel, ownerTimeZone, type Duration } from "@/content/booking";
-import { availableSlots, bookingMode, rememberBooking } from "@/lib/booking/availability";
+import { availableSlots, bookingMode, liveBookingMode, markGoogleDown, rememberBooking } from "@/lib/booking/availability";
 import { createMeetEvent, logRow } from "@/lib/google";
 import { sendOwnerMail, smtpConfig, smtpErrorSummary } from "@/lib/mail";
 import { clientIp, createRateLimiter } from "@/lib/rate-limit";
@@ -34,8 +34,7 @@ export async function bookCall(_prev: BookingState, formData: FormData): Promise
   if (slot) return { status: "taken", message: "Please pick a time again." };
   if (Object.keys(errors).length) return { status: "error", message: "Please check the highlighted fields.", errors, values };
 
-  const mode = bookingMode();
-  if (mode === "off") {
+  if (bookingMode() === "off") {
     console.error("[booking] Neither Google nor SMTP is configured: set the GOOGLE_* or SMTP_* variables.");
     return { status: "error", message: "Online booking is temporarily unavailable. Please use our contact form instead.", values };
   }
@@ -82,25 +81,33 @@ export async function bookCall(_prev: BookingState, formData: FormData): Promise
       eventId,
       status,
     ];
-    const booking = { start: start.toISOString(), end: end.toISOString(), durationMin: duration, name: info.name, email: v.email, mode };
+    const booking = { start: start.toISOString(), end: end.toISOString(), durationMin: duration, name: info.name, email: v.email };
 
-    if (mode === "email") {
-      // No calendar yet: the owner's inbox is the only record, so a failed email fails the booking.
+    // No calendar (or Google is failing): the owner's inbox is the only record, so a failed email fails the booking.
+    const bookByEmail = async (): Promise<BookingState> => {
       await sendOwnerMail(smtpConfig()!, ownerMail(null, null, true));
       rememberBooking(v.slot, duration);
       await logRow("Bookings", row("", "", "requested"));
-      return { status: "success", booking: { ...booking, meetLink: null } };
-    }
+      return { status: "success", booking: { ...booking, mode: "email", meetLink: null } };
+    };
 
-    const event = await createMeetEvent({
-      // A marker up front so website bookings are easy to spot among the owner's own events.
-      summary: `📞 BOOKED: ${info.name} · ${bookingEvent.title} (${durationLabel(duration)})`,
-      description: info.text,
-      start,
-      end,
-      attendee: { email: v.email, name: info.name },
-      requestId: randomUUID(),
-    });
+    if (liveBookingMode() === "email") return await bookByEmail();
+
+    let event: Awaited<ReturnType<typeof createMeetEvent>>;
+    try {
+      event = await createMeetEvent({
+        // A marker up front so website bookings are easy to spot among the owner's own events.
+        summary: `📞 BOOKED: ${info.name} · ${bookingEvent.title} (${durationLabel(duration)})`,
+        description: info.text,
+        start,
+        end,
+        attendee: { email: v.email, name: info.name },
+        requestId: randomUUID(),
+      });
+    } catch (err) {
+      if (!markGoogleDown(err)) throw err;
+      return await bookByEmail();
+    }
     rememberBooking(v.slot, duration);
     await logRow("Bookings", row(event.meetLink ?? "", event.id, "booked"));
 
@@ -112,7 +119,7 @@ export async function bookCall(_prev: BookingState, formData: FormData): Promise
       );
     }
 
-    return { status: "success", booking: { ...booking, meetLink: event.meetLink } };
+    return { status: "success", booking: { ...booking, mode: "google", meetLink: event.meetLink } };
   } catch (err) {
     console.error(err instanceof Error ? err.message : "[booking] failed");
     return { status: "error", message: "Something went wrong booking your call. Please try again shortly.", values };

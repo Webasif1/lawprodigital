@@ -16,8 +16,9 @@ export async function GET() {
   try {
     // `taken`: times that clash with an existing booking or event. Only their start times are
     // sent (never what or whose), so the picker can show them greyed out as "Booked".
-    const { slots, taken } = await slotAvailability();
-    return json({ enabled: true, mode, timeZone: bookingTimeZone(), durations: bookingEvent.durations, slots, taken });
+    // `mode` may be "email" here even with Google set up, while Google is failing.
+    const { mode: liveMode, slots, taken } = await slotAvailability();
+    return json({ enabled: true, mode: liveMode, timeZone: bookingTimeZone(), durations: bookingEvent.durations, slots, taken });
   } catch (err) {
     console.error(err instanceof Error ? err.message : "[booking] slots failed");
     return json({ enabled: true, error: "unavailable", slots: {} }, 502);
