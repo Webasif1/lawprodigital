@@ -202,6 +202,16 @@ SMTP configured, the calendar is hidden.
    - Bookings: `Booked at | Call (your time) | Call (UTC) | Client time zone | Duration (min) | Name | Email | Phone | Website | Notes | Meet link | Event ID | Status`
    - Leads: `Received at | First name | Last name | Email | Phone | Website | City | Service | Message`
 6. Add the variables above in Setup Node.js App → Environment variables and restart the app.
+7. Check the connection: in cPanel → Terminal, `cd` into the app folder and run `npm run google:check` (or run it
+   locally with the same `GOOGLE_*` values in `.env.local`). It prints ✓ when bookings will get Meet links.
+
+**Booking page says "Your call is requested" instead of "This meeting is scheduled".** The site has fallen back
+to email mode: either the `GOOGLE_*` variables are missing, or Google is refusing them. While Google is failing, the
+owner (`CONTACT_TO`) gets a "Google Calendar disconnected" email at most every 6 hours. Run `npm run google:check`.
+`invalid_grant` means the refresh token expired or was revoked, usually because the consent screen is still in
+**Testing**. Publish it (step 2), make a new token (step 4), update `GOOGLE_REFRESH_TOKEN`, and restart the app.
+Whatever the mode, the confirmation screen offers the visitor **Add to Google Calendar** and an `.ics` download
+(Outlook, Apple), so the time is on their calendar even before you confirm.
 
 ### Indexing
 

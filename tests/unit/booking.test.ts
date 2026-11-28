@@ -175,7 +175,7 @@ describe("availability while Google is failing", () => {
   beforeEach(() => {
     vi.resetModules();
     vi.doMock("@/lib/google", () => ({ isCalendarConfigured: () => true, freeBusy: vi.fn(async () => { throw new Error("invalid_grant"); }) }));
-    vi.doMock("@/lib/mail", () => ({ smtpConfig: () => ({ to: "owner@test.invalid" }) }));
+    vi.doMock("@/lib/mail", () => ({ smtpConfig: () => ({ to: "owner@test.invalid" }), sendOwnerMail: async () => {}, smtpErrorSummary: () => "x" }));
   });
   afterEach(() => {
     vi.doUnmock("@/lib/google");

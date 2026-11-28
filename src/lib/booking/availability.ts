@@ -1,6 +1,6 @@
 import { bookingEvent, bookingRules, type Duration } from "@/content/booking";
 import { freeBusy, isCalendarConfigured } from "@/lib/google";
-import { smtpConfig } from "@/lib/mail";
+import { sendOwnerMail, smtpConfig, smtpErrorSummary } from "@/lib/mail";
 import { slotRange, slotStates, type Interval } from "./slots";
 
 export type SlotsByDuration = Record<Duration, string[]>;
@@ -34,7 +34,43 @@ export function markGoogleDown(err: unknown, now = Date.now()) {
   console.error("[booking] Google Calendar unavailable, using email mode. Check GOOGLE_REFRESH_TOKEN.");
   store.googleDownUntil = now + GOOGLE_RETRY_MS;
   store.cache = null;
+  alertOwner(err, now);
   return true;
+}
+
+/** How often, at most, to email the owner that Google is down. */
+const ALERT_EVERY_MS = 6 * 60 * 60_000;
+
+/**
+ * Tells the owner Google has dropped out, so bookings don't silently arrive without Meet
+ * links for days (a refresh token from an OAuth app left in "Testing" dies after 7 days).
+ * Fire-and-forget: it never delays or fails a booking.
+ */
+function alertOwner(err: unknown, now: number) {
+  const mail = smtpConfig();
+  if (!mail || now - store.alertedAt < ALERT_EVERY_MS) return;
+  store.alertedAt = now;
+  const reason = (err instanceof Error ? err.message : String(err)).slice(0, 400);
+  const expired = /invalid_grant/.test(reason);
+  const text = [
+    "Google Calendar is disconnected from the booking page on lawprodigital.com.",
+    "Bookings still come in, but as email requests: no Google Meet link and no calendar invite for the client.",
+    "",
+    `Cause: ${reason}`,
+    "",
+    expired
+      ? "The refresh token has expired or was revoked. In Google Cloud console make sure the OAuth consent screen is \"In production\" (not Testing), then run scripts/google-auth.mjs on your computer, put the new GOOGLE_REFRESH_TOKEN in cPanel (Setup Node.js App > Environment variables) and restart the app."
+      : "Run `npm run google:check` on the server (or locally with the same GOOGLE_* values) to see what is wrong.",
+    "",
+    "You will get this email at most once every 6 hours while the problem lasts.",
+  ].join("\n");
+  const html = `<pre style="font:14px/1.5 system-ui,sans-serif;white-space:pre-wrap">${text.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!)}</pre>`;
+  sendOwnerMail(mail, {
+    replyTo: { name: "Law Pro Digital website", address: mail.to },
+    subject: "⚠️ Booking: Google Calendar disconnected (no Meet links)",
+    text,
+    html,
+  }).catch((e) => console.error(`[booking] Failed to send Google-down alert: ${smtpErrorSummary(e)}`));
 }
 
 /**
@@ -52,8 +88,10 @@ type Store = {
   booked: (Interval & { at: number })[];
   cache: { at: number; mode: BookingMode; slots: SlotsByDuration; taken: SlotsByDuration } | null;
   googleDownUntil: number;
+  /** When the owner was last emailed that Google is down. */
+  alertedAt: number;
 };
-const store: Store = ((globalThis as { __lawproBooking?: Store }).__lawproBooking ??= { booked: [], cache: null, googleDownUntil: 0 });
+const store: Store = ((globalThis as { __lawproBooking?: Store }).__lawproBooking ??= { booked: [], cache: null, googleDownUntil: 0, alertedAt: 0 });
 
 const MAX_LOCAL = 500;
 const GOOGLE_GRACE_MS = 5 * 60_000;
@@ -112,4 +150,5 @@ export function resetLocalBookings() {
   store.booked = [];
   store.cache = null;
   store.googleDownUntil = 0;
+  store.alertedAt = 0;
 }

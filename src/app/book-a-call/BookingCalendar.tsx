@@ -8,6 +8,7 @@ import { CheckIcon } from "@/components/ui/icons";
 import { bookingEvent, durationLabel } from "@/content/booking";
 import { site } from "@/content/site";
 import { trackLead } from "@/lib/analytics";
+import { type CalendarEntry, googleCalendarUrl, icsFile } from "@/lib/booking/calendar-links";
 import { dateKey, zonedParts } from "@/lib/booking/slots";
 import { bookCall } from "./actions";
 import type { BookingField, BookingState } from "./form-config";
@@ -633,6 +634,7 @@ function Confirmation({ booking, tz }: { booking: NonNullable<BookingState["book
           </div>
         ))}
       </dl>
+      <AddToCalendar booking={booking} />
       <p className="mt-8 text-sm text-muted">
         {booking.mode === "email"
           ? "Need to change the time? Just reply to our confirmation email."
@@ -641,6 +643,43 @@ function Confirmation({ booking, tz }: { booking: NonNullable<BookingState["book
       <ButtonLink href="/" variant="ghost-light" className="mt-6">
         Back to the homepage
       </ButtonLink>
+    </div>
+  );
+}
+
+/** Lets the visitor put the call on their own calendar (Google link, or .ics for Outlook/Apple). */
+function AddToCalendar({ booking }: { booking: NonNullable<BookingState["booking"]> }) {
+  const entry: CalendarEntry = {
+    title: `${bookingEvent.title} with ${site.name} (${durationLabel(booking.durationMin)})`,
+    details: booking.meetLink
+      ? `Join with Google Meet: ${booking.meetLink}`
+      : `${site.name} will email you to confirm and send the Google Meet link.`,
+    start: new Date(booking.start),
+    end: new Date(booking.end),
+    location: booking.meetLink,
+  };
+  const download = () => {
+    const ics = icsFile({ ...entry, uid: `${booking.start}-${booking.email}@lawprodigital.com` });
+    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "law-pro-digital-strategy-call.ics";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  return (
+    <div className="mt-8">
+      {booking.mode === "google" && (
+        <p className="text-sm text-muted">It’s already on your calendar through our invitation. Use these only if it didn’t arrive.</p>
+      )}
+      <div className="mt-3 flex flex-wrap justify-center gap-3">
+        <a href={googleCalendarUrl(entry)} target="_blank" rel="noopener noreferrer" className={buttonClasses("ghost-light")}>
+          Add to Google Calendar<span className="sr-only"> (opens in a new tab)</span>
+        </a>
+        <button type="button" onClick={download} className={buttonClasses("ghost-light")}>
+          Download .ics (Outlook, Apple)
+        </button>
+      </div>
     </div>
   );
 }
